@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
   <title>YEGER — Edmonton Live</title>
 
@@ -12,6 +16,10 @@
   >
 
   <style>
+
+    /* =====================================================
+       GLOBAL
+       ===================================================== */
 
     * {
       box-sizing: border-box;
@@ -35,426 +43,1154 @@
       text-decoration: none;
     }
 
-    /* =========================
+
+    /* =====================================================
        HEADER
-       ========================= */
+       ===================================================== */
 
     header {
+
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 5%;
-      background: rgba(11, 13, 16, 0.95);
+
+      padding: 18px 5%;
+
+      background: rgba(11, 13, 16, 0.97);
+
       border-bottom: 1px solid #222;
+
       position: sticky;
       top: 0;
+
       z-index: 100;
+
     }
+
 
     .logo {
+
       font-size: 30px;
+
       font-weight: 800;
+
       letter-spacing: 4px;
+
     }
+
 
     .logo span {
+
       font-weight: 300;
+
       color: #aaa;
-      font-size: 13px;
+
+      font-size: 12px;
+
       letter-spacing: 1px;
+
       margin-left: 8px;
+
     }
+
 
     nav {
+
       display: flex;
+
       gap: 25px;
+
       font-size: 14px;
+
       color: #bbb;
+
     }
+
 
     nav a:hover {
-      color: #fff;
+
+      color: #ffffff;
+
     }
 
-    /* =========================
+
+
+    /* =====================================================
        MAIN
-       ========================= */
+       ===================================================== */
 
     main {
+
       width: min(1500px, 94%);
+
       margin: auto;
+
     }
 
-    /* =========================
+
+
+    /* =====================================================
        HERO
-       ========================= */
+       ===================================================== */
 
     .hero {
-      padding: 42px 0 25px;
+
+      padding: 35px 0 20px;
+
+      display: grid;
+
+      grid-template-columns: 1fr auto;
+
+      gap: 40px;
+
+      align-items: end;
+
     }
+
+
+    .hero-left {
+
+      min-width: 0;
+
+    }
+
 
     .status {
+
       display: inline-flex;
+
       align-items: center;
+
       gap: 8px;
-      font-size: 13px;
+
+      font-size: 12px;
+
       font-weight: bold;
-      margin-bottom: 12px;
+
+      margin-bottom: 10px;
+
     }
+
 
     .live-dot {
-      width: 10px;
-      height: 10px;
+
+      width: 9px;
+
+      height: 9px;
+
       background: #ff2b2b;
+
       border-radius: 50%;
+
       animation: pulse 1.8s infinite;
+
     }
 
+
     @keyframes pulse {
+
       0%, 100% {
         opacity: 1;
       }
 
       50% {
-        opacity: 0.35;
+        opacity: 0.3;
       }
+
     }
+
 
     h1 {
-      font-size: clamp(34px, 6vw, 72px);
+
+      font-size: clamp(36px, 5vw, 70px);
+
       line-height: 1;
-      margin-bottom: 12px;
+
       letter-spacing: -2px;
+
+      margin-bottom: 10px;
+
     }
 
-    .hero p {
+
+    .hero-description {
+
       color: #aaa;
-      font-size: 18px;
+
+      font-size: 17px;
+
     }
 
-    /* =========================
-       LIVE VIDEO + CHAT
-       ========================= */
+
+
+    /* =====================================================
+       WEATHER TOP RIGHT
+       ===================================================== */
+
+    .weather-panel {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 28px;
+
+      padding: 15px 20px;
+
+      background: #121519;
+
+      border: 1px solid #25282d;
+
+      border-radius: 12px;
+
+      min-width: 390px;
+
+    }
+
+
+    .weather-item {
+
+      min-width: 90px;
+
+    }
+
+
+    .weather-label {
+
+      color: #777;
+
+      text-transform: uppercase;
+
+      font-size: 10px;
+
+      letter-spacing: 1px;
+
+      margin-bottom: 3px;
+
+    }
+
+
+    .weather-value {
+
+      font-size: 21px;
+
+      font-weight: 700;
+
+      white-space: nowrap;
+
+    }
+
+
+    .weather-temp {
+
+      font-size: 30px;
+
+    }
+
+
+
+    /* =====================================================
+       VIDEO + CHAT
+       ===================================================== */
 
     .live-layout {
+
       display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(320px, 1fr);
+
+      grid-template-columns:
+        minmax(0, 3fr)
+        minmax(320px, 1fr);
+
       gap: 16px;
+
       align-items: stretch;
+
     }
+
 
     .video-container {
+
       position: relative;
+
       width: 100%;
+
       aspect-ratio: 16 / 9;
-      background: #15181c;
+
+      background: #000;
+
       overflow: hidden;
-      border-radius: 14px;
+
+      border-radius: 12px;
+
       border: 1px solid #292d32;
+
     }
+
 
     .video-container iframe {
+
       position: absolute;
+
       inset: 0;
+
       width: 100%;
+
       height: 100%;
+
       border: 0;
+
     }
+
+
+
+    /* =====================================================
+       CHAT
+       ===================================================== */
 
     .chat-container {
+
       position: relative;
+
       min-width: 0;
-      background: #15181c;
+
+      background: #ffffff;
+
       border: 1px solid #292d32;
-      border-radius: 14px;
+
+      border-radius: 12px;
+
       overflow: hidden;
+
     }
+
 
     .chat-container iframe {
+
       position: absolute;
+
       inset: 0;
+
       width: 100%;
+
       height: 100%;
+
       border: 0;
+
     }
 
-    /* =========================
+
+
+    /* =====================================================
        INFO BAR
-       ========================= */
+       ===================================================== */
 
     .info-bar {
+
       display: grid;
+
       grid-template-columns: repeat(4, 1fr);
+
       gap: 1px;
-      margin-top: 20px;
+
+      margin-top: 18px;
+
       background: #25282d;
+
       border: 1px solid #25282d;
-      border-radius: 12px;
+
+      border-radius: 10px;
+
       overflow: hidden;
+
     }
+
 
     .info-box {
+
       background: #121519;
-      padding: 22px;
+
+      padding: 18px 20px;
+
     }
+
 
     .info-label {
+
       color: #777;
-      font-size: 12px;
+
+      font-size: 10px;
+
       text-transform: uppercase;
+
       letter-spacing: 1px;
+
       margin-bottom: 4px;
+
     }
+
 
     .info-value {
-      font-size: 20px;
+
+      font-size: 18px;
+
       font-weight: 600;
+
     }
 
-    /* =========================
+
+
+    /* =====================================================
        CONTENT
-       ========================= */
+       ===================================================== */
 
     .content-grid {
+
       display: grid;
+
       grid-template-columns: 2fr 1fr;
+
       gap: 25px;
-      margin: 45px 0;
+
+      margin: 30px 0 45px;
+
     }
+
 
     .card {
+
       background: #121519;
+
       border: 1px solid #25282d;
+
       border-radius: 12px;
-      padding: 28px;
+
+      padding: 25px;
+
     }
+
 
     .card h2 {
-      margin-bottom: 12px;
-      font-size: 24px;
+
+      margin-bottom: 10px;
+
+      font-size: 22px;
+
     }
+
 
     .card p {
+
       color: #aaa;
+
     }
+
 
     .location {
-      margin-top: 20px;
-      padding-top: 20px;
+
+      margin-top: 18px;
+
+      padding-top: 18px;
+
       border-top: 1px solid #26292e;
+
       color: #777;
-      font-size: 14px;
+
+      font-size: 13px;
+
     }
 
-    /* =========================
+
+
+    /* =====================================================
        FOOTER
-       ========================= */
+       ===================================================== */
 
     footer {
+
       border-top: 1px solid #222;
+
       color: #666;
+
       text-align: center;
-      padding: 35px 20px;
-      font-size: 13px;
-      margin-top: 50px;
+
+      padding: 30px 20px;
+
+      font-size: 12px;
+
+      margin-top: 30px;
+
     }
 
-    /* =========================
-       TABLET / MOBILE
-       ========================= */
 
-    @media (max-width: 1000px) {
+
+    /* =====================================================
+       TABLET
+       ===================================================== */
+
+    @media (max-width: 1050px) {
+
+      .hero {
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+
+      }
+
+
+      .weather-panel {
+
+        min-width: 0;
+
+        width: 100%;
+
+        justify-content: space-around;
+
+      }
+
 
       .live-layout {
+
         grid-template-columns: 1fr;
+
       }
 
+
       .chat-container {
+
         height: 500px;
+
       }
+
     }
+
+
+
+    /* =====================================================
+       MOBILE
+       ===================================================== */
 
     @media (max-width: 750px) {
 
       header {
-        padding: 16px 4%;
+
+        padding: 15px 4%;
+
       }
+
 
       .logo {
-        font-size: 24px;
+
+        font-size: 23px;
+
       }
+
 
       .logo span {
+
         display: none;
+
       }
+
 
       nav {
-        gap: 14px;
-        font-size: 12px;
+
+        gap: 13px;
+
+        font-size: 11px;
+
       }
+
 
       .hero {
-        padding-top: 28px;
+
+        padding-top: 25px;
+
       }
 
-      .info-bar {
-        grid-template-columns: repeat(2, 1fr);
+
+      .weather-panel {
+
+        display: grid;
+
+        grid-template-columns:
+          repeat(3, 1fr);
+
+        gap: 10px;
+
+        padding: 15px;
+
       }
 
-      .content-grid {
-        grid-template-columns: 1fr;
+
+      .weather-item {
+
+        min-width: 0;
+
       }
 
-      .info-value {
-        font-size: 17px;
+
+      .weather-value {
+
+        font-size: 15px;
+
       }
+
+
+      .weather-temp {
+
+        font-size: 22px;
+
+      }
+
 
       .chat-container {
+
         height: 420px;
+
       }
+
+
+      .info-bar {
+
+        grid-template-columns:
+          repeat(2, 1fr);
+
+      }
+
+
+      .content-grid {
+
+        grid-template-columns: 1fr;
+
+      }
+
+
+      .info-value {
+
+        font-size: 16px;
+
+      }
+
     }
 
   </style>
+
 </head>
 
+
 <body>
+
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
 
 <header>
 
   <div class="logo">
+
     YEGER
-    <span>EDMONTON LIVE</span>
+
+    <span>
+      EDMONTON LIVE
+    </span>
+
   </div>
 
+
   <nav>
-    <a href="#live">Live</a>
-    <a href="#about">About</a>
-    <a href="#sunsets">Sunsets</a>
+
+    <a href="#live">
+      Live
+    </a>
+
+    <a href="#about">
+      About
+    </a>
+
+    <a href="#sunsets">
+      Sunsets
+    </a>
+
   </nav>
 
 </header>
 
+
+
 <main>
 
-  <!-- =========================
-       HERO
-       ========================= -->
 
-  <section class="hero" id="live">
+  <!-- =====================================================
+       HERO + WEATHER
+       ===================================================== -->
 
-    <div class="status">
-      <span class="live-dot"></span>
-      LIVE FROM EDMONTON
+  <section
+    class="hero"
+    id="live"
+  >
+
+
+    <div class="hero-left">
+
+
+      <div class="status">
+
+        <span class="live-dot"></span>
+
+        LIVE FROM EDMONTON
+
+      </div>
+
+
+      <h1>
+        Edmonton. Live.
+      </h1>
+
+
+      <p class="hero-description">
+
+        A live window overlooking Edmonton, Alberta.
+
+      </p>
+
+
     </div>
 
-    <h1>Edmonton. Live.</h1>
 
-    <p>
-      A live window overlooking Edmonton, Alberta.
-    </p>
+
+    <!-- WEATHER -->
+
+    <div class="weather-panel">
+
+
+      <div class="weather-item">
+
+        <div class="weather-label">
+          Edmonton
+        </div>
+
+        <div
+          class="weather-value weather-temp"
+          id="temperature"
+        >
+          --°C
+        </div>
+
+      </div>
+
+
+
+      <div class="weather-item">
+
+        <div class="weather-label">
+          Sunrise
+        </div>
+
+        <div
+          class="weather-value"
+          id="sunrise"
+        >
+          --:--
+        </div>
+
+      </div>
+
+
+
+      <div class="weather-item">
+
+        <div class="weather-label">
+          Sunset
+        </div>
+
+        <div
+          class="weather-value"
+          id="sunset"
+        >
+          --:--
+        </div>
+
+      </div>
+
+
+    </div>
+
 
   </section>
 
-  <!-- =========================
+
+
+  <!-- =====================================================
        YOUTUBE LIVE + CHAT
-       ========================= -->
+       ===================================================== -->
 
   <section class="live-layout">
+
+
+    <!-- LIVE VIDEO -->
 
     <div class="video-container">
 
       <iframe
-        src="https://www.youtube.com/embed/4TXdHm3OgA4?autoplay=1&mute=1&playsinline=1&origin=https%3A%2F%2Fyeger.ca"
+
+        src="https://www.youtube.com/embed/4TXdHm3OgA4?autoplay=1&mute=1&playsinline=1&controls=0&rel=0&disablekb=1&origin=https%3A%2F%2Fyeger.ca"
+
         title="YEGER Edmonton Live"
+
         referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+
+        allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+
         allowfullscreen>
+
       </iframe>
 
     </div>
+
+
+
+    <!-- LIVE CHAT -->
 
     <div class="chat-container">
 
       <iframe
+
         src="https://www.youtube.com/live_chat?v=4TXdHm3OgA4&embed_domain=yeger.ca"
+
         title="YEGER Live Chat"
+
         referrerpolicy="strict-origin-when-cross-origin">
+
       </iframe>
 
     </div>
 
+
   </section>
 
-  <!-- =========================
-       LIVE INFORMATION
-       ========================= -->
+
+
+  <!-- =====================================================
+       INFORMATION BAR
+       ===================================================== -->
 
   <section class="info-bar">
 
-    <div class="info-box">
-      <div class="info-label">Location</div>
-      <div class="info-value">Edmonton</div>
-    </div>
 
     <div class="info-box">
-      <div class="info-label">Camera</div>
-      <div class="info-value">25th Floor</div>
+
+      <div class="info-label">
+        Location
+      </div>
+
+      <div class="info-value">
+        Edmonton
+      </div>
+
     </div>
 
-    <div class="info-box">
-      <div class="info-label">Direction</div>
-      <div class="info-value">West</div>
-    </div>
+
 
     <div class="info-box">
-      <div class="info-label">Stream</div>
-      <div class="info-value">Live</div>
+
+      <div class="info-label">
+        View
+      </div>
+
+      <div class="info-value">
+        High-rise
+      </div>
+
     </div>
+
+
+
+    <div class="info-box">
+
+      <div class="info-label">
+        Direction
+      </div>
+
+      <div class="info-value">
+        West
+      </div>
+
+    </div>
+
+
+
+    <div class="info-box">
+
+      <div class="info-label">
+        Stream
+      </div>
+
+      <div class="info-value">
+        Live
+      </div>
+
+    </div>
+
 
   </section>
 
-  <!-- =========================
+
+
+  <!-- =====================================================
        CONTENT
-       ========================= -->
+       ===================================================== -->
 
   <section class="content-grid">
 
-    <article class="card" id="about">
 
-      <h2>See Edmonton as it happens.</h2>
+    <!-- ABOUT -->
+
+    <article
+      class="card"
+      id="about"
+    >
+
+      <h2>
+        See Edmonton as it happens.
+      </h2>
 
       <p>
-        YEGER provides a live view across Edmonton — from changing
-        weather and dramatic prairie skies to sunsets, storms,
-        construction and the everyday movement of the city.
+
+        YEGER provides a live view across Edmonton —
+        from changing weather and dramatic prairie skies
+        to sunsets, storms, construction and the everyday
+        movement of the city.
+
       </p>
 
       <div class="location">
+
         Edmonton, Alberta, Canada
+
       </div>
 
     </article>
 
-    <aside class="card" id="sunsets">
 
-      <h2>Sunsets</h2>
+
+    <!-- SUNSETS -->
+
+    <aside
+      class="card"
+      id="sunsets"
+    >
+
+      <h2>
+        Sunsets
+      </h2>
 
       <p>
-        Facing west gives YEGER a front-row view of Edmonton's evening
-        skies. Sunset highlights and timelapses will appear here.
+
+        Facing west gives YEGER a front-row view of
+        Edmonton's evening skies.
+
+        Sunset highlights and timelapses will appear here.
+
       </p>
 
     </aside>
 
+
   </section>
+
 
 </main>
 
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
 <footer>
 
-  © 2026 YEGER.ca &nbsp; • &nbsp; Edmonton, Alberta
+  © 2026 YEGER.ca
+  &nbsp; • &nbsp;
+  Edmonton, Alberta
 
 </footer>
 
+
+
+<!-- =====================================================
+     EDMONTON WEATHER
+     ===================================================== -->
+
+<script>
+
+  /*
+    Edmonton coordinates
+    Approximate city-centre coordinates.
+
+    Open-Meteo provides:
+    - Current temperature
+    - Today's sunrise
+    - Today's sunset
+
+    No API key is required for this request.
+  */
+
+  const weatherURL =
+    "https://api.open-meteo.com/v1/forecast" +
+    "?latitude=53.5461" +
+    "&longitude=-113.4938" +
+    "&current=temperature_2m" +
+    "&daily=sunrise,sunset" +
+    "&temperature_unit=celsius" +
+    "&timezone=America%2FEdmonton" +
+    "&forecast_days=1";
+
+
+  function formatTime(dateString) {
+
+    if (!dateString) {
+      return "--:--";
+    }
+
+    const date =
+      new Date(dateString);
+
+
+    return date.toLocaleTimeString(
+      "en-CA",
+      {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+        timeZone: "America/Edmonton"
+      }
+    );
+
+  }
+
+
+
+  async function updateWeather() {
+
+    try {
+
+      const response =
+        await fetch(weatherURL);
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          "Weather service unavailable"
+        );
+
+      }
+
+
+      const data =
+        await response.json();
+
+
+
+      /* TEMPERATURE */
+
+      if (
+        data.current &&
+        typeof data.current.temperature_2m === "number"
+      ) {
+
+        document.getElementById(
+          "temperature"
+        ).textContent =
+
+          Math.round(
+            data.current.temperature_2m
+          ) + "°C";
+
+      }
+
+
+
+      /* SUNRISE */
+
+      if (
+        data.daily &&
+        data.daily.sunrise &&
+        data.daily.sunrise.length
+      ) {
+
+        document.getElementById(
+          "sunrise"
+        ).textContent =
+
+          formatTime(
+            data.daily.sunrise[0]
+          );
+
+      }
+
+
+
+      /* SUNSET */
+
+      if (
+        data.daily &&
+        data.daily.sunset &&
+        data.daily.sunset.length
+      ) {
+
+        document.getElementById(
+          "sunset"
+        ).textContent =
+
+          formatTime(
+            data.daily.sunset[0]
+          );
+
+      }
+
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Unable to retrieve Edmonton weather:",
+        error
+      );
+
+    }
+
+  }
+
+
+
+  /*
+    Load weather immediately.
+  */
+
+  updateWeather();
+
+
+
+  /*
+    Refresh every 10 minutes.
+
+    Sunrise/sunset won't change much,
+    but temperature will stay reasonably current.
+  */
+
+  setInterval(
+    updateWeather,
+    600000
+  );
+
+
+</script>
+
+
 </body>
+
 </html>
