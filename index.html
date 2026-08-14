@@ -49,70 +49,44 @@
        ===================================================== */
 
     header {
-
       display: flex;
       justify-content: space-between;
       align-items: center;
 
-      padding: 18px 5%;
+      padding: 16px 3%;
 
       background: rgba(11, 13, 16, 0.97);
-
       border-bottom: 1px solid #222;
 
       position: sticky;
       top: 0;
-
       z-index: 100;
-
     }
-
 
     .logo {
-
       font-size: 30px;
-
       font-weight: 800;
-
-      letter-spacing: 4px;
-
+      letter-spacing: 3px;
     }
-
 
     .logo span {
-
       font-weight: 300;
-
       color: #aaa;
-
       font-size: 12px;
-
       letter-spacing: 1px;
-
       margin-left: 8px;
-
     }
-
 
     nav {
-
       display: flex;
-
       gap: 25px;
-
       font-size: 14px;
-
       color: #bbb;
-
     }
-
 
     nav a:hover {
-
       color: #ffffff;
-
     }
-
 
 
     /* =====================================================
@@ -120,13 +94,10 @@
        ===================================================== */
 
     main {
-
-      width: min(1500px, 94%);
-
+      width: 96%;
+      max-width: 1900px;
       margin: auto;
-
     }
-
 
 
     /* =====================================================
@@ -134,58 +105,39 @@
        ===================================================== */
 
     .hero {
-
-      padding: 35px 0 20px;
+      padding: 28px 0 18px;
 
       display: grid;
-
       grid-template-columns: 1fr auto;
-
       gap: 40px;
 
       align-items: end;
-
     }
-
 
     .hero-left {
-
       min-width: 0;
-
     }
 
-
     .status {
-
       display: inline-flex;
-
       align-items: center;
-
       gap: 8px;
 
       font-size: 12px;
-
       font-weight: bold;
 
-      margin-bottom: 10px;
-
+      margin-bottom: 8px;
     }
 
-
     .live-dot {
-
       width: 9px;
-
       height: 9px;
 
       background: #ff2b2b;
-
       border-radius: 50%;
 
       animation: pulse 1.8s infinite;
-
     }
-
 
     @keyframes pulse {
 
@@ -199,200 +151,109 @@
 
     }
 
-
     h1 {
-
-      font-size: clamp(36px, 5vw, 70px);
-
+      font-size: clamp(36px, 4.5vw, 68px);
       line-height: 1;
-
       letter-spacing: -2px;
-
       margin-bottom: 10px;
-
     }
-
 
     .hero-description {
-
       color: #aaa;
-
       font-size: 17px;
-
     }
-
 
 
     /* =====================================================
-       WEATHER TOP RIGHT
+       WEATHER
        ===================================================== */
 
     .weather-panel {
-
       display: flex;
-
       align-items: center;
+      gap: 32px;
 
-      gap: 28px;
-
-      padding: 15px 20px;
+      padding: 14px 20px;
 
       background: #121519;
-
       border: 1px solid #25282d;
-
       border-radius: 12px;
 
       min-width: 430px;
-
     }
-
 
     .weather-item {
-
       min-width: 90px;
-
     }
 
-
     .weather-label {
-
       color: #777;
-
       text-transform: uppercase;
 
       font-size: 10px;
-
       letter-spacing: 1px;
 
       margin-bottom: 3px;
-
     }
-
 
     .weather-value {
-
       font-size: 21px;
-
       font-weight: 700;
-
       white-space: nowrap;
-
     }
-
 
     .weather-temp {
-
       font-size: 30px;
-
     }
 
-
     .weather-condition {
-
       margin-top: 2px;
 
       color: #aaa;
-
       font-size: 13px;
 
-      font-weight: 400;
-
       white-space: nowrap;
-
     }
-
 
 
     /* =====================================================
-       VIDEO + CHAT
+       WIDE LIVE VIDEO
        ===================================================== */
 
     .live-layout {
-
-      display: grid;
-
-      grid-template-columns:
-        minmax(0, 3fr)
-        minmax(320px, 1fr);
-
-      gap: 16px;
-
-      align-items: stretch;
-
+      width: 100%;
+      display: block;
     }
 
-
     .video-container {
-
       position: relative;
 
       width: 100%;
 
-      aspect-ratio: 16 / 9;
+      /*
+         Panoramic presentation for the Duo camera.
+      */
+
+      aspect-ratio: 21 / 9;
 
       background: #000;
 
       overflow: hidden;
 
       border-radius: 12px;
-
       border: 1px solid #292d32;
-
     }
-
 
     .video-container iframe {
-
       position: absolute;
 
       inset: 0;
 
       width: 100%;
-
       height: 100%;
 
       border: 0;
-
     }
-
-
-
-    /* =====================================================
-       CHAT
-       ===================================================== */
-
-    .chat-container {
-
-      position: relative;
-
-      min-width: 0;
-
-      background: #ffffff;
-
-      border: 1px solid #292d32;
-
-      border-radius: 12px;
-
-      overflow: hidden;
-
-    }
-
-
-    .chat-container iframe {
-
-      position: absolute;
-
-      inset: 0;
-
-      width: 100%;
-
-      height: 100%;
-
-      border: 0;
-
-    }
-
 
 
     /* =====================================================
@@ -400,14 +261,13 @@
        ===================================================== */
 
     .info-bar {
-
       display: grid;
 
       grid-template-columns: repeat(4, 1fr);
 
       gap: 1px;
 
-      margin-top: 18px;
+      margin-top: 14px;
 
       background: #25282d;
 
@@ -416,21 +276,14 @@
       border-radius: 10px;
 
       overflow: hidden;
-
     }
-
 
     .info-box {
-
       background: #121519;
-
-      padding: 18px 20px;
-
+      padding: 16px 20px;
     }
 
-
     .info-label {
-
       color: #777;
 
       font-size: 10px;
@@ -440,27 +293,20 @@
       letter-spacing: 1px;
 
       margin-bottom: 4px;
-
     }
-
 
     .info-value {
-
       font-size: 18px;
-
       font-weight: 600;
-
     }
-
 
 
     /* =====================================================
-       YEGER RADIO
+       YEGer RADIO
        ===================================================== */
 
     .radio-section {
-
-      margin: 28px 0 0;
+      margin: 25px 0 0;
 
       background: #121519;
 
@@ -469,12 +315,9 @@
       border-radius: 12px;
 
       padding: 20px;
-
     }
 
-
     .radio-header {
-
       display: flex;
 
       align-items: center;
@@ -482,19 +325,13 @@
       gap: 14px;
 
       margin-bottom: 15px;
-
     }
-
 
     .radio-info {
-
       margin-right: auto;
-
     }
 
-
     .radio-label {
-
       color: #777;
 
       font-size: 10px;
@@ -504,43 +341,28 @@
       text-transform: uppercase;
 
       margin-bottom: 2px;
-
     }
-
 
     .radio-title {
-
       font-size: 20px;
-
       font-weight: 700;
-
     }
 
-
     .radio-subtitle {
-
       color: #999;
 
       font-size: 13px;
 
       margin-top: 2px;
-
     }
-
 
     .radio-controls {
-
       display: flex;
-
       gap: 8px;
-
       flex-wrap: wrap;
-
     }
 
-
     .radio-button {
-
       border: 1px solid #3a3d42;
 
       background: #181c20;
@@ -556,21 +378,14 @@
       font-size: 13px;
 
       transition: 0.2s ease;
-
     }
-
 
     .radio-button:hover {
-
       background: #24292f;
-
     }
 
-
     .spotify-link {
-
       display: inline-flex;
-
       align-items: center;
 
       border: 1px solid #3a3d42;
@@ -584,19 +399,13 @@
       padding: 9px 15px;
 
       font-size: 13px;
-
     }
-
 
     .spotify-link:hover {
-
       background: #24292f;
-
     }
 
-
     #spotify-player {
-
       width: 100%;
 
       min-height: 152px;
@@ -604,9 +413,7 @@
       border-radius: 12px;
 
       overflow: hidden;
-
     }
-
 
 
     /* =====================================================
@@ -614,7 +421,6 @@
        ===================================================== */
 
     .content-grid {
-
       display: grid;
 
       grid-template-columns: 2fr 1fr;
@@ -622,12 +428,9 @@
       gap: 25px;
 
       margin: 30px 0 45px;
-
     }
 
-
     .card {
-
       background: #121519;
 
       border: 1px solid #25282d;
@@ -635,28 +438,19 @@
       border-radius: 12px;
 
       padding: 25px;
-
     }
 
-
     .card h2 {
-
       margin-bottom: 10px;
 
       font-size: 22px;
-
     }
-
 
     .card p {
-
       color: #aaa;
-
     }
 
-
     .location {
-
       margin-top: 18px;
 
       padding-top: 18px;
@@ -666,9 +460,7 @@
       color: #777;
 
       font-size: 13px;
-
     }
-
 
 
     /* =====================================================
@@ -676,7 +468,6 @@
        ===================================================== */
 
     footer {
-
       border-top: 1px solid #222;
 
       color: #666;
@@ -688,9 +479,7 @@
       font-size: 12px;
 
       margin-top: 30px;
-
     }
-
 
 
     /* =====================================================
@@ -699,41 +488,29 @@
 
     @media (max-width: 1050px) {
 
-      .hero {
-
-        grid-template-columns: 1fr;
-
-        gap: 20px;
-
+      main {
+        width: 94%;
       }
 
+      .hero {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+      }
 
       .weather-panel {
-
         min-width: 0;
 
         width: 100%;
 
         justify-content: space-around;
-
       }
 
-
-      .live-layout {
-
-        grid-template-columns: 1fr;
-
-      }
-
-
-      .chat-container {
-
-        height: 500px;
-
+      .video-container {
+        aspect-ratio: 16 / 9;
       }
 
     }
-
 
 
     /* =====================================================
@@ -743,128 +520,87 @@
     @media (max-width: 750px) {
 
       header {
-
-        padding: 15px 4%;
-
+        padding: 14px 4%;
       }
-
 
       .logo {
-
         font-size: 23px;
-
       }
-
 
       .logo span {
-
         display: none;
-
       }
 
-
       nav {
-
         gap: 13px;
 
         font-size: 11px;
-
       }
 
+      main {
+        width: 94%;
+      }
 
       .hero {
-
-        padding-top: 25px;
-
+        padding-top: 22px;
       }
 
+      h1 {
+        font-size: 42px;
+      }
 
       .weather-panel {
-
         display: grid;
 
-        grid-template-columns:
-          repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr);
 
         gap: 10px;
 
         padding: 15px;
-
       }
-
 
       .weather-item {
-
         min-width: 0;
-
       }
-
 
       .weather-value {
-
         font-size: 15px;
-
       }
-
 
       .weather-temp {
-
         font-size: 22px;
-
       }
 
-
       .weather-condition {
-
         font-size: 11px;
 
         white-space: normal;
-
       }
 
-
-      .chat-container {
-
-        height: 420px;
-
+      .video-container {
+        aspect-ratio: 16 / 9;
       }
-
 
       .info-bar {
-
-        grid-template-columns:
-          repeat(2, 1fr);
-
+        grid-template-columns: repeat(2, 1fr);
       }
-
 
       .content-grid {
-
         grid-template-columns: 1fr;
-
       }
-
 
       .info-value {
-
         font-size: 16px;
-
       }
 
-
       .radio-header {
-
         align-items: flex-start;
 
         flex-direction: column;
-
       }
 
-
       .radio-controls {
-
         width: 100%;
-
       }
 
     }
@@ -885,32 +621,22 @@
 
   <div class="logo">
 
-    YEGER
+    YEGer
 
-    <span>
-      EDMONTON LIVE
-    </span>
+    <span>EDMONTON LIVE</span>
 
   </div>
 
 
   <nav>
 
-    <a href="#live">
-      Live
-    </a>
+    <a href="#live">Live</a>
 
-    <a href="#radio">
-      Music
-    </a>
+    <a href="#radio">Music</a>
 
-    <a href="#about">
-      About
-    </a>
+    <a href="#about">About</a>
 
-    <a href="#sunsets">
-      Sunsets
-    </a>
+    <a href="#sunsets">Sunsets</a>
 
   </nav>
 
@@ -925,10 +651,7 @@
        HERO + WEATHER
        ===================================================== -->
 
-  <section
-    class="hero"
-    id="live"
-  >
+  <section class="hero" id="live">
 
 
     <div class="hero-left">
@@ -1029,25 +752,33 @@
 
 
   <!-- =====================================================
-       YOUTUBE LIVE + CHAT
+       YOUTUBE LIVE
        ===================================================== -->
 
+  <section class="live-layout">
 
-<section class="live-layout">
 
-  <div class="video-container">
+    <div class="video-container">
 
-    <iframe
-      src="https://www.youtube.com/embed/4TXdHm3OgA4?autoplay=1&mute=1&playsinline=1&controls=0&rel=0&disablekb=1&origin=https%3A%2F%2Fyeger.ca"
-      title="YEGER Edmonton Live"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-      allowfullscreen>
-    </iframe>
+      <iframe
 
-  </div>
+        src="https://www.youtube.com/embed/4TXdHm3OgA4?autoplay=1&mute=1&playsinline=1&controls=0&rel=0&disablekb=1&origin=https%3A%2F%2Fyeger.ca"
 
-</section>
+        title="YEGer Edmonton Live"
+
+        referrerpolicy="strict-origin-when-cross-origin"
+
+        allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+
+        allowfullscreen>
+
+      </iframe>
+
+    </div>
+
+
+  </section>
+
 
 
   <!-- =====================================================
@@ -1125,12 +856,14 @@
     id="radio"
   >
 
+
     <div class="radio-header">
+
 
       <div class="radio-info">
 
         <div class="radio-label">
-          YEGER RADIO
+          YEGer RADIO
         </div>
 
         <div class="radio-title">
@@ -1138,13 +871,14 @@
         </div>
 
         <div class="radio-subtitle">
-          Music from the YEGER Spotify playlist
+          Music from the YEGer Spotify playlist
         </div>
 
       </div>
 
 
       <div class="radio-controls">
+
 
         <button
           class="radio-button"
@@ -1173,7 +907,9 @@
           Open Spotify
         </a>
 
+
       </div>
+
 
     </div>
 
@@ -1191,8 +927,6 @@
 
   <section class="content-grid">
 
-
-    <!-- ABOUT -->
 
     <article
       class="card"
@@ -1212,17 +946,17 @@
 
       </p>
 
+
       <div class="location">
 
         Edmonton, Alberta, Canada
 
       </div>
 
+
     </article>
 
 
-
-    <!-- SUNSETS -->
 
     <aside
       class="card"
@@ -1235,12 +969,13 @@
 
       <p>
 
-        Facing west gives YEGER a front-row view of
+        Facing west gives YEGer a front-row view of
         Edmonton's evening skies.
 
         Sunset highlights and timelapses will appear here.
 
       </p>
+
 
     </aside>
 
@@ -1267,7 +1002,7 @@
 
 
 <!-- =====================================================
-     OPEN-METEO WEATHER
+     WEATHER
      ===================================================== -->
 
 <script>
@@ -1289,10 +1024,7 @@
       return "--:--";
     }
 
-
-    const date =
-      new Date(dateString);
-
+    const date = new Date(dateString);
 
     return date.toLocaleTimeString(
       "en-CA",
@@ -1305,7 +1037,6 @@
     );
 
   }
-
 
 
   function weatherDescription(code) {
@@ -1355,33 +1086,24 @@
 
     };
 
-
     return descriptions[code] || "Current conditions";
 
   }
-
 
 
   async function updateWeather() {
 
     try {
 
-      const response =
-        await fetch(weatherURL);
-
+      const response = await fetch(weatherURL);
 
       if (!response.ok) {
 
-        throw new Error(
-          "Weather service unavailable"
-        );
+        throw new Error("Weather service unavailable");
 
       }
 
-
-      const data =
-        await response.json();
-
+      const data = await response.json();
 
 
       /* TEMPERATURE */
@@ -1394,13 +1116,9 @@
         document.getElementById(
           "temperature"
         ).textContent =
-
-          Math.round(
-            data.current.temperature_2m
-          ) + "°C";
+          Math.round(data.current.temperature_2m) + "°C";
 
       }
-
 
 
       /* WEATHER CONDITION */
@@ -1413,13 +1131,9 @@
         document.getElementById(
           "weather-condition"
         ).textContent =
-
-          weatherDescription(
-            data.current.weather_code
-          );
+          weatherDescription(data.current.weather_code);
 
       }
-
 
 
       /* SUNRISE */
@@ -1433,13 +1147,9 @@
         document.getElementById(
           "sunrise"
         ).textContent =
-
-          formatTime(
-            data.daily.sunrise[0]
-          );
+          formatTime(data.daily.sunrise[0]);
 
       }
-
 
 
       /* SUNSET */
@@ -1453,13 +1163,9 @@
         document.getElementById(
           "sunset"
         ).textContent =
-
-          formatTime(
-            data.daily.sunset[0]
-          );
+          formatTime(data.daily.sunset[0]);
 
       }
-
 
     }
 
@@ -1469,7 +1175,6 @@
         "Unable to retrieve Edmonton weather:",
         error
       );
-
 
       document.getElementById(
         "weather-condition"
@@ -1481,10 +1186,10 @@
   }
 
 
-
   updateWeather();
 
 
+  /* Refresh weather every 10 minutes */
 
   setInterval(
     updateWeather,
@@ -1496,7 +1201,7 @@
 
 
 <!-- =====================================================
-     SPOTIFY IFRAME API
+     SPOTIFY
      ===================================================== -->
 
 <script
@@ -1512,7 +1217,6 @@
   let isPlaying = false;
 
   let isMuted = false;
-
 
 
   window.onSpotifyIframeApiReady =
@@ -1547,43 +1251,7 @@
 
         (controller) => {
 
-
-          spotifyController =
-            controller;
-
-
-          /*
-            Attempt autoplay.
-
-            Some browsers will block playback
-            with sound until the visitor
-            interacts with the page.
-          */
-
-          try {
-
-            controller.play();
-
-            isPlaying = true;
-
-            document.getElementById(
-              "playButton"
-            ).textContent =
-              "⏸ Pause";
-
-          }
-
-          catch (error) {
-
-            isPlaying = false;
-
-            document.getElementById(
-              "playButton"
-            ).textContent =
-              "▶ Play";
-
-          }
-
+          spotifyController = controller;
 
         }
 
@@ -1592,15 +1260,12 @@
     };
 
 
-
   /* =====================================================
      PLAY / PAUSE
      ===================================================== */
 
   document
-    .getElementById(
-      "playButton"
-    )
+    .getElementById("playButton")
     .addEventListener(
 
       "click",
@@ -1609,80 +1274,53 @@
 
 
         if (!spotifyController) {
-
           return;
-
         }
 
 
         if (isPlaying) {
 
-
           spotifyController.pause();
 
-
-          isPlaying =
-            false;
-
+          isPlaying = false;
 
           document.getElementById(
             "playButton"
           ).textContent =
             "▶ Play";
 
-
         }
 
         else {
 
-
           spotifyController.play();
 
-
-          isPlaying =
-            true;
-
-
-          isMuted =
-            false;
-
+          isPlaying = true;
+          isMuted = false;
 
           document.getElementById(
             "playButton"
           ).textContent =
             "⏸ Pause";
 
-
           document.getElementById(
             "muteButton"
           ).textContent =
             "🔊 Sound";
 
-
         }
-
 
       }
 
     );
 
 
-
   /* =====================================================
-     MUTE / UNMUTE
-
-     Spotify's simple iframe controller does not
-     provide normal volume control.
-
-     Therefore:
-     Mute = pause
-     Unmute = resume
+     SOUND / PAUSE
      ===================================================== */
 
   document
-    .getElementById(
-      "muteButton"
-    )
+    .getElementById("muteButton")
     .addEventListener(
 
       "click",
@@ -1691,68 +1329,47 @@
 
 
         if (!spotifyController) {
-
           return;
-
         }
 
 
         if (!isMuted) {
 
-
           spotifyController.pause();
 
-
-          isMuted =
-            true;
-
-
-          isPlaying =
-            false;
-
+          isMuted = true;
+          isPlaying = false;
 
           document.getElementById(
             "muteButton"
           ).textContent =
             "🔇 Muted";
 
-
           document.getElementById(
             "playButton"
           ).textContent =
             "▶ Play";
 
-
         }
 
         else {
 
-
           spotifyController.play();
 
-
-          isMuted =
-            false;
-
-
-          isPlaying =
-            true;
-
+          isMuted = false;
+          isPlaying = true;
 
           document.getElementById(
             "muteButton"
           ).textContent =
             "🔊 Sound";
 
-
           document.getElementById(
             "playButton"
           ).textContent =
             "⏸ Pause";
 
-
         }
-
 
       }
 
