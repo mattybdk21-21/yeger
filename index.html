@@ -2,24 +2,17 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
-
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>YEGer — Edmonton Live</title>
 
   <meta
     name="description"
-    content="Watch Edmonton live. Skyline views, weather, sunsets, music and more from YEGer."
+    content="Watch Edmonton live. Skyline views, weather, sunsets and music from YEGer."
   >
 
   <style>
-
-    /* =====================================================
-       GLOBAL
-       ===================================================== */
 
     * {
       box-sizing: border-box;
@@ -34,7 +27,7 @@
     body {
       font-family: Arial, Helvetica, sans-serif;
       background: #0b0d10;
-      color: #ffffff;
+      color: white;
       line-height: 1.5;
     }
 
@@ -44,18 +37,20 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        HEADER
-       ===================================================== */
+       ========================================= */
 
     header {
+      height: 58px;
+
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
 
-      padding: 16px 3%;
+      padding: 0 2.2%;
 
-      background: rgba(11, 13, 16, 0.97);
+      background: rgba(11,13,16,.97);
       border-bottom: 1px solid #222;
 
       position: sticky;
@@ -64,34 +59,34 @@
     }
 
     .logo {
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 800;
       letter-spacing: 3px;
     }
 
     .logo span {
+      font-size: 11px;
       font-weight: 300;
-      color: #aaa;
-      font-size: 12px;
       letter-spacing: 1px;
+      color: #999;
       margin-left: 8px;
     }
 
     nav {
       display: flex;
       gap: 25px;
-      font-size: 14px;
       color: #bbb;
+      font-size: 13px;
     }
 
     nav a:hover {
-      color: #ffffff;
+      color: white;
     }
 
 
-    /* =====================================================
+    /* =========================================
        MAIN
-       ===================================================== */
+       ========================================= */
 
     main {
       width: 96%;
@@ -100,86 +95,81 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        HERO
-       ===================================================== */
+       ========================================= */
 
     .hero {
-      padding: 28px 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
 
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 40px;
-
-      align-items: end;
+      padding: 20px 0 14px;
     }
 
     .hero-left {
-      min-width: 0;
+      flex: 1;
     }
 
     .status {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
 
-      font-size: 12px;
+      font-size: 11px;
       font-weight: bold;
 
-      margin-bottom: 8px;
+      margin-bottom: 5px;
     }
 
     .live-dot {
-      width: 9px;
-      height: 9px;
-
-      background: #ff2b2b;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-
+      background: #ff2b2b;
       animation: pulse 1.8s infinite;
     }
 
     @keyframes pulse {
 
-      0%, 100% {
+      0%,100% {
         opacity: 1;
       }
 
       50% {
-        opacity: 0.3;
+        opacity: .3;
       }
 
     }
 
     h1 {
-      font-size: clamp(36px, 4.5vw, 68px);
+      font-size: clamp(38px,4vw,64px);
       line-height: 1;
       letter-spacing: -2px;
-      margin-bottom: 10px;
+      margin-bottom: 7px;
     }
 
     .hero-description {
       color: #aaa;
-      font-size: 17px;
+      font-size: 16px;
     }
 
 
-    /* =====================================================
+    /* =========================================
        WEATHER
-       ===================================================== */
+       ========================================= */
 
     .weather-panel {
       display: flex;
       align-items: center;
-      gap: 32px;
-
-      padding: 14px 20px;
+      gap: 30px;
 
       background: #121519;
       border: 1px solid #25282d;
-      border-radius: 12px;
+      border-radius: 10px;
 
-      min-width: 430px;
+      padding: 11px 18px;
     }
 
     .weather-item {
@@ -188,41 +178,37 @@
 
     .weather-label {
       color: #777;
+      font-size: 9px;
       text-transform: uppercase;
-
-      font-size: 10px;
       letter-spacing: 1px;
-
-      margin-bottom: 3px;
     }
 
     .weather-value {
-      font-size: 21px;
-      font-weight: 700;
+      font-size: 19px;
+      font-weight: bold;
       white-space: nowrap;
     }
 
     .weather-temp {
-      font-size: 30px;
+      font-size: 27px;
     }
 
     .weather-condition {
-      margin-top: 2px;
-
       color: #aaa;
-      font-size: 13px;
-
-      white-space: nowrap;
+      font-size: 11px;
     }
 
 
-    /* =====================================================
-       WIDE LIVE VIDEO
-       ===================================================== */
+    /* =========================================
+       YOUTUBE LIVE VIDEO
 
-    .live-layout {
+       IMPORTANT:
+       16:9 eliminates the huge unused vertical
+       space from the old 21:9 container.
+       ========================================= */
+
+    .video-section {
       width: 100%;
-      display: block;
     }
 
     .video-container {
@@ -230,47 +216,44 @@
 
       width: 100%;
 
-      /*
-         Panoramic presentation for the Duo camera.
-      */
-
-      aspect-ratio: 21 / 9;
+      aspect-ratio: 16 / 9;
 
       background: #000;
 
       overflow: hidden;
 
-      border-radius: 12px;
       border: 1px solid #292d32;
+      border-radius: 12px;
     }
 
     .video-container iframe {
       position: absolute;
 
-      inset: 0;
+      top: 0;
+      left: 0;
 
       width: 100%;
       height: 100%;
 
       border: 0;
+
+      display: block;
     }
 
 
-    /* =====================================================
+    /* =========================================
        INFO BAR
-       ===================================================== */
+       ========================================= */
 
     .info-bar {
       display: grid;
-
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4,1fr);
 
       gap: 1px;
 
-      margin-top: 14px;
+      margin-top: 12px;
 
       background: #25282d;
-
       border: 1px solid #25282d;
 
       border-radius: 10px;
@@ -280,49 +263,45 @@
 
     .info-box {
       background: #121519;
-      padding: 16px 20px;
+      padding: 14px 18px;
     }
 
     .info-label {
       color: #777;
 
-      font-size: 10px;
+      font-size: 9px;
 
       text-transform: uppercase;
-
       letter-spacing: 1px;
 
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .info-value {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 600;
     }
 
 
-    /* =====================================================
+    /* =========================================
        YEGer RADIO
-       ===================================================== */
+       ========================================= */
 
     .radio-section {
-      margin: 25px 0 0;
+      margin-top: 20px;
+
+      padding: 20px;
 
       background: #121519;
 
       border: 1px solid #25282d;
-
       border-radius: 12px;
-
-      padding: 20px;
     }
 
     .radio-header {
       display: flex;
-
       align-items: center;
-
-      gap: 14px;
+      gap: 15px;
 
       margin-bottom: 15px;
     }
@@ -335,99 +314,67 @@
       color: #777;
 
       font-size: 10px;
-
       letter-spacing: 1px;
 
       text-transform: uppercase;
-
-      margin-bottom: 2px;
     }
 
     .radio-title {
       font-size: 20px;
-      font-weight: 700;
+      font-weight: bold;
     }
 
     .radio-subtitle {
       color: #999;
-
       font-size: 13px;
-
-      margin-top: 2px;
     }
 
     .radio-controls {
       display: flex;
       gap: 8px;
-      flex-wrap: wrap;
     }
 
-    .radio-button {
-      border: 1px solid #3a3d42;
-
+    .radio-button,
+    .spotify-link {
       background: #181c20;
+      color: white;
 
-      color: #ffffff;
+      border: 1px solid #3a3d42;
 
       border-radius: 999px;
 
       padding: 9px 15px;
+
+      font-size: 13px;
 
       cursor: pointer;
-
-      font-size: 13px;
-
-      transition: 0.2s ease;
     }
 
-    .radio-button:hover {
-      background: #24292f;
-    }
-
-    .spotify-link {
-      display: inline-flex;
-      align-items: center;
-
-      border: 1px solid #3a3d42;
-
-      background: #181c20;
-
-      color: #ffffff;
-
-      border-radius: 999px;
-
-      padding: 9px 15px;
-
-      font-size: 13px;
-    }
-
+    .radio-button:hover,
     .spotify-link:hover {
       background: #24292f;
     }
 
     #spotify-player {
       width: 100%;
-
       min-height: 152px;
-
-      border-radius: 12px;
-
       overflow: hidden;
+      border-radius: 12px;
     }
 
 
-    /* =====================================================
-       CONTENT
-       ===================================================== */
+    /* =========================================
+       INFORMATION CARDS
+       ========================================= */
 
     .content-grid {
       display: grid;
 
       grid-template-columns: 2fr 1fr;
 
-      gap: 25px;
+      gap: 20px;
 
-      margin: 30px 0 45px;
+      margin: 25px 0 40px;
     }
 
     .card {
@@ -437,13 +384,12 @@
 
       border-radius: 12px;
 
-      padding: 25px;
+      padding: 24px;
     }
 
     .card h2 {
-      margin-bottom: 10px;
-
       font-size: 22px;
+      margin-bottom: 10px;
     }
 
     .card p {
@@ -463,68 +409,57 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        FOOTER
-       ===================================================== */
+       ========================================= */
 
     footer {
       border-top: 1px solid #222;
 
-      color: #666;
-
       text-align: center;
 
-      padding: 30px 20px;
+      color: #666;
 
       font-size: 12px;
 
-      margin-top: 30px;
+      padding: 28px 20px;
     }
 
 
-    /* =====================================================
+    /* =========================================
        TABLET
-       ===================================================== */
+       ========================================= */
 
-    @media (max-width: 1050px) {
+    @media (max-width: 1000px) {
 
       main {
-        width: 94%;
+        width: 95%;
       }
 
       .hero {
-        grid-template-columns: 1fr;
-
-        gap: 18px;
+        flex-direction: column;
+        align-items: stretch;
       }
 
       .weather-panel {
-        min-width: 0;
-
-        width: 100%;
-
         justify-content: space-around;
-      }
-
-      .video-container {
-        aspect-ratio: 16 / 9;
       }
 
     }
 
 
-    /* =====================================================
+    /* =========================================
        MOBILE
-       ===================================================== */
+       ========================================= */
 
-    @media (max-width: 750px) {
+    @media (max-width: 700px) {
 
       header {
-        padding: 14px 4%;
+        padding: 0 4%;
       }
 
       .logo {
-        font-size: 23px;
+        font-size: 22px;
       }
 
       .logo span {
@@ -532,35 +467,22 @@
       }
 
       nav {
-        gap: 13px;
-
+        gap: 12px;
         font-size: 11px;
       }
 
       main {
-        width: 94%;
-      }
-
-      .hero {
-        padding-top: 22px;
+        width: 96%;
       }
 
       h1 {
-        font-size: 42px;
+        font-size: 40px;
       }
 
       .weather-panel {
         display: grid;
-
-        grid-template-columns: repeat(3, 1fr);
-
+        grid-template-columns: repeat(3,1fr);
         gap: 10px;
-
-        padding: 15px;
-      }
-
-      .weather-item {
-        min-width: 0;
       }
 
       .weather-value {
@@ -571,36 +493,21 @@
         font-size: 22px;
       }
 
-      .weather-condition {
-        font-size: 11px;
-
-        white-space: normal;
-      }
-
-      .video-container {
-        aspect-ratio: 16 / 9;
-      }
-
       .info-bar {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2,1fr);
       }
 
       .content-grid {
         grid-template-columns: 1fr;
       }
 
-      .info-value {
-        font-size: 16px;
-      }
-
       .radio-header {
-        align-items: flex-start;
-
         flex-direction: column;
+        align-items: flex-start;
       }
 
       .radio-controls {
-        width: 100%;
+        flex-wrap: wrap;
       }
 
     }
@@ -613,31 +520,22 @@
 <body>
 
 
-<!-- =====================================================
+<!-- =========================================
      HEADER
-     ===================================================== -->
+     ========================================= -->
 
 <header>
 
   <div class="logo">
-
     YEGer
-
     <span>EDMONTON LIVE</span>
-
   </div>
 
-
   <nav>
-
     <a href="#live">Live</a>
-
-    <a href="#radio">Music</a>
-
+    <a href="#music">Music</a>
     <a href="#about">About</a>
-
     <a href="#sunsets">Sunsets</a>
-
   </nav>
 
 </header>
@@ -647,349 +545,296 @@
 <main>
 
 
-  <!-- =====================================================
-       HERO + WEATHER
-       ===================================================== -->
+<!-- =========================================
+     HERO
+     ========================================= -->
 
-  <section class="hero" id="live">
+<section class="hero" id="live">
 
+  <div class="hero-left">
 
-    <div class="hero-left">
-
-
-      <div class="status">
-
-        <span class="live-dot"></span>
-
-        LIVE FROM EDMONTON
-
-      </div>
-
-
-      <h1>
-        Edmonton. Live.
-      </h1>
-
-
-      <p class="hero-description">
-
-        A live window overlooking Edmonton, Alberta.
-
-      </p>
-
-
+    <div class="status">
+      <span class="live-dot"></span>
+      LIVE FROM EDMONTON
     </div>
 
+    <h1>Edmonton. Live.</h1>
+
+    <p class="hero-description">
+      A live window overlooking Edmonton, Alberta.
+    </p>
+
+  </div>
 
 
-    <!-- WEATHER -->
+  <!-- WEATHER -->
 
-    <div class="weather-panel">
+  <div class="weather-panel">
 
+    <div class="weather-item">
 
-      <div class="weather-item">
-
-        <div class="weather-label">
-          Edmonton
-        </div>
-
-        <div
-          class="weather-value weather-temp"
-          id="temperature"
-        >
-          --°C
-        </div>
-
-        <div
-          class="weather-condition"
-          id="weather-condition"
-        >
-          Loading weather...
-        </div>
-
-      </div>
-
-
-
-      <div class="weather-item">
-
-        <div class="weather-label">
-          Sunrise
-        </div>
-
-        <div
-          class="weather-value"
-          id="sunrise"
-        >
-          --:--
-        </div>
-
-      </div>
-
-
-
-      <div class="weather-item">
-
-        <div class="weather-label">
-          Sunset
-        </div>
-
-        <div
-          class="weather-value"
-          id="sunset"
-        >
-          --:--
-        </div>
-
-      </div>
-
-
-    </div>
-
-
-  </section>
-
-
-
-  <!-- =====================================================
-       YOUTUBE LIVE
-       ===================================================== -->
-
-  <section class="live-layout">
-
-
-    <div class="video-container">
-
-      <iframe
-
-        src="https://www.youtube.com/embed/4TXdHm3OgA4?autoplay=1&mute=1&playsinline=1&controls=0&rel=0&disablekb=1&origin=https%3A%2F%2Fyeger.ca"
-
-        title="YEGer Edmonton Live"
-
-        referrerpolicy="strict-origin-when-cross-origin"
-
-        allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-
-        allowfullscreen>
-
-      </iframe>
-
-    </div>
-
-
-  </section>
-
-
-
-  <!-- =====================================================
-       INFORMATION BAR
-       ===================================================== -->
-
-  <section class="info-bar">
-
-
-    <div class="info-box">
-
-      <div class="info-label">
-        Location
-      </div>
-
-      <div class="info-value">
+      <div class="weather-label">
         Edmonton
       </div>
 
-    </div>
-
-
-
-    <div class="info-box">
-
-      <div class="info-label">
-        View
+      <div
+        class="weather-value weather-temp"
+        id="temperature"
+      >
+        --°C
       </div>
 
-      <div class="info-value">
-        High-rise
-      </div>
-
-    </div>
-
-
-
-    <div class="info-box">
-
-      <div class="info-label">
-        Direction
-      </div>
-
-      <div class="info-value">
-        West
+      <div
+        class="weather-condition"
+        id="weather-condition"
+      >
+        Loading weather...
       </div>
 
     </div>
 
 
+    <div class="weather-item">
 
-    <div class="info-box">
-
-      <div class="info-label">
-        Stream
+      <div class="weather-label">
+        Sunrise
       </div>
 
-      <div class="info-value">
-        Live
+      <div
+        class="weather-value"
+        id="sunrise"
+      >
+        --:--
       </div>
 
     </div>
 
 
-  </section>
+    <div class="weather-item">
+
+      <div class="weather-label">
+        Sunset
+      </div>
+
+      <div
+        class="weather-value"
+        id="sunset"
+      >
+        --:--
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 
 
-  <!-- =====================================================
-       YEGER RADIO
-       ===================================================== -->
+<!-- =========================================
+     FULL-WIDTH YOUTUBE LIVE STREAM
+     ========================================= -->
 
-  <section
-    class="radio-section"
-    id="radio"
+<section class="video-section">
+
+  <div class="video-container">
+
+    <iframe
+      src="https://www.youtube.com/embed/4TXdHm3OgA4?autoplay=1&mute=1&playsinline=1&controls=0&rel=0&disablekb=1&origin=https%3A%2F%2Fyeger.ca"
+      title="YEGer Edmonton Live"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+      allowfullscreen>
+    </iframe>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================
+     INFO BAR
+     ========================================= -->
+
+<section class="info-bar">
+
+  <div class="info-box">
+
+    <div class="info-label">
+      Location
+    </div>
+
+    <div class="info-value">
+      Edmonton
+    </div>
+
+  </div>
+
+
+  <div class="info-box">
+
+    <div class="info-label">
+      View
+    </div>
+
+    <div class="info-value">
+      High-rise
+    </div>
+
+  </div>
+
+
+  <div class="info-box">
+
+    <div class="info-label">
+      Direction
+    </div>
+
+    <div class="info-value">
+      West
+    </div>
+
+  </div>
+
+
+  <div class="info-box">
+
+    <div class="info-label">
+      Stream
+    </div>
+
+    <div class="info-value">
+      Live
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================
+     YEGer MUSIC
+     ========================================= -->
+
+<section
+  class="radio-section"
+  id="music"
+>
+
+  <div class="radio-header">
+
+    <div class="radio-info">
+
+      <div class="radio-label">
+        YEGer RADIO
+      </div>
+
+      <div class="radio-title">
+        Listen while you watch
+      </div>
+
+      <div class="radio-subtitle">
+        Music from the YEGer Spotify playlist
+      </div>
+
+    </div>
+
+
+    <div class="radio-controls">
+
+      <button
+        class="radio-button"
+        id="playButton"
+        type="button"
+      >
+        ▶ Play
+      </button>
+
+      <button
+        class="radio-button"
+        id="muteButton"
+        type="button"
+      >
+        🔊 Sound
+      </button>
+
+      <a
+        class="spotify-link"
+        href="https://open.spotify.com/playlist/0YVIdMIqEwCW1S33LRKtVa"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open Spotify
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div id="spotify-player"></div>
+
+</section>
+
+
+
+<!-- =========================================
+     ABOUT
+     ========================================= -->
+
+<section class="content-grid">
+
+
+  <article
+    class="card"
+    id="about"
   >
 
+    <h2>
+      See Edmonton as it happens.
+    </h2>
 
-    <div class="radio-header">
+    <p>
+      YEGer provides a live view across Edmonton —
+      from changing weather and dramatic prairie skies
+      to sunsets, storms, construction and the everyday
+      movement of the city.
+    </p>
 
-
-      <div class="radio-info">
-
-        <div class="radio-label">
-          YEGer RADIO
-        </div>
-
-        <div class="radio-title">
-          Listen while you watch
-        </div>
-
-        <div class="radio-subtitle">
-          Music from the YEGer Spotify playlist
-        </div>
-
-      </div>
-
-
-      <div class="radio-controls">
-
-
-        <button
-          class="radio-button"
-          id="playButton"
-          type="button"
-        >
-          ▶ Play
-        </button>
-
-
-        <button
-          class="radio-button"
-          id="muteButton"
-          type="button"
-        >
-          🔊 Sound
-        </button>
-
-
-        <a
-          class="spotify-link"
-          href="https://open.spotify.com/playlist/0YVIdMIqEwCW1S33LRKtVa"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Open Spotify
-        </a>
-
-
-      </div>
-
-
+    <div class="location">
+      Edmonton, Alberta, Canada
     </div>
 
-
-    <div id="spotify-player"></div>
-
-
-  </section>
+  </article>
 
 
 
-  <!-- =====================================================
-       CONTENT
-       ===================================================== -->
+  <aside
+    class="card"
+    id="sunsets"
+  >
 
-  <section class="content-grid">
+    <h2>
+      Sunsets
+    </h2>
 
+    <p>
+      Facing west gives YEGer a front-row view of
+      Edmonton's evening skies. Sunset highlights
+      and timelapses will appear here.
+    </p>
 
-    <article
-      class="card"
-      id="about"
-    >
-
-      <h2>
-        See Edmonton as it happens.
-      </h2>
-
-      <p>
-
-        YEGer provides a live view across Edmonton —
-        from changing weather and dramatic prairie skies
-        to sunsets, storms, construction and the everyday
-        movement of the city.
-
-      </p>
+  </aside>
 
 
-      <div class="location">
-
-        Edmonton, Alberta, Canada
-
-      </div>
-
-
-    </article>
-
-
-
-    <aside
-      class="card"
-      id="sunsets"
-    >
-
-      <h2>
-        Sunsets
-      </h2>
-
-      <p>
-
-        Facing west gives YEGer a front-row view of
-        Edmonton's evening skies.
-
-        Sunset highlights and timelapses will appear here.
-
-      </p>
-
-
-    </aside>
-
-
-  </section>
+</section>
 
 
 </main>
 
 
-
-<!-- =====================================================
-     FOOTER
-     ===================================================== -->
 
 <footer>
 
@@ -1001,208 +846,202 @@
 
 
 
-<!-- =====================================================
-     WEATHER
-     ===================================================== -->
+<!-- =========================================
+     EDMONTON WEATHER
+     ========================================= -->
 
 <script>
 
-  const weatherURL =
-    "https://api.open-meteo.com/v1/forecast" +
-    "?latitude=53.5461" +
-    "&longitude=-113.4938" +
-    "&current=temperature_2m,weather_code" +
-    "&daily=sunrise,sunset" +
-    "&temperature_unit=celsius" +
-    "&timezone=America%2FEdmonton" +
-    "&forecast_days=1";
+const weatherURL =
+  "https://api.open-meteo.com/v1/forecast" +
+  "?latitude=53.5461" +
+  "&longitude=-113.4938" +
+  "&current=temperature_2m,weather_code" +
+  "&daily=sunrise,sunset" +
+  "&temperature_unit=celsius" +
+  "&timezone=America%2FEdmonton" +
+  "&forecast_days=1";
 
 
-  function formatTime(dateString) {
+function formatTime(dateString) {
 
-    if (!dateString) {
-      return "--:--";
+  if (!dateString) {
+    return "--:--";
+  }
+
+  const date = new Date(dateString);
+
+  return date.toLocaleTimeString(
+    "en-CA",
+    {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+      timeZone: "America/Edmonton"
+    }
+  );
+
+}
+
+
+function weatherDescription(code) {
+
+  const descriptions = {
+
+    0: "Clear sky",
+
+    1: "Mainly clear",
+    2: "Partly cloudy",
+    3: "Overcast",
+
+    45: "Fog",
+    48: "Freezing fog",
+
+    51: "Light drizzle",
+    53: "Drizzle",
+    55: "Heavy drizzle",
+
+    56: "Light freezing drizzle",
+    57: "Freezing drizzle",
+
+    61: "Light rain",
+    63: "Rain",
+    65: "Heavy rain",
+
+    66: "Light freezing rain",
+    67: "Freezing rain",
+
+    71: "Light snow",
+    73: "Snow",
+    75: "Heavy snow",
+
+    77: "Snow grains",
+
+    80: "Light rain showers",
+    81: "Rain showers",
+    82: "Heavy rain showers",
+
+    85: "Light snow showers",
+    86: "Heavy snow showers",
+
+    95: "Thunderstorm",
+
+    96: "Thunderstorm with hail",
+    99: "Severe thunderstorm with hail"
+
+  };
+
+  return descriptions[code] || "Current conditions";
+
+}
+
+
+async function updateWeather() {
+
+  try {
+
+    const response = await fetch(weatherURL);
+
+    if (!response.ok) {
+      throw new Error("Weather service unavailable");
     }
 
-    const date = new Date(dateString);
-
-    return date.toLocaleTimeString(
-      "en-CA",
-      {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true,
-        timeZone: "America/Edmonton"
-      }
-    );
-
-  }
+    const data = await response.json();
 
 
-  function weatherDescription(code) {
+    if (
+      data.current &&
+      typeof data.current.temperature_2m === "number"
+    ) {
 
-    const descriptions = {
-
-      0: "Clear sky",
-
-      1: "Mainly clear",
-      2: "Partly cloudy",
-      3: "Overcast",
-
-      45: "Fog",
-      48: "Freezing fog",
-
-      51: "Light drizzle",
-      53: "Drizzle",
-      55: "Heavy drizzle",
-
-      56: "Light freezing drizzle",
-      57: "Freezing drizzle",
-
-      61: "Light rain",
-      63: "Rain",
-      65: "Heavy rain",
-
-      66: "Light freezing rain",
-      67: "Freezing rain",
-
-      71: "Light snow",
-      73: "Snow",
-      75: "Heavy snow",
-
-      77: "Snow grains",
-
-      80: "Light rain showers",
-      81: "Rain showers",
-      82: "Heavy rain showers",
-
-      85: "Light snow showers",
-      86: "Heavy snow showers",
-
-      95: "Thunderstorm",
-
-      96: "Thunderstorm with hail",
-      99: "Severe thunderstorm with hail"
-
-    };
-
-    return descriptions[code] || "Current conditions";
-
-  }
-
-
-  async function updateWeather() {
-
-    try {
-
-      const response = await fetch(weatherURL);
-
-      if (!response.ok) {
-
-        throw new Error("Weather service unavailable");
-
-      }
-
-      const data = await response.json();
-
-
-      /* TEMPERATURE */
-
-      if (
-        data.current &&
-        typeof data.current.temperature_2m === "number"
-      ) {
-
-        document.getElementById(
-          "temperature"
-        ).textContent =
-          Math.round(data.current.temperature_2m) + "°C";
-
-      }
-
-
-      /* WEATHER CONDITION */
-
-      if (
-        data.current &&
-        typeof data.current.weather_code === "number"
-      ) {
-
-        document.getElementById(
-          "weather-condition"
-        ).textContent =
-          weatherDescription(data.current.weather_code);
-
-      }
-
-
-      /* SUNRISE */
-
-      if (
-        data.daily &&
-        data.daily.sunrise &&
-        data.daily.sunrise.length
-      ) {
-
-        document.getElementById(
-          "sunrise"
-        ).textContent =
-          formatTime(data.daily.sunrise[0]);
-
-      }
-
-
-      /* SUNSET */
-
-      if (
-        data.daily &&
-        data.daily.sunset &&
-        data.daily.sunset.length
-      ) {
-
-        document.getElementById(
-          "sunset"
-        ).textContent =
-          formatTime(data.daily.sunset[0]);
-
-      }
+      document.getElementById(
+        "temperature"
+      ).textContent =
+        Math.round(data.current.temperature_2m) + "°C";
 
     }
 
-    catch (error) {
 
-      console.error(
-        "Unable to retrieve Edmonton weather:",
-        error
-      );
+    if (
+      data.current &&
+      typeof data.current.weather_code === "number"
+    ) {
 
       document.getElementById(
         "weather-condition"
       ).textContent =
-        "Weather unavailable";
+        weatherDescription(
+          data.current.weather_code
+        );
+
+    }
+
+
+    if (
+      data.daily &&
+      data.daily.sunrise &&
+      data.daily.sunrise.length
+    ) {
+
+      document.getElementById(
+        "sunrise"
+      ).textContent =
+        formatTime(
+          data.daily.sunrise[0]
+        );
+
+    }
+
+
+    if (
+      data.daily &&
+      data.daily.sunset &&
+      data.daily.sunset.length
+    ) {
+
+      document.getElementById(
+        "sunset"
+      ).textContent =
+        formatTime(
+          data.daily.sunset[0]
+        );
 
     }
 
   }
 
+  catch (error) {
 
-  updateWeather();
+    console.error(
+      "Unable to retrieve Edmonton weather:",
+      error
+    );
+
+    document.getElementById(
+      "weather-condition"
+    ).textContent =
+      "Weather unavailable";
+
+  }
+
+}
 
 
-  /* Refresh weather every 10 minutes */
+updateWeather();
 
-  setInterval(
-    updateWeather,
-    600000
-  );
+
+setInterval(
+  updateWeather,
+  600000
+);
 
 </script>
 
 
 
-<!-- =====================================================
+<!-- =========================================
      SPOTIFY
-     ===================================================== -->
+     ========================================= -->
 
 <script
   src="https://open.spotify.com/embed/iframe-api/v1"
@@ -1212,172 +1051,157 @@
 
 <script>
 
-  let spotifyController = null;
+let spotifyController = null;
 
-  let isPlaying = false;
+let isPlaying = false;
 
-  let isMuted = false;
-
-
-  window.onSpotifyIframeApiReady =
-    (IFrameAPI) => {
+let isMuted = false;
 
 
-      const element =
-        document.getElementById(
-          "spotify-player"
-        );
+window.onSpotifyIframeApiReady =
+function(IFrameAPI) {
 
-
-      const options = {
-
-        uri:
-          "spotify:playlist:0YVIdMIqEwCW1S33LRKtVa",
-
-        width:
-          "100%",
-
-        height:
-          152
-
-      };
-
-
-      IFrameAPI.createController(
-
-        element,
-
-        options,
-
-        (controller) => {
-
-          spotifyController = controller;
-
-        }
-
-      );
-
-    };
-
-
-  /* =====================================================
-     PLAY / PAUSE
-     ===================================================== */
-
-  document
-    .getElementById("playButton")
-    .addEventListener(
-
-      "click",
-
-      () => {
-
-
-        if (!spotifyController) {
-          return;
-        }
-
-
-        if (isPlaying) {
-
-          spotifyController.pause();
-
-          isPlaying = false;
-
-          document.getElementById(
-            "playButton"
-          ).textContent =
-            "▶ Play";
-
-        }
-
-        else {
-
-          spotifyController.play();
-
-          isPlaying = true;
-          isMuted = false;
-
-          document.getElementById(
-            "playButton"
-          ).textContent =
-            "⏸ Pause";
-
-          document.getElementById(
-            "muteButton"
-          ).textContent =
-            "🔊 Sound";
-
-        }
-
-      }
-
+  const element =
+    document.getElementById(
+      "spotify-player"
     );
 
 
-  /* =====================================================
-     SOUND / PAUSE
-     ===================================================== */
+  const options = {
 
-  document
-    .getElementById("muteButton")
-    .addEventListener(
+    uri:
+      "spotify:playlist:0YVIdMIqEwCW1S33LRKtVa",
 
-      "click",
+    width:
+      "100%",
 
-      () => {
+    height:
+      152
 
-
-        if (!spotifyController) {
-          return;
-        }
+  };
 
 
-        if (!isMuted) {
+  IFrameAPI.createController(
 
-          spotifyController.pause();
+    element,
 
-          isMuted = true;
-          isPlaying = false;
+    options,
 
-          document.getElementById(
-            "muteButton"
-          ).textContent =
-            "🔇 Muted";
+    function(controller) {
 
-          document.getElementById(
-            "playButton"
-          ).textContent =
-            "▶ Play";
+      spotifyController =
+        controller;
 
-        }
+    }
 
-        else {
+  );
 
-          spotifyController.play();
+};
 
-          isMuted = false;
-          isPlaying = true;
 
-          document.getElementById(
-            "muteButton"
-          ).textContent =
-            "🔊 Sound";
 
-          document.getElementById(
-            "playButton"
-          ).textContent =
-            "⏸ Pause";
+document
+.getElementById("playButton")
+.addEventListener(
+  "click",
+  function() {
 
-        }
+    if (!spotifyController) {
+      return;
+    }
 
-      }
 
-    );
+    if (isPlaying) {
+
+      spotifyController.pause();
+
+      isPlaying = false;
+
+      document.getElementById(
+        "playButton"
+      ).textContent =
+        "▶ Play";
+
+    }
+
+    else {
+
+      spotifyController.play();
+
+      isPlaying = true;
+      isMuted = false;
+
+      document.getElementById(
+        "playButton"
+      ).textContent =
+        "⏸ Pause";
+
+      document.getElementById(
+        "muteButton"
+      ).textContent =
+        "🔊 Sound";
+
+    }
+
+  }
+);
+
+
+
+document
+.getElementById("muteButton")
+.addEventListener(
+  "click",
+  function() {
+
+    if (!spotifyController) {
+      return;
+    }
+
+
+    if (!isMuted) {
+
+      spotifyController.pause();
+
+      isMuted = true;
+      isPlaying = false;
+
+      document.getElementById(
+        "muteButton"
+      ).textContent =
+        "🔇 Muted";
+
+      document.getElementById(
+        "playButton"
+      ).textContent =
+        "▶ Play";
+
+    }
+
+    else {
+
+      spotifyController.play();
+
+      isMuted = false;
+      isPlaying = true;
+
+      document.getElementById(
+        "muteButton"
+      ).textContent =
+        "🔊 Sound";
+
+      document.getElementById(
+        "playButton"
+      ).textContent =
+        "⏸ Pause";
+
+    }
+
+  }
+);
 
 </script>
 
 
 </body>
-
 </html>
