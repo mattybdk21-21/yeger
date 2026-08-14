@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>YEGER — Edmonton Live</title>
+
   <meta
     name="description"
     content="Watch Edmonton live. Skyline views, weather, sunsets and more from YEGER."
-  />
+  >
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -29,7 +35,10 @@
       text-decoration: none;
     }
 
-    /* HEADER */
+
+    /* =========================
+       HEADER
+       ========================= */
 
     header {
       display: flex;
@@ -65,15 +74,23 @@
     }
 
     nav a:hover {
-      color: white;
+      color: #fff;
     }
 
-    /* MAIN */
+
+    /* =========================
+       MAIN
+       ========================= */
 
     main {
       width: min(1500px, 94%);
       margin: auto;
     }
+
+
+    /* =========================
+       HERO
+       ========================= */
 
     .hero {
       padding: 42px 0 25px;
@@ -100,6 +117,7 @@
       0%, 100% {
         opacity: 1;
       }
+
       50% {
         opacity: 0.35;
       }
@@ -117,68 +135,35 @@
       font-size: 18px;
     }
 
-    /* VIDEO */
+
+    /* =========================
+       LIVE VIDEO
+       ========================= */
 
     .video-container {
       position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,0.04),
-          rgba(255,255,255,0)
-        ),
-        #15181c;
+      background: #15181c;
       overflow: hidden;
       border-radius: 14px;
       border: 1px solid #292d32;
     }
 
-    .video-placeholder {
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #999;
+      border: 0;
     }
 
-    .video-placeholder strong {
-      color: white;
-      font-size: 25px;
-      margin-bottom: 8px;
-    }
 
-    /*
-      WHEN YOUR YOUTUBE LIVE STREAM IS READY,
-      replace the video-placeholder div above with:
+    /* =========================
+       INFO BAR
+       ========================= */
 
-      <iframe
-        width="100%"
-        height="100%"
-        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-        title="YEGER Edmonton Live"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write;
-               encrypted-media; gyroscope; picture-in-picture;
-               web-share"
-        allowfullscreen>
-      </iframe>
-    */
-
-    /* INFO BAR */
-<iframe
-  width="100%"
-  height="100%"
-  src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&mute=1"
-  title="YEGER Edmonton Live"
-  frameborder="0"
-  allow="autoplay; encrypted-media; picture-in-picture"
-  allowfullscreen>
-</iframe>
     .info-bar {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -208,7 +193,10 @@
       font-weight: 600;
     }
 
-    /* CONTENT */
+
+    /* =========================
+       CONTENT
+       ========================= */
 
     .content-grid {
       display: grid;
@@ -241,7 +229,10 @@
       font-size: 14px;
     }
 
-    /* FOOTER */
+
+    /* =========================
+       FOOTER
+       ========================= */
 
     footer {
       border-top: 1px solid #222;
@@ -252,7 +243,10 @@
       margin-top: 50px;
     }
 
-    /* MOBILE */
+
+    /* =========================
+       MOBILE
+       ========================= */
 
     @media (max-width: 750px) {
 
@@ -293,7 +287,13 @@
   </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     HEADER
+     ========================= -->
 
 <header>
 
@@ -313,7 +313,10 @@
 
 <main>
 
-  <!-- HERO -->
+
+  <!-- =========================
+       HERO
+       ========================= -->
 
   <section class="hero" id="live">
 
@@ -331,57 +334,94 @@
   </section>
 
 
-  <!-- VIDEO -->
+  <!-- =========================
+       YOUTUBE LIVE STREAM
+       ========================= -->
 
   <section class="video-container">
 
-    <div class="video-placeholder">
-
-      <strong>YEGER LIVE</strong>
-
-      <span>
-        Edmonton livestream coming soon
-      </span>
-
-    </div>
+    <iframe
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&mute=1"
+      title="YEGER Edmonton Live"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
 
   </section>
 
 
-  <!-- LIVE INFO -->
+  <!-- =========================
+       LIVE INFORMATION
+       ========================= -->
 
   <section class="info-bar">
 
     <div class="info-box">
-      <div class="info-label">Location</div>
-      <div class="info-value">Edmonton</div>
+
+      <div class="info-label">
+        Location
+      </div>
+
+      <div class="info-value">
+        Edmonton
+      </div>
+
     </div>
 
-    <div class="info-box">
-      <div class="info-label">Camera</div>
-      <div class="info-value">25th Floor</div>
-    </div>
 
     <div class="info-box">
-      <div class="info-label">Direction</div>
-      <div class="info-value">West</div>
+
+      <div class="info-label">
+        Camera
+      </div>
+
+      <div class="info-value">
+        25th Floor
+      </div>
+
     </div>
 
+
     <div class="info-box">
-      <div class="info-label">Stream</div>
-      <div class="info-value">Live</div>
+
+      <div class="info-label">
+        Direction
+      </div>
+
+      <div class="info-value">
+        West
+      </div>
+
+    </div>
+
+
+    <div class="info-box">
+
+      <div class="info-label">
+        Stream
+      </div>
+
+      <div class="info-value">
+        Live
+      </div>
+
     </div>
 
   </section>
 
 
-  <!-- INFORMATION -->
+  <!-- =========================
+       ABOUT
+       ========================= -->
 
   <section class="content-grid">
 
+
     <article class="card" id="about">
 
-      <h2>See Edmonton as it happens.</h2>
+      <h2>
+        See Edmonton as it happens.
+      </h2>
 
       <p>
         YEGER provides a live view across Edmonton — from changing
@@ -396,9 +436,15 @@
     </article>
 
 
+    <!-- =========================
+         SUNSETS
+         ========================= -->
+
     <aside class="card" id="sunsets">
 
-      <h2>Sunsets</h2>
+      <h2>
+        Sunsets
+      </h2>
 
       <p>
         Facing west gives YEGER a front-row view of Edmonton's evening
@@ -407,16 +453,23 @@
 
     </aside>
 
+
   </section>
+
 
 </main>
 
+
+<!-- =========================
+     FOOTER
+     ========================= -->
 
 <footer>
 
   © 2026 YEGER.ca &nbsp; • &nbsp; Edmonton, Alberta
 
 </footer>
+
 
 </body>
 </html>
