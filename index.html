@@ -8,11 +8,11 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-  <title>YEGer — Edmonton Live </title>
+  <title>YEGER — Edmonton Live</title>
 
   <meta
     name="description"
-    content="Watch Edmonton live. Skyline views, weather, sunsets and more from YEGer.ca."
+    content="Watch Edmonton live. Skyline views, weather, sunsets, music and more from YEGER."
   >
 
   <style>
@@ -243,7 +243,7 @@
 
       border-radius: 12px;
 
-      min-width: 390px;
+      min-width: 430px;
 
     }
 
@@ -284,6 +284,21 @@
     .weather-temp {
 
       font-size: 30px;
+
+    }
+
+
+    .weather-condition {
+
+      margin-top: 2px;
+
+      color: #aaa;
+
+      font-size: 13px;
+
+      font-weight: 400;
+
+      white-space: nowrap;
 
     }
 
@@ -434,6 +449,161 @@
       font-size: 18px;
 
       font-weight: 600;
+
+    }
+
+
+
+    /* =====================================================
+       YEGER RADIO
+       ===================================================== */
+
+    .radio-section {
+
+      margin: 28px 0 0;
+
+      background: #121519;
+
+      border: 1px solid #25282d;
+
+      border-radius: 12px;
+
+      padding: 20px;
+
+    }
+
+
+    .radio-header {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      margin-bottom: 15px;
+
+    }
+
+
+    .radio-info {
+
+      margin-right: auto;
+
+    }
+
+
+    .radio-label {
+
+      color: #777;
+
+      font-size: 10px;
+
+      letter-spacing: 1px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 2px;
+
+    }
+
+
+    .radio-title {
+
+      font-size: 20px;
+
+      font-weight: 700;
+
+    }
+
+
+    .radio-subtitle {
+
+      color: #999;
+
+      font-size: 13px;
+
+      margin-top: 2px;
+
+    }
+
+
+    .radio-controls {
+
+      display: flex;
+
+      gap: 8px;
+
+      flex-wrap: wrap;
+
+    }
+
+
+    .radio-button {
+
+      border: 1px solid #3a3d42;
+
+      background: #181c20;
+
+      color: #ffffff;
+
+      border-radius: 999px;
+
+      padding: 9px 15px;
+
+      cursor: pointer;
+
+      font-size: 13px;
+
+      transition: 0.2s ease;
+
+    }
+
+
+    .radio-button:hover {
+
+      background: #24292f;
+
+    }
+
+
+    .spotify-link {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      border: 1px solid #3a3d42;
+
+      background: #181c20;
+
+      color: #ffffff;
+
+      border-radius: 999px;
+
+      padding: 9px 15px;
+
+      font-size: 13px;
+
+    }
+
+
+    .spotify-link:hover {
+
+      background: #24292f;
+
+    }
+
+
+    #spotify-player {
+
+      width: 100%;
+
+      min-height: 152px;
+
+      border-radius: 12px;
+
+      overflow: hidden;
 
     }
 
@@ -644,6 +814,15 @@
       }
 
 
+      .weather-condition {
+
+        font-size: 11px;
+
+        white-space: normal;
+
+      }
+
+
       .chat-container {
 
         height: 420px;
@@ -669,6 +848,22 @@
       .info-value {
 
         font-size: 16px;
+
+      }
+
+
+      .radio-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+      }
+
+
+      .radio-controls {
+
+        width: 100%;
 
       }
 
@@ -703,6 +898,10 @@
 
     <a href="#live">
       Live
+    </a>
+
+    <a href="#radio">
+      Music
     </a>
 
     <a href="#about">
@@ -776,6 +975,13 @@
           id="temperature"
         >
           --°C
+        </div>
+
+        <div
+          class="weather-condition"
+          id="weather-condition"
+        >
+          Loading weather...
         </div>
 
       </div>
@@ -939,6 +1145,75 @@
 
 
   <!-- =====================================================
+       YEGER RADIO
+       ===================================================== -->
+
+  <section
+    class="radio-section"
+    id="radio"
+  >
+
+    <div class="radio-header">
+
+      <div class="radio-info">
+
+        <div class="radio-label">
+          YEGER RADIO
+        </div>
+
+        <div class="radio-title">
+          Listen while you watch
+        </div>
+
+        <div class="radio-subtitle">
+          Music from the YEGER Spotify playlist
+        </div>
+
+      </div>
+
+
+      <div class="radio-controls">
+
+        <button
+          class="radio-button"
+          id="playButton"
+          type="button"
+        >
+          ▶ Play
+        </button>
+
+
+        <button
+          class="radio-button"
+          id="muteButton"
+          type="button"
+        >
+          🔊 Sound
+        </button>
+
+
+        <a
+          class="spotify-link"
+          href="https://open.spotify.com/playlist/0YVIdMIqEwCW1S33LRKtVa"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open Spotify
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div id="spotify-player"></div>
+
+
+  </section>
+
+
+
+  <!-- =====================================================
        CONTENT
        ===================================================== -->
 
@@ -1020,28 +1295,16 @@
 
 
 <!-- =====================================================
-     EDMONTON WEATHER
+     OPEN-METEO WEATHER
      ===================================================== -->
 
 <script>
-
-  /*
-    Edmonton coordinates
-    Approximate city-centre coordinates.
-
-    Open-Meteo provides:
-    - Current temperature
-    - Today's sunrise
-    - Today's sunset
-
-    No API key is required for this request.
-  */
 
   const weatherURL =
     "https://api.open-meteo.com/v1/forecast" +
     "?latitude=53.5461" +
     "&longitude=-113.4938" +
-    "&current=temperature_2m" +
+    "&current=temperature_2m,weather_code" +
     "&daily=sunrise,sunset" +
     "&temperature_unit=celsius" +
     "&timezone=America%2FEdmonton" +
@@ -1053,6 +1316,7 @@
     if (!dateString) {
       return "--:--";
     }
+
 
     const date =
       new Date(dateString);
@@ -1067,6 +1331,60 @@
         timeZone: "America/Edmonton"
       }
     );
+
+  }
+
+
+
+  function weatherDescription(code) {
+
+    const descriptions = {
+
+      0: "Clear sky",
+
+      1: "Mainly clear",
+      2: "Partly cloudy",
+      3: "Overcast",
+
+      45: "Fog",
+      48: "Freezing fog",
+
+      51: "Light drizzle",
+      53: "Drizzle",
+      55: "Heavy drizzle",
+
+      56: "Light freezing drizzle",
+      57: "Freezing drizzle",
+
+      61: "Light rain",
+      63: "Rain",
+      65: "Heavy rain",
+
+      66: "Light freezing rain",
+      67: "Freezing rain",
+
+      71: "Light snow",
+      73: "Snow",
+      75: "Heavy snow",
+
+      77: "Snow grains",
+
+      80: "Light rain showers",
+      81: "Rain showers",
+      82: "Heavy rain showers",
+
+      85: "Light snow showers",
+      86: "Heavy snow showers",
+
+      95: "Thunderstorm",
+
+      96: "Thunderstorm with hail",
+      99: "Severe thunderstorm with hail"
+
+    };
+
+
+    return descriptions[code] || "Current conditions";
 
   }
 
@@ -1108,6 +1426,25 @@
           Math.round(
             data.current.temperature_2m
           ) + "°C";
+
+      }
+
+
+
+      /* WEATHER CONDITION */
+
+      if (
+        data.current &&
+        typeof data.current.weather_code === "number"
+      ) {
+
+        document.getElementById(
+          "weather-condition"
+        ).textContent =
+
+          weatherDescription(
+            data.current.weather_code
+          );
 
       }
 
@@ -1161,32 +1498,293 @@
         error
       );
 
+
+      document.getElementById(
+        "weather-condition"
+      ).textContent =
+        "Weather unavailable";
+
     }
 
   }
 
 
 
-  /*
-    Load weather immediately.
-  */
-
   updateWeather();
 
 
-
-  /*
-    Refresh every 10 minutes.
-
-    Sunrise/sunset won't change much,
-    but temperature will stay reasonably current.
-  */
 
   setInterval(
     updateWeather,
     600000
   );
 
+</script>
+
+
+
+<!-- =====================================================
+     SPOTIFY IFRAME API
+     ===================================================== -->
+
+<script
+  src="https://open.spotify.com/embed/iframe-api/v1"
+  async>
+</script>
+
+
+<script>
+
+  let spotifyController = null;
+
+  let isPlaying = false;
+
+  let isMuted = false;
+
+
+
+  window.onSpotifyIframeApiReady =
+    (IFrameAPI) => {
+
+
+      const element =
+        document.getElementById(
+          "spotify-player"
+        );
+
+
+      const options = {
+
+        uri:
+          "spotify:playlist:0YVIdMIqEwCW1S33LRKtVa",
+
+        width:
+          "100%",
+
+        height:
+          152
+
+      };
+
+
+      IFrameAPI.createController(
+
+        element,
+
+        options,
+
+        (controller) => {
+
+
+          spotifyController =
+            controller;
+
+
+          /*
+            Attempt autoplay.
+
+            Some browsers will block playback
+            with sound until the visitor
+            interacts with the page.
+          */
+
+          try {
+
+            controller.play();
+
+            isPlaying = true;
+
+            document.getElementById(
+              "playButton"
+            ).textContent =
+              "⏸ Pause";
+
+          }
+
+          catch (error) {
+
+            isPlaying = false;
+
+            document.getElementById(
+              "playButton"
+            ).textContent =
+              "▶ Play";
+
+          }
+
+
+        }
+
+      );
+
+    };
+
+
+
+  /* =====================================================
+     PLAY / PAUSE
+     ===================================================== */
+
+  document
+    .getElementById(
+      "playButton"
+    )
+    .addEventListener(
+
+      "click",
+
+      () => {
+
+
+        if (!spotifyController) {
+
+          return;
+
+        }
+
+
+        if (isPlaying) {
+
+
+          spotifyController.pause();
+
+
+          isPlaying =
+            false;
+
+
+          document.getElementById(
+            "playButton"
+          ).textContent =
+            "▶ Play";
+
+
+        }
+
+        else {
+
+
+          spotifyController.play();
+
+
+          isPlaying =
+            true;
+
+
+          isMuted =
+            false;
+
+
+          document.getElementById(
+            "playButton"
+          ).textContent =
+            "⏸ Pause";
+
+
+          document.getElementById(
+            "muteButton"
+          ).textContent =
+            "🔊 Sound";
+
+
+        }
+
+
+      }
+
+    );
+
+
+
+  /* =====================================================
+     MUTE / UNMUTE
+
+     Spotify's simple iframe controller does not
+     provide normal volume control.
+
+     Therefore:
+     Mute = pause
+     Unmute = resume
+     ===================================================== */
+
+  document
+    .getElementById(
+      "muteButton"
+    )
+    .addEventListener(
+
+      "click",
+
+      () => {
+
+
+        if (!spotifyController) {
+
+          return;
+
+        }
+
+
+        if (!isMuted) {
+
+
+          spotifyController.pause();
+
+
+          isMuted =
+            true;
+
+
+          isPlaying =
+            false;
+
+
+          document.getElementById(
+            "muteButton"
+          ).textContent =
+            "🔇 Muted";
+
+
+          document.getElementById(
+            "playButton"
+          ).textContent =
+            "▶ Play";
+
+
+        }
+
+        else {
+
+
+          spotifyController.play();
+
+
+          isMuted =
+            false;
+
+
+          isPlaying =
+            true;
+
+
+          document.getElementById(
+            "muteButton"
+          ).textContent =
+            "🔊 Sound";
+
+
+          document.getElementById(
+            "playButton"
+          ).textContent =
+            "⏸ Pause";
+
+
+        }
+
+
+      }
+
+    );
 
 </script>
 
