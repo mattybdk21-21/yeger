@@ -2,17 +2,27 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>YEGer — Edmonton Live</title>
 
   <meta
     name="description"
-    content="Watch Edmonton live. Skyline views, weather, sunsets and music from YEGer."
+    content="Watch Edmonton live with skyline views, weather, sunsets and music from YEGer."
   >
 
+
   <style>
+
+    /* =====================================================
+       GLOBAL
+       ===================================================== */
 
     * {
       box-sizing: border-box;
@@ -26,8 +36,10 @@
 
     body {
       font-family: Arial, Helvetica, sans-serif;
+
       background: #0b0d10;
       color: #ffffff;
+
       line-height: 1.5;
     }
 
@@ -36,92 +48,158 @@
       text-decoration: none;
     }
 
-    /* =========================
+
+    /* =====================================================
        HEADER
-       ========================= */
+       ===================================================== */
 
     header {
+
       height: 58px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       padding: 0 2.2%;
+
       background: rgba(11, 13, 16, 0.97);
+
       border-bottom: 1px solid #222;
+
       position: sticky;
       top: 0;
+
       z-index: 100;
+
     }
+
 
     .logo {
+
       font-size: 28px;
+
       font-weight: 800;
+
       letter-spacing: 3px;
+
     }
+
 
     .logo span {
+
       font-size: 11px;
+
       font-weight: 300;
+
       letter-spacing: 1px;
+
       color: #999;
+
       margin-left: 8px;
+
     }
+
 
     nav {
+
       display: flex;
-      gap: 25px;
+
+      gap: 24px;
+
       color: #bbb;
+
       font-size: 13px;
+
     }
+
 
     nav a:hover {
+
       color: #ffffff;
+
     }
 
-    /* =========================
+
+
+    /* =====================================================
        MAIN
-       ========================= */
+       ===================================================== */
 
     main {
+
       width: 96%;
+
       max-width: 1900px;
+
       margin: auto;
+
     }
 
-    /* =========================
-       COMPACT HERO
-       ========================= */
+
+
+    /* =====================================================
+       COMPACT LIVE HEADER
+       ===================================================== */
 
     .hero {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 30px;
-      padding: 10px 0 10px;
+
+      padding: 8px 0;
+
     }
 
-    .hero-left {
-      min-width: 0;
+
+    .hero-line {
+
+      min-height: 42px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
     }
 
-    .status {
-      display: inline-flex;
+
+    .live-title {
+
+      display: flex;
+
       align-items: center;
-      gap: 6px;
-      font-size: 10px;
+
+      gap: 7px;
+
+      font-size: 13px;
+
       font-weight: 700;
-      margin-bottom: 2px;
+
+      letter-spacing: 0.2px;
+
+      white-space: nowrap;
+
     }
+
 
     .live-dot {
-      width: 7px;
-      height: 7px;
+
+      width: 8px;
+
+      height: 8px;
+
       background: #ff2b2b;
+
       border-radius: 50%;
+
       animation: pulse 1.8s infinite;
+
     }
 
+
     @keyframes pulse {
+
       0%, 100% {
         opacity: 1;
       }
@@ -129,567 +207,1110 @@
       50% {
         opacity: 0.3;
       }
+
     }
 
-    h1 {
-      font-size: clamp(30px, 3vw, 46px);
-      line-height: 1;
-      letter-spacing: -1.5px;
-      margin-bottom: 3px;
-    }
 
-    .hero-description {
-      color: #aaa;
-      font-size: 13px;
-      margin: 0;
-    }
 
-    /* =========================
-       WEATHER
-       ========================= */
+    /* =====================================================
+       INLINE WEATHER
+       ===================================================== */
 
-    .weather-panel {
+    .weather-inline {
+
       display: flex;
+
       align-items: center;
-      gap: 25px;
-      padding: 9px 15px;
-      background: #121519;
-      border: 1px solid #25282d;
-      border-radius: 10px;
+
+      justify-content: flex-end;
+
+      flex-wrap: wrap;
+
+      gap: 18px;
+
+      color: #999;
+
+      font-size: 12px;
+
     }
 
-    .weather-item {
-      min-width: 82px;
+
+    .weather-group {
+
+      display: flex;
+
+      align-items: baseline;
+
+      gap: 5px;
+
     }
+
 
     .weather-label {
+
       color: #777;
+
       font-size: 9px;
+
+      letter-spacing: 0.8px;
+
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 2px;
+
     }
 
-    .weather-value {
-      font-size: 17px;
+
+    #temperature {
+
+      color: #ffffff;
+
+      font-size: 18px;
+
       font-weight: 700;
-      white-space: nowrap;
+
     }
 
-    .weather-temp {
-      font-size: 23px;
-    }
 
-    .weather-condition {
+    #weather-condition {
+
       color: #aaa;
-      font-size: 11px;
-      margin-top: 1px;
-      white-space: nowrap;
+
     }
 
-    /* =========================
+
+    .weather-inline strong {
+
+      color: #ffffff;
+
+      font-weight: 600;
+
+    }
+
+
+
+    /* =====================================================
        VIDEO TOOLBAR
-       ========================= */
+       ===================================================== */
 
     .video-toolbar {
+
       display: flex;
+
       align-items: center;
-      justify-content: flex-end;
-      gap: 8px;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
       margin-bottom: 8px;
+
+      flex-wrap: wrap;
+
     }
 
-    .zoom-btn {
-      min-width: 38px;
+
+    .toolbar-left,
+    .toolbar-right {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      flex-wrap: wrap;
+
+    }
+
+
+    .zoom-btn,
+    .preset-btn {
+
       height: 34px;
-      border: 1px solid #3a3d42;
+
+      border: 1px solid #353a40;
+
       border-radius: 8px;
-      background: #181c20;
+
+      background: #171a1f;
+
       color: #ffffff;
-      font-size: 16px;
+
       cursor: pointer;
+
       padding: 0 12px;
+
+      font-size: 13px;
+
+      transition: background 0.15s ease;
+
     }
 
-    .zoom-btn:hover {
+
+    .zoom-btn:hover,
+    .preset-btn:hover {
+
       background: #252a30;
+
     }
+
+
+    .zoom-btn.icon {
+
+      min-width: 38px;
+
+      padding: 0 10px;
+
+      font-size: 18px;
+
+    }
+
 
     .zoom-level {
-      min-width: 52px;
+
+      min-width: 55px;
+
       text-align: center;
+
       color: #aaa;
+
       font-size: 12px;
+
     }
 
-    .reset-btn {
-      font-size: 12px;
+
+    .drag-hint {
+
+      color: #666;
+
+      font-size: 11px;
+
+      margin-left: 5px;
+
     }
 
-    /* =========================
+
+
+    /* =====================================================
        VIDEO
-       ========================= */
+       ===================================================== */
 
     .video-section {
+
       width: 100%;
+
     }
+
 
     .video-container {
+
       position: relative;
+
       width: 100%;
+
       aspect-ratio: 16 / 9;
+
       background: #000;
+
       overflow: hidden;
+
       border: 1px solid #292d32;
+
       border-radius: 12px;
+
+      user-select: none;
+
     }
+
+
+    /*
+      Pan and zoom are separated into two layers.
+
+      Pan layer = movement
+      Zoom layer = magnification
+    */
+
+    .video-pan-layer {
+
+      position: absolute;
+
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      transform: translate3d(0, 0, 0);
+
+      will-change: transform;
+
+    }
+
 
     .video-zoom-layer {
+
       position: absolute;
+
       inset: 0;
+
       width: 100%;
       height: 100%;
+
+      transform: scale(1);
+
       transform-origin: center center;
-      transition: transform 0.2s ease;
+
+      will-change: transform;
+
     }
+
 
     .video-zoom-layer iframe {
+
+      position: absolute;
+
+      inset: 0;
+
       width: 100%;
       height: 100%;
-      border: 0;
+
       display: block;
+
+      border: 0;
+
     }
 
-    /* =========================
+
+    /*
+      Transparent interaction layer.
+
+      At 100% it does not block YouTube.
+      Once zoomed, it captures dragging.
+    */
+
+    .drag-surface {
+
+      position: absolute;
+
+      inset: 0;
+
+      z-index: 10;
+
+      pointer-events: none;
+
+      cursor: grab;
+
+      touch-action: none;
+
+    }
+
+
+    .drag-surface.active {
+
+      pointer-events: auto;
+
+    }
+
+
+    .drag-surface.dragging {
+
+      cursor: grabbing;
+
+    }
+
+
+
+    /* =====================================================
        INFO BAR
-       ========================= */
+       ===================================================== */
 
     .info-bar {
+
       display: grid;
+
       grid-template-columns: repeat(4, 1fr);
+
       gap: 1px;
+
       margin-top: 12px;
+
       background: #25282d;
+
       border: 1px solid #25282d;
+
       border-radius: 10px;
+
       overflow: hidden;
+
     }
+
 
     .info-box {
+
       background: #121519;
+
       padding: 14px 18px;
+
     }
+
 
     .info-label {
+
       color: #777;
+
       font-size: 9px;
+
       text-transform: uppercase;
+
       letter-spacing: 1px;
+
       margin-bottom: 3px;
+
     }
+
 
     .info-value {
+
       font-size: 17px;
+
       font-weight: 600;
+
     }
 
-    /* =========================
+
+
+    /* =====================================================
        YEGer RADIO
-       ========================= */
+       ===================================================== */
 
     .radio-section {
+
       margin-top: 20px;
+
       padding: 20px;
+
       background: #121519;
+
       border: 1px solid #25282d;
+
       border-radius: 12px;
+
     }
+
 
     .radio-header {
+
       display: flex;
+
       align-items: center;
+
       gap: 15px;
+
       margin-bottom: 15px;
+
     }
+
 
     .radio-info {
+
       margin-right: auto;
+
     }
+
 
     .radio-label {
+
       color: #777;
+
       font-size: 10px;
+
       letter-spacing: 1px;
+
       text-transform: uppercase;
+
     }
+
 
     .radio-title {
+
       font-size: 20px;
+
       font-weight: 700;
+
     }
+
 
     .radio-subtitle {
+
       color: #999;
+
       font-size: 13px;
+
     }
 
+
     .radio-controls {
+
       display: flex;
+
       gap: 8px;
+
       flex-wrap: wrap;
+
     }
+
 
     .radio-button,
     .spotify-link {
+
       background: #181c20;
+
       color: #ffffff;
+
       border: 1px solid #3a3d42;
+
       border-radius: 999px;
+
       padding: 9px 15px;
+
       font-size: 13px;
+
       cursor: pointer;
+
     }
+
 
     .radio-button:hover,
     .spotify-link:hover {
+
       background: #24292f;
+
     }
+
 
     #spotify-player {
+
       width: 100%;
+
       min-height: 152px;
+
       overflow: hidden;
+
       border-radius: 12px;
+
     }
 
-    /* =========================
+
+
+    /* =====================================================
        CONTENT
-       ========================= */
+       ===================================================== */
 
     .content-grid {
+
       display: grid;
+
       grid-template-columns: 2fr 1fr;
+
       gap: 20px;
+
       margin: 25px 0 40px;
+
     }
+
 
     .card {
+
       background: #121519;
+
       border: 1px solid #25282d;
+
       border-radius: 12px;
+
       padding: 24px;
+
     }
+
 
     .card h2 {
+
       font-size: 22px;
+
       margin-bottom: 10px;
+
     }
+
 
     .card p {
+
       color: #aaa;
+
     }
+
 
     .location {
+
       margin-top: 18px;
+
       padding-top: 18px;
+
       border-top: 1px solid #26292e;
+
       color: #777;
+
       font-size: 13px;
+
     }
 
-    /* =========================
+
+
+    /* =====================================================
        FOOTER
-       ========================= */
+       ===================================================== */
 
     footer {
+
       border-top: 1px solid #222;
+
       text-align: center;
+
       color: #666;
+
       font-size: 12px;
+
       padding: 28px 20px;
+
     }
 
-    /* =========================
+
+
+    /* =====================================================
        TABLET
-       ========================= */
+       ===================================================== */
 
-    @media (max-width: 1000px) {
+    @media (max-width: 950px) {
 
-      main {
-        width: 95%;
+      .hero-line {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 6px;
+
       }
 
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 10px;
+
+      .weather-inline {
+
+        justify-content: flex-start;
+
       }
 
-      .weather-panel {
-        width: 100%;
-        justify-content: space-around;
-      }
     }
 
-    /* =========================
+
+
+    /* =====================================================
        MOBILE
-       ========================= */
+       ===================================================== */
 
     @media (max-width: 700px) {
 
       header {
+
         padding: 0 4%;
+
       }
+
 
       .logo {
+
         font-size: 22px;
+
       }
+
 
       .logo span {
+
         display: none;
+
       }
+
 
       nav {
-        gap: 12px;
-        font-size: 11px;
+
+        gap: 11px;
+
+        font-size: 10px;
+
       }
+
 
       main {
+
         width: 96%;
+
       }
 
-      .hero {
-        padding-top: 8px;
-        padding-bottom: 8px;
-      }
-
-      h1 {
-        font-size: 34px;
-      }
-
-      .weather-panel {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-      }
-
-      .weather-value {
-        font-size: 15px;
-      }
-
-      .weather-temp {
-        font-size: 21px;
-      }
-
-      .weather-condition {
-        font-size: 10px;
-        white-space: normal;
-      }
-
-      .info-bar {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .content-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .radio-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
 
       .video-toolbar {
+
         justify-content: center;
+
       }
+
+
+      .toolbar-left,
+      .toolbar-right {
+
+        width: 100%;
+
+        justify-content: center;
+
+      }
+
+
+      .drag-hint {
+
+        display: none;
+
+      }
+
+
+      .info-bar {
+
+        grid-template-columns: repeat(2, 1fr);
+
+      }
+
+
+      .content-grid {
+
+        grid-template-columns: 1fr;
+
+      }
+
+
+      .radio-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+      }
+
+
+      .weather-inline {
+
+        gap: 8px 12px;
+
+      }
+
     }
 
   </style>
 
 </head>
 
+
+
 <body>
+
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
 
 <header>
 
   <div class="logo">
+
     YEGer
-    <span>EDMONTON LIVE</span>
+
+    <span>
+      EDMONTON LIVE
+    </span>
+
   </div>
 
+
   <nav>
-    <a href="#live">Live</a>
-    <a href="#music">Music</a>
-    <a href="#about">About</a>
-    <a href="#sunsets">Sunsets</a>
+
+    <a href="#live">
+      Live
+    </a>
+
+    <a href="#music">
+      Music
+    </a>
+
+    <a href="#about">
+      About
+    </a>
+
+    <a href="#sunsets">
+      Sunsets
+    </a>
+
   </nav>
 
 </header>
 
+
+
 <main>
 
-<section class="hero" id="live">
 
-  <div class="hero-left">
+<!-- =====================================================
+     COMPACT LIVE HEADER
+     ===================================================== -->
 
-    <div class="status">
+<section
+  class="hero"
+  id="live"
+>
+
+  <div class="hero-line">
+
+
+    <div class="live-title">
+
       <span class="live-dot"></span>
-      LIVE FROM EDMONTON
-    </div>
 
-    <h1>Edmonton. Live.</h1>
-
-    <p class="hero-description">
-      A live window overlooking Edmonton, Alberta.
-    </p>
-
-  </div>
-
-  <div class="weather-panel">
-
-    <div class="weather-item">
-
-      <div class="weather-label">
-        Edmonton
-      </div>
-
-      <div
-        class="weather-value weather-temp"
-        id="temperature"
-      >
-        --°C
-      </div>
-
-      <div
-        class="weather-condition"
-        id="weather-condition"
-      >
-        Loading weather...
-      </div>
+      LIVE FROM EDMONTON — YEGer
 
     </div>
 
-    <div class="weather-item">
 
-      <div class="weather-label">
-        Sunrise
+
+    <div class="weather-inline">
+
+
+      <div class="weather-group">
+
+        <span class="weather-label">
+          Edmonton
+        </span>
+
+        <span id="temperature">
+          --°C
+        </span>
+
+        <span id="weather-condition">
+          Loading...
+        </span>
+
       </div>
 
-      <div
-        class="weather-value"
-        id="sunrise"
-      >
-        --:--
+
+
+      <div class="weather-group">
+
+        <span class="weather-label">
+          Sunrise
+        </span>
+
+        <strong id="sunrise">
+          --:--
+        </strong>
+
       </div>
+
+
+
+      <div class="weather-group">
+
+        <span class="weather-label">
+          Sunset
+        </span>
+
+        <strong id="sunset">
+          --:--
+        </strong>
+
+      </div>
+
 
     </div>
 
-    <div class="weather-item">
-
-      <div class="weather-label">
-        Sunset
-      </div>
-
-      <div
-        class="weather-value"
-        id="sunset"
-      >
-        --:--
-      </div>
-
-    </div>
 
   </div>
 
 </section>
+
+
+
+<!-- =====================================================
+     VIDEO
+     ===================================================== -->
 
 <section class="video-section">
 
+
+  <!-- ZOOM / PAN CONTROLS -->
+
   <div class="video-toolbar">
 
-    <button
-      id="zoomOut"
-      class="zoom-btn"
-      type="button"
-    >
-      −
-    </button>
 
-    <span
-      id="zoomLevel"
-      class="zoom-level"
-    >
-      100%
-    </span>
+    <div class="toolbar-left">
 
-    <button
-      id="zoomIn"
-      class="zoom-btn"
-      type="button"
-    >
-      +
-    </button>
 
-    <button
-      id="zoomReset"
-      class="zoom-btn reset-btn"
-      type="button"
-    >
-      Reset
-    </button>
+      <button
+        id="zoomOut"
+        class="zoom-btn icon"
+        type="button"
+        title="Zoom out"
+      >
+        −
+      </button>
+
+
+      <span
+        id="zoomLevel"
+        class="zoom-level"
+      >
+        100%
+      </span>
+
+
+      <button
+        id="zoomIn"
+        class="zoom-btn icon"
+        type="button"
+        title="Zoom in"
+      >
+        +
+      </button>
+
+
+      <button
+        id="panLeft"
+        class="zoom-btn icon"
+        type="button"
+        title="Move view left"
+      >
+        ←
+      </button>
+
+
+      <button
+        id="panUp"
+        class="zoom-btn icon"
+        type="button"
+        title="Move view up"
+      >
+        ↑
+      </button>
+
+
+      <button
+        id="panDown"
+        class="zoom-btn icon"
+        type="button"
+        title="Move view down"
+      >
+        ↓
+      </button>
+
+
+      <button
+        id="panRight"
+        class="zoom-btn icon"
+        type="button"
+        title="Move view right"
+      >
+        →
+      </button>
+
+
+      <button
+        id="zoomReset"
+        class="zoom-btn"
+        type="button"
+      >
+        Reset
+      </button>
+
+
+      <span class="drag-hint">
+        Zoom in, then drag the image
+      </span>
+
+
+    </div>
+
+
+
+    <div class="toolbar-right">
+
+
+      <button
+        id="presetDowntown"
+        class="preset-btn"
+        type="button"
+      >
+        Downtown
+      </button>
+
+
+      <button
+        id="presetCentre"
+        class="preset-btn"
+        type="button"
+      >
+        Centre
+      </button>
+
+
+      <button
+        id="presetWest"
+        class="preset-btn"
+        type="button"
+      >
+        West
+      </button>
+
+
+    </div>
+
 
   </div>
 
-  <div class="video-container">
+
+
+  <!-- VIDEO WINDOW -->
+
+  <div
+    class="video-container"
+    id="videoContainer"
+  >
+
 
     <div
-      id="videoZoomLayer"
-      class="video-zoom-layer"
+      class="video-pan-layer"
+      id="videoPanLayer"
     >
 
-      <iframe
-        src="https://www.youtube.com/embed/4TXdHm3OgA4?autoplay=1&mute=1&playsinline=1&controls=0&rel=0&disablekb=1&origin=https%3A%2F%2Fyeger.ca"
-        title="YEGer Edmonton Live"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-        allowfullscreen>
-      </iframe>
 
+      <div
+        class="video-zoom-layer"
+        id="videoZoomLayer"
+      >
+
+
+        <iframe
+
+          src="https://www.youtube.com/embed/4TXdHm3OgA4?autoplay=1&mute=1&playsinline=1&controls=0&rel=0&disablekb=1&origin=https%3A%2F%2Fyeger.ca"
+
+          title="YEGer Edmonton Live"
+
+          referrerpolicy="strict-origin-when-cross-origin"
+
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+
+          allowfullscreen>
+
+        </iframe>
+
+
+      </div>
+
+
+    </div>
+
+
+    <div
+      id="dragSurface"
+      class="drag-surface"
+      title="Drag to move around the zoomed view"
+    >
+    </div>
+
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     INFO BAR
+     ===================================================== -->
+
+<section class="info-bar">
+
+
+  <div class="info-box">
+
+    <div class="info-label">
+      Location
+    </div>
+
+    <div class="info-value">
+      Edmonton
     </div>
 
   </div>
 
+
+
+  <div class="info-box">
+
+    <div class="info-label">
+      View
+    </div>
+
+    <div class="info-value">
+      High-rise
+    </div>
+
+  </div>
+
+
+
+  <div class="info-box">
+
+    <div class="info-label">
+      Direction
+    </div>
+
+    <div class="info-value">
+      West
+    </div>
+
+  </div>
+
+
+
+  <div class="info-box">
+
+    <div class="info-label">
+      Stream
+    </div>
+
+    <div class="info-value">
+      Live
+    </div>
+
+  </div>
+
+
 </section>
 
-<section class="info-bar">
 
-  <div class="info-box">
-    <div class="info-label">Location</div>
-    <div class="info-value">Edmonton</div>
-  </div>
 
-  <div class="info-box">
-    <div class="info-label">View</div>
-    <div class="info-value">High-rise</div>
-  </div>
-
-  <div class="info-box">
-    <div class="info-label">Direction</div>
-    <div class="info-value">West</div>
-  </div>
-
-  <div class="info-box">
-    <div class="info-label">Stream</div>
-    <div class="info-value">Live</div>
-  </div>
-
-</section>
+<!-- =====================================================
+     YEGer RADIO
+     ===================================================== -->
 
 <section
   class="radio-section"
   id="music"
 >
 
+
   <div class="radio-header">
+
 
     <div class="radio-info">
 
@@ -707,7 +1328,10 @@
 
     </div>
 
+
+
     <div class="radio-controls">
+
 
       <button
         class="radio-button"
@@ -717,6 +1341,7 @@
         ▶ Play
       </button>
 
+
       <button
         class="radio-button"
         id="muteButton"
@@ -725,24 +1350,39 @@
         🔊 Sound
       </button>
 
+
       <a
         class="spotify-link"
+
         href="https://open.spotify.com/playlist/0YVIdMIqEwCW1S33LRKtVa"
+
         target="_blank"
+
         rel="noopener noreferrer"
       >
         Open Spotify
       </a>
 
+
     </div>
+
 
   </div>
 
+
   <div id="spotify-player"></div>
+
 
 </section>
 
+
+
+<!-- =====================================================
+     CONTENT
+     ===================================================== -->
+
 <section class="content-grid">
+
 
   <article
     class="card"
@@ -754,10 +1394,12 @@
     </h2>
 
     <p>
+
       YEGer provides a live view across Edmonton —
       from changing weather and dramatic prairie skies
       to sunsets, storms, construction and the everyday
       movement of the city.
+
     </p>
 
     <div class="location">
@@ -765,6 +1407,8 @@
     </div>
 
   </article>
+
+
 
   <aside
     class="card"
@@ -776,22 +1420,36 @@
     </h2>
 
     <p>
+
       Facing west gives YEGer a front-row view of Edmonton's
       evening skies. Sunset highlights and timelapses will
       appear here.
+
     </p>
 
   </aside>
 
+
 </section>
+
 
 </main>
 
+
+
 <footer>
+
   © 2026 YEGer.ca
   &nbsp; • &nbsp;
   Edmonton, Alberta
+
 </footer>
+
+
+
+<!-- =====================================================
+     WEATHER
+     ===================================================== -->
 
 <script>
 
@@ -805,24 +1463,39 @@ const weatherURL =
   "&timezone=America%2FEdmonton" +
   "&forecast_days=1";
 
+
 function formatTime(dateString) {
 
   if (!dateString) {
     return "--:--";
   }
 
-  const date = new Date(dateString);
+
+  const date =
+    new Date(dateString);
+
 
   return date.toLocaleTimeString(
+
     "en-CA",
+
     {
+
       hour: "numeric",
+
       minute: "2-digit",
+
       hour12: true,
+
       timeZone: "America/Edmonton"
+
     }
+
   );
+
 }
+
+
 
 function weatherDescription(code) {
 
@@ -868,22 +1541,38 @@ function weatherDescription(code) {
 
     96: "Thunderstorm with hail",
     99: "Severe thunderstorm with hail"
+
   };
 
+
   return descriptions[code] || "Current conditions";
+
 }
+
+
 
 async function updateWeather() {
 
   try {
 
-    const response = await fetch(weatherURL);
+
+    const response =
+      await fetch(weatherURL);
+
 
     if (!response.ok) {
-      throw new Error("Weather service unavailable");
+
+      throw new Error(
+        "Weather service unavailable"
+      );
+
     }
 
-    const data = await response.json();
+
+    const data =
+      await response.json();
+
+
 
     if (
       data.current &&
@@ -893,8 +1582,14 @@ async function updateWeather() {
       document.getElementById(
         "temperature"
       ).textContent =
-        Math.round(data.current.temperature_2m) + "°C";
+
+        Math.round(
+          data.current.temperature_2m
+        ) + "°C";
+
     }
+
+
 
     if (
       data.current &&
@@ -904,10 +1599,14 @@ async function updateWeather() {
       document.getElementById(
         "weather-condition"
       ).textContent =
+
         weatherDescription(
           data.current.weather_code
         );
+
     }
+
+
 
     if (
       data.daily &&
@@ -918,10 +1617,14 @@ async function updateWeather() {
       document.getElementById(
         "sunrise"
       ).textContent =
+
         formatTime(
           data.daily.sunrise[0]
         );
+
     }
+
+
 
     if (
       data.daily &&
@@ -932,28 +1635,39 @@ async function updateWeather() {
       document.getElementById(
         "sunset"
       ).textContent =
+
         formatTime(
           data.daily.sunset[0]
         );
+
     }
+
 
   }
 
   catch (error) {
+
 
     console.error(
       "Unable to retrieve Edmonton weather:",
       error
     );
 
+
     document.getElementById(
       "weather-condition"
     ).textContent =
       "Weather unavailable";
+
+
   }
+
 }
 
+
+
 updateWeather();
+
 
 setInterval(
   updateWeather,
@@ -962,24 +1676,37 @@ setInterval(
 
 </script>
 
+
+
+<!-- =====================================================
+     SPOTIFY
+     ===================================================== -->
+
 <script
   src="https://open.spotify.com/embed/iframe-api/v1"
   async>
 </script>
 
+
 <script>
 
 let spotifyController = null;
+
 let isPlaying = false;
+
 let isMuted = false;
+
+
 
 window.onSpotifyIframeApiReady =
 function(IFrameAPI) {
+
 
   const element =
     document.getElementById(
       "spotify-player"
     );
+
 
   const options = {
 
@@ -991,7 +1718,9 @@ function(IFrameAPI) {
 
     height:
       152
+
   };
+
 
   IFrameAPI.createController(
 
@@ -1003,172 +1732,912 @@ function(IFrameAPI) {
 
       spotifyController =
         controller;
+
     }
+
   );
+
 };
+
+
 
 document
 .getElementById("playButton")
 .addEventListener(
+
   "click",
+
   function() {
+
 
     if (!spotifyController) {
       return;
     }
 
+
     if (isPlaying) {
+
 
       spotifyController.pause();
 
-      isPlaying = false;
+
+      isPlaying =
+        false;
+
 
       document.getElementById(
         "playButton"
       ).textContent =
         "▶ Play";
+
+
     }
 
     else {
 
+
       spotifyController.play();
 
-      isPlaying = true;
-      isMuted = false;
+
+      isPlaying =
+        true;
+
+
+      isMuted =
+        false;
+
 
       document.getElementById(
         "playButton"
       ).textContent =
         "⏸ Pause";
 
+
       document.getElementById(
         "muteButton"
       ).textContent =
         "🔊 Sound";
+
+
     }
+
+
   }
+
 );
+
+
 
 document
 .getElementById("muteButton")
 .addEventListener(
+
   "click",
+
   function() {
+
 
     if (!spotifyController) {
       return;
     }
 
+
     if (!isMuted) {
+
 
       spotifyController.pause();
 
-      isMuted = true;
-      isPlaying = false;
+
+      isMuted =
+        true;
+
+
+      isPlaying =
+        false;
+
 
       document.getElementById(
         "muteButton"
       ).textContent =
         "🔇 Muted";
 
+
       document.getElementById(
         "playButton"
       ).textContent =
         "▶ Play";
+
+
     }
 
     else {
 
+
       spotifyController.play();
 
-      isMuted = false;
-      isPlaying = true;
+
+      isMuted =
+        false;
+
+
+      isPlaying =
+        true;
+
 
       document.getElementById(
         "muteButton"
       ).textContent =
         "🔊 Sound";
 
+
       document.getElementById(
         "playButton"
       ).textContent =
         "⏸ Pause";
+
+
     }
+
+
   }
+
 );
 
 </script>
 
+
+
+<!-- =====================================================
+     YEGer ZOOM + PAN
+     ===================================================== -->
+
 <script>
 
-let zoomLevel = 1;
+const videoContainer =
+  document.getElementById(
+    "videoContainer"
+  );
 
-const minZoom = 1;
-const maxZoom = 2;
-const zoomStep = 0.25;
+
+const panLayer =
+  document.getElementById(
+    "videoPanLayer"
+  );
+
 
 const zoomLayer =
-  document.getElementById("videoZoomLayer");
+  document.getElementById(
+    "videoZoomLayer"
+  );
+
+
+const dragSurface =
+  document.getElementById(
+    "dragSurface"
+  );
+
 
 const zoomText =
-  document.getElementById("zoomLevel");
+  document.getElementById(
+    "zoomLevel"
+  );
 
-function updateZoom() {
+
+
+/*
+  Zoom:
+  100% minimum
+  400% maximum
+*/
+
+let zoom =
+  1;
+
+
+const minZoom =
+  1;
+
+
+const maxZoom =
+  4;
+
+
+const zoomStep =
+  0.25;
+
+
+
+/*
+  Pan position in pixels.
+*/
+
+let panX =
+  0;
+
+
+let panY =
+  0;
+
+
+
+/*
+  Dragging state.
+*/
+
+let dragging =
+  false;
+
+
+let dragStartX =
+  0;
+
+
+let dragStartY =
+  0;
+
+
+let panStartX =
+  0;
+
+
+let panStartY =
+  0;
+
+
+
+/*
+  Calculate how far the enlarged stream
+  can move without exposing empty space.
+*/
+
+function getPanLimits() {
+
+
+  const width =
+    videoContainer.clientWidth;
+
+
+  const height =
+    videoContainer.clientHeight;
+
+
+  return {
+
+    x:
+      (width * (zoom - 1)) / 2,
+
+    y:
+      (height * (zoom - 1)) / 2
+
+  };
+
+}
+
+
+
+/*
+  Keep panning inside valid bounds.
+*/
+
+function clampPan() {
+
+
+  if (zoom <= 1) {
+
+    panX = 0;
+    panY = 0;
+
+    return;
+
+  }
+
+
+  const limits =
+    getPanLimits();
+
+
+  panX =
+    Math.max(
+      -limits.x,
+      Math.min(
+        limits.x,
+        panX
+      )
+    );
+
+
+  panY =
+    Math.max(
+      -limits.y,
+      Math.min(
+        limits.y,
+        panY
+      )
+    );
+
+}
+
+
+
+/*
+  Render zoom + pan.
+*/
+
+function updateVideoTransform() {
+
+
+  clampPan();
+
 
   zoomLayer.style.transform =
-    `scale(${zoomLevel})`;
+    `scale(${zoom})`;
+
+
+  panLayer.style.transform =
+    `translate3d(${panX}px, ${panY}px, 0)`;
+
 
   zoomText.textContent =
-    Math.round(zoomLevel * 100) + "%";
+    Math.round(
+      zoom * 100
+    ) + "%";
+
+
+  if (zoom > 1) {
+
+    dragSurface.classList.add(
+      "active"
+    );
+
+  }
+
+  else {
+
+    dragSurface.classList.remove(
+      "active"
+    );
+
+  }
+
 }
+
+
+
+/*
+  Zoom in.
+*/
 
 document
 .getElementById("zoomIn")
 .addEventListener(
+
   "click",
+
   function() {
 
-    zoomLevel =
+
+    zoom =
       Math.min(
         maxZoom,
-        zoomLevel + zoomStep
+        zoom + zoomStep
       );
 
-    updateZoom();
+
+    updateVideoTransform();
+
+
   }
+
 );
+
+
+
+/*
+  Zoom out.
+*/
 
 document
 .getElementById("zoomOut")
 .addEventListener(
+
   "click",
+
   function() {
 
-    zoomLevel =
+
+    zoom =
       Math.max(
         minZoom,
-        zoomLevel - zoomStep
+        zoom - zoomStep
       );
 
-    updateZoom();
+
+    updateVideoTransform();
+
+
   }
+
 );
+
+
+
+/*
+  Reset everything.
+*/
+
+function resetVideo() {
+
+
+  zoom =
+    1;
+
+
+  panX =
+    0;
+
+
+  panY =
+    0;
+
+
+  updateVideoTransform();
+
+
+}
+
+
 
 document
 .getElementById("zoomReset")
 .addEventListener(
+
   "click",
-  function() {
 
-    zoomLevel = 1;
+  resetVideo
 
-    updateZoom();
-  }
 );
 
-updateZoom();
+
+
+/*
+  Arrow movement.
+
+  Larger zoom automatically gives the user
+  more available movement.
+*/
+
+function panBy(dx, dy) {
+
+
+  if (zoom <= 1) {
+
+    return;
+
+  }
+
+
+  const step =
+    Math.max(
+      40,
+      videoContainer.clientWidth * 0.05
+    );
+
+
+  panX +=
+    dx * step;
+
+
+  panY +=
+    dy * step;
+
+
+  updateVideoTransform();
+
+
+}
+
+
+
+document
+.getElementById("panLeft")
+.addEventListener(
+
+  "click",
+
+  function() {
+
+    /*
+      Move image right to view
+      more of the left side.
+    */
+
+    panBy(
+      1,
+      0
+    );
+
+  }
+
+);
+
+
+
+document
+.getElementById("panRight")
+.addEventListener(
+
+  "click",
+
+  function() {
+
+    /*
+      Move image left to view
+      more of the right side.
+    */
+
+    panBy(
+      -1,
+      0
+    );
+
+  }
+
+);
+
+
+
+document
+.getElementById("panUp")
+.addEventListener(
+
+  "click",
+
+  function() {
+
+    panBy(
+      0,
+      1
+    );
+
+  }
+
+);
+
+
+
+document
+.getElementById("panDown")
+.addEventListener(
+
+  "click",
+
+  function() {
+
+    panBy(
+      0,
+      -1
+    );
+
+  }
+
+);
+
+
+
+/* =====================================================
+   PRESETS
+   ===================================================== */
+
+
+/*
+  Downtown appears toward the left side
+  of your current panorama.
+
+  These values can be fine-tuned later.
+*/
+
+document
+.getElementById("presetDowntown")
+.addEventListener(
+
+  "click",
+
+  function() {
+
+
+    zoom =
+      Math.max(
+        zoom,
+        2
+      );
+
+
+    const limits =
+      getPanLimits();
+
+
+    panX =
+      limits.x * 0.62;
+
+
+    panY =
+      0;
+
+
+    updateVideoTransform();
+
+
+  }
+
+);
+
+
+
+document
+.getElementById("presetCentre")
+.addEventListener(
+
+  "click",
+
+  function() {
+
+
+    if (zoom < 1.5) {
+
+      zoom =
+        1.5;
+
+    }
+
+
+    panX =
+      0;
+
+
+    panY =
+      0;
+
+
+    updateVideoTransform();
+
+
+  }
+
+);
+
+
+
+document
+.getElementById("presetWest")
+.addEventListener(
+
+  "click",
+
+  function() {
+
+
+    zoom =
+      Math.max(
+        zoom,
+        2
+      );
+
+
+    const limits =
+      getPanLimits();
+
+
+    panX =
+      -limits.x * 0.62;
+
+
+    panY =
+      0;
+
+
+    updateVideoTransform();
+
+
+  }
+
+);
+
+
+
+/* =====================================================
+   CLICK + DRAG
+   ===================================================== */
+
+dragSurface
+.addEventListener(
+
+  "pointerdown",
+
+  function(event) {
+
+
+    if (zoom <= 1) {
+
+      return;
+
+    }
+
+
+    dragging =
+      true;
+
+
+    dragStartX =
+      event.clientX;
+
+
+    dragStartY =
+      event.clientY;
+
+
+    panStartX =
+      panX;
+
+
+    panStartY =
+      panY;
+
+
+    dragSurface.classList.add(
+      "dragging"
+    );
+
+
+    dragSurface.setPointerCapture(
+      event.pointerId
+    );
+
+
+  }
+
+);
+
+
+
+dragSurface
+.addEventListener(
+
+  "pointermove",
+
+  function(event) {
+
+
+    if (!dragging) {
+
+      return;
+
+    }
+
+
+    const dx =
+      event.clientX -
+      dragStartX;
+
+
+    const dy =
+      event.clientY -
+      dragStartY;
+
+
+    panX =
+      panStartX + dx;
+
+
+    panY =
+      panStartY + dy;
+
+
+    updateVideoTransform();
+
+
+  }
+
+);
+
+
+
+function stopDragging(event) {
+
+
+  if (!dragging) {
+
+    return;
+
+  }
+
+
+  dragging =
+    false;
+
+
+  dragSurface.classList.remove(
+    "dragging"
+  );
+
+
+  if (
+    event &&
+    dragSurface.hasPointerCapture(
+      event.pointerId
+    )
+  ) {
+
+    dragSurface.releasePointerCapture(
+      event.pointerId
+    );
+
+  }
+
+
+}
+
+
+
+dragSurface
+.addEventListener(
+  "pointerup",
+  stopDragging
+);
+
+
+dragSurface
+.addEventListener(
+  "pointercancel",
+  stopDragging
+);
+
+
+
+/*
+  Double-click the zoomed image
+  to reset.
+*/
+
+dragSurface
+.addEventListener(
+
+  "dblclick",
+
+  function() {
+
+    resetVideo();
+
+  }
+
+);
+
+
+
+/*
+  If the browser window changes size,
+  recalculate valid pan limits.
+*/
+
+window
+.addEventListener(
+
+  "resize",
+
+  function() {
+
+    updateVideoTransform();
+
+  }
+
+);
+
+
+
+updateVideoTransform();
 
 </script>
 
+
 </body>
+
 </html>
