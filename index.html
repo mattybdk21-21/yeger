@@ -1,921 +1,733 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>YEGer — Edmonton Live</title>
+<title>YEGer — Edmonton Live</title>
 
-  <meta
-    name="description"
-    content="Watch Edmonton live with skyline views, current weather and sunset information from YEGer."
-  >
+<meta name="description"
+content="Watch Edmonton live with skyline views, current weather and sunset information from YEGer.">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#0b0d10;
+    color:#fff;
+    line-height:1.5;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+/* HEADER */
+
+header{
+    height:58px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 2.2%;
+    background:rgba(11,13,16,.97);
+    border-bottom:1px solid #222;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:3px;
+}
+
+.logo span{
+    font-size:11px;
+    font-weight:300;
+    letter-spacing:1px;
+    color:#999;
+    margin-left:8px;
+}
+
+nav{
+    display:flex;
+    gap:24px;
+    color:#bbb;
+    font-size:13px;
+}
+
+nav a:hover{
+    color:#fff;
+}
+
+/* MAIN */
+
+main{
+    width:96%;
+    max-width:1900px;
+    margin:auto;
+}
+
+/* LIVE HEADER */
+
+.hero{
+    padding:8px 0;
+}
+
+.hero-line{
+    min-height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.live-title{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.live-dot{
+    width:8px;
+    height:8px;
+    background:#ff2b2b;
+    border-radius:50%;
+    animation:pulse 1.8s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:.3;}
+}
+
+/* WEATHER */
+
+.weather-inline{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    flex-wrap:wrap;
+    gap:18px;
+    color:#999;
+    font-size:12px;
+}
+
+.weather-group{
+    display:flex;
+    align-items:baseline;
+    gap:5px;
+}
+
+.weather-label{
+    color:#777;
+    font-size:9px;
+    letter-spacing:.8px;
+    text-transform:uppercase;
+}
+
+#temperature{
+    color:#fff;
+    font-size:18px;
+    font-weight:700;
+}
+
+#weather-condition{
+    color:#aaa;
+}
+
+.weather-inline strong{
+    color:#fff;
+}
+
+/* VIDEO CONTROLS */
+
+.video-toolbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:8px;
+    flex-wrap:wrap;
+}
+
+.toolbar-left,
+.toolbar-right{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.zoom-btn,
+.preset-btn{
+    height:34px;
+    border:1px solid #353a40;
+    border-radius:8px;
+    background:#171a1f;
+    color:#fff;
+    cursor:pointer;
+    padding:0 12px;
+    font-size:13px;
+}
+
+.zoom-btn:hover,
+.preset-btn:hover{
+    background:#252a30;
+}
+
+.zoom-btn.icon{
+    min-width:38px;
+    font-size:18px;
+}
+
+.zoom-level{
+    min-width:55px;
+    text-align:center;
+    color:#aaa;
+    font-size:12px;
+}
+
+.drag-hint{
+    color:#666;
+    font-size:11px;
+    margin-left:5px;
+}
+
+/* VIDEO */
+
+.video-container{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    background:#000;
+    overflow:hidden;
+    border:1px solid #292d32;
+    border-radius:12px;
+    user-select:none;
+}
+
+.video-pan-layer{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    transform:translate3d(0,0,0);
+    will-change:transform;
+}
+
+.video-zoom-layer{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    transform:scale(1);
+    transform-origin:center center;
+    will-change:transform;
+}
+
+.video-zoom-layer iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+    display:block;
+}
+
+.drag-surface{
+    position:absolute;
+    inset:0;
+    z-index:10;
+    pointer-events:none;
+    cursor:grab;
+    touch-action:none;
+}
+
+.drag-surface.active{
+    pointer-events:auto;
+}
+
+.drag-surface.dragging{
+    cursor:grabbing;
+}
+
+/* INFO */
+
+.info-bar{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    margin-top:12px;
+    background:#25282d;
+    border:1px solid #25282d;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.info-box{
+    background:#121519;
+    padding:14px 18px;
+}
+
+.info-label{
+    color:#777;
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:3px;
+}
+
+.info-value{
+    font-size:17px;
+    font-weight:600;
+}
+
+/* CONTENT */
+
+.content-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+    margin:25px 0 40px;
+}
+
+.card{
+    background:#121519;
+    border:1px solid #25282d;
+    border-radius:12px;
+    padding:24px;
+}
+
+.card h2{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#aaa;
+}
+
+.location{
+    margin-top:18px;
+    padding-top:18px;
+    border-top:1px solid #26292e;
+    color:#777;
+    font-size:13px;
+}
+
+footer{
+    border-top:1px solid #222;
+    text-align:center;
+    color:#666;
+    font-size:12px;
+    padding:28px 20px;
+}
+
+@media(max-width:950px){
+    .hero-line{
+        flex-direction:column;
+        align-items:flex-start;
     }
 
-    html {
-      scroll-behavior: smooth;
+    .weather-inline{
+        justify-content:flex-start;
+    }
+}
+
+@media(max-width:700px){
+
+    header{
+        padding:0 4%;
     }
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0b0d10;
-      color: #ffffff;
-      line-height: 1.5;
+    .logo{
+        font-size:22px;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    .logo span{
+        display:none;
     }
 
-    /* =====================================================
-       HEADER
-       ===================================================== */
-
-    header {
-      height: 58px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2.2%;
-      background: rgba(11, 13, 16, 0.97);
-      border-bottom: 1px solid #222;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: 3px;
-    }
-
-    .logo span {
-      font-size: 11px;
-      font-weight: 300;
-      letter-spacing: 1px;
-      color: #999;
-      margin-left: 8px;
-    }
-
-    nav {
-      display: flex;
-      gap: 24px;
-      color: #bbb;
-      font-size: 13px;
-    }
-
-    nav a:hover {
-      color: #ffffff;
-    }
-
-    /* =====================================================
-       MAIN
-       ===================================================== */
-
-    main {
-      width: 96%;
-      max-width: 1900px;
-      margin: auto;
-    }
-
-    /* =====================================================
-       LIVE HEADER
-       ===================================================== */
-
-    .hero {
-      padding: 8px 0;
-    }
-
-    .hero-line {
-      min-height: 42px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .live-title {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.2px;
-      white-space: nowrap;
-    }
-
-    .live-dot {
-      width: 8px;
-      height: 8px;
-      background: #ff2b2b;
-      border-radius: 50%;
-      animation: pulse 1.8s infinite;
-    }
-
-    @keyframes pulse {
-      0%,
-      100% {
-        opacity: 1;
-      }
-
-      50% {
-        opacity: 0.3;
-      }
-    }
-
-    /* =====================================================
-       WEATHER
-       ===================================================== */
-
-    .weather-inline {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-      gap: 18px;
-      color: #999;
-      font-size: 12px;
-    }
-
-    .weather-group {
-      display: flex;
-      align-items: baseline;
-      gap: 5px;
-    }
-
-    .weather-label {
-      color: #777;
-      font-size: 9px;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-    }
-
-    #temperature {
-      color: #ffffff;
-      font-size: 18px;
-      font-weight: 700;
-    }
-
-    #weather-condition {
-      color: #aaa;
-    }
-
-    .weather-inline strong {
-      color: #ffffff;
-      font-weight: 600;
-    }
-
-    /* =====================================================
-       VIDEO TOOLBAR
-       ===================================================== */
-
-    .video-section {
-      width: 100%;
-    }
-
-    .video-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 8px;
-      flex-wrap: wrap;
+    nav{
+        gap:11px;
+        font-size:10px;
     }
 
     .toolbar-left,
-    .toolbar-right {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      flex-wrap: wrap;
+    .toolbar-right{
+        width:100%;
+        justify-content:center;
     }
 
-    .zoom-btn,
-    .preset-btn {
-      height: 34px;
-      border: 1px solid #353a40;
-      border-radius: 8px;
-      background: #171a1f;
-      color: #ffffff;
-      cursor: pointer;
-      padding: 0 12px;
-      font-size: 13px;
-      transition: background 0.15s ease;
+    .drag-hint{
+        display:none;
     }
 
-    .zoom-btn:hover,
-    .preset-btn:hover {
-      background: #252a30;
+    .info-bar{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .zoom-btn.icon {
-      min-width: 38px;
-      padding: 0 10px;
-      font-size: 18px;
+    .content-grid{
+        grid-template-columns:1fr;
     }
-
-    .zoom-level {
-      min-width: 55px;
-      text-align: center;
-      color: #aaa;
-      font-size: 12px;
-    }
-
-    .drag-hint {
-      color: #666;
-      font-size: 11px;
-      margin-left: 5px;
-    }
-
-    /* =====================================================
-       VIDEO
-       ===================================================== */
-
-    .video-container {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: #000;
-      overflow: hidden;
-      border: 1px solid #292d32;
-      border-radius: 12px;
-      user-select: none;
-    }
-
-    .video-pan-layer {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      transform: translate3d(0, 0, 0);
-      will-change: transform;
-    }
-
-    .video-zoom-layer {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      transform: scale(1);
-      transform-origin: center center;
-      will-change: transform;
-    }
-
-    .video-zoom-layer iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
-      border: 0;
-    }
-
-    .drag-surface {
-      position: absolute;
-      inset: 0;
-      z-index: 10;
-      pointer-events: none;
-      cursor: grab;
-      touch-action: none;
-    }
-
-    .drag-surface.active {
-      pointer-events: auto;
-    }
-
-    .drag-surface.dragging {
-      cursor: grabbing;
-    }
-
-    /* =====================================================
-       INFO BAR
-       ===================================================== */
-
-    .info-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      margin-top: 12px;
-      background: #25282d;
-      border: 1px solid #25282d;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .info-box {
-      background: #121519;
-      padding: 14px 18px;
-    }
-
-    .info-label {
-      color: #777;
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 3px;
-    }
-
-    .info-value {
-      font-size: 17px;
-      font-weight: 600;
-    }
-
-    /* =====================================================
-       CONTENT
-       ===================================================== */
-
-    .content-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 20px;
-      margin: 25px 0 40px;
-    }
-
-    .card {
-      background: #121519;
-      border: 1px solid #25282d;
-      border-radius: 12px;
-      padding: 24px;
-    }
-
-    .card h2 {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: #aaa;
-    }
-
-    .location {
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px solid #26292e;
-      color: #777;
-      font-size: 13px;
-    }
-
-    /* =====================================================
-       FOOTER
-       ===================================================== */
-
-    footer {
-      border-top: 1px solid #222;
-      text-align: center;
-      color: #666;
-      font-size: 12px;
-      padding: 28px 20px;
-    }
-
-    /* =====================================================
-       TABLET
-       ===================================================== */
-
-    @media (max-width: 950px) {
-      .hero-line {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-      }
-
-      .weather-inline {
-        justify-content: flex-start;
-      }
-    }
-
-    /* =====================================================
-       MOBILE
-       ===================================================== */
-
-    @media (max-width: 700px) {
-      header {
-        padding: 0 4%;
-      }
-
-      .logo {
-        font-size: 22px;
-      }
-
-      .logo span {
-        display: none;
-      }
-
-      nav {
-        gap: 11px;
-        font-size: 10px;
-      }
-
-      main {
-        width: 96%;
-      }
-
-      .video-toolbar {
-        justify-content: center;
-      }
-
-      .toolbar-left,
-      .toolbar-right {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .drag-hint {
-        display: none;
-      }
-
-      .info-bar {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .content-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .weather-inline {
-        gap: 8px 12px;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
 <header>
 
-  <div class="logo">
-    YEGer
-    <span>EDMONTON LIVE</span>
-  </div>
+<div class="logo">
+YEGer
+<span>EDMONTON LIVE</span>
+</div>
 
-  <nav>
-    <a href="#live">Live</a>
-    <a href="#about">About</a>
-    <a href="#sunsets">Sunsets</a>
-  </nav>
+<nav>
+<a href="#live">Live</a>
+<a href="#about">About</a>
+<a href="#sunsets">Sunsets</a>
+</nav>
 
 </header>
 
 <main>
 
-  <!-- =====================================================
-       LIVE HEADER
-       ===================================================== -->
+<section class="hero" id="live">
 
-  <section class="hero" id="live">
+<div class="hero-line">
 
-    <div class="hero-line">
+<div class="live-title">
+<span class="live-dot"></span>
+LIVE FROM EDMONTON — YEGer
+</div>
 
-      <div class="live-title">
-        <span class="live-dot"></span>
-        LIVE FROM EDMONTON — YEGer
-      </div>
+<div class="weather-inline">
 
-      <div class="weather-inline">
+<div class="weather-group">
+<span class="weather-label">Edmonton</span>
+<span id="temperature">--°C</span>
+<span id="weather-condition">Loading...</span>
+</div>
 
-        <div class="weather-group">
-          <span class="weather-label">Edmonton</span>
-          <span id="temperature">--°C</span>
-          <span id="weather-condition">Loading...</span>
-        </div>
+<div class="weather-group">
+<span class="weather-label">Sunrise</span>
+<strong id="sunrise">--:--</strong>
+</div>
 
-        <div class="weather-group">
-          <span class="weather-label">Sunrise</span>
-          <strong id="sunrise">--:--</strong>
-        </div>
+<div class="weather-group">
+<span class="weather-label">Sunset</span>
+<strong id="sunset">--:--</strong>
+</div>
 
-        <div class="weather-group">
-          <span class="weather-label">Sunset</span>
-          <strong id="sunset">--:--</strong>
-        </div>
+</div>
+</div>
+</section>
 
-      </div>
 
-    </div>
+<section class="video-section">
 
-  </section>
+<div class="video-toolbar">
 
-  <!-- =====================================================
-       VIDEO
-       ===================================================== -->
+<div class="toolbar-left">
 
-  <section class="video-section">
+<button id="zoomOut" class="zoom-btn icon">−</button>
 
-    <div class="video-toolbar">
+<span id="zoomLevel" class="zoom-level">
+100%
+</span>
 
-      <div class="toolbar-left">
+<button id="zoomIn" class="zoom-btn icon">+</button>
 
-        <button
-          id="zoomOut"
-          class="zoom-btn icon"
-          type="button"
-          title="Zoom out"
-        >
-          −
-        </button>
+<button id="panLeft" class="zoom-btn icon">←</button>
 
-        <span
-          id="zoomLevel"
-          class="zoom-level"
-        >
-          100%
-        </span>
+<button id="panUp" class="zoom-btn icon">↑</button>
 
-        <button
-          id="zoomIn"
-          class="zoom-btn icon"
-          type="button"
-          title="Zoom in"
-        >
-          +
-        </button>
+<button id="panDown" class="zoom-btn icon">↓</button>
 
-        <button
-          id="panLeft"
-          class="zoom-btn icon"
-          type="button"
-          title="Move view left"
-        >
-          ←
-        </button>
+<button id="panRight" class="zoom-btn icon">→</button>
 
-        <button
-          id="panUp"
-          class="zoom-btn icon"
-          type="button"
-          title="Move view up"
-        >
-          ↑
-        </button>
+<button id="zoomReset" class="zoom-btn">
+Reset
+</button>
 
-        <button
-          id="panDown"
-          class="zoom-btn icon"
-          type="button"
-          title="Move view down"
-        >
-          ↓
-        </button>
+<span class="drag-hint">
+Zoom in, then drag the image
+</span>
 
-        <button
-          id="panRight"
-          class="zoom-btn icon"
-          type="button"
-          title="Move view right"
-        >
-          →
-        </button>
+</div>
 
-        <button
-          id="zoomReset"
-          class="zoom-btn"
-          type="button"
-        >
-          Reset
-        </button>
 
-        <span class="drag-hint">
-          Zoom in, then drag the image
-        </span>
+<div class="toolbar-right">
 
-      </div>
+<button id="presetDowntown" class="preset-btn">
+Downtown
+</button>
 
-      <div class="toolbar-right">
+<button id="presetCentre" class="preset-btn">
+Centre
+</button>
 
-        <button
-          id="presetDowntown"
-          class="preset-btn"
-          type="button"
-        >
-          Downtown
-        </button>
+<button id="presetWest" class="preset-btn">
+West
+</button>
 
-        <button
-          id="presetCentre"
-          class="preset-btn"
-          type="button"
-        >
-          Centre
-        </button>
+</div>
+</div>
 
-        <button
-          id="presetWest"
-          class="preset-btn"
-          type="button"
-        >
-          West
-        </button>
 
-      </div>
+<div class="video-container" id="videoContainer">
 
-    </div>
+<div class="video-pan-layer" id="videoPanLayer">
 
-    <div
-      class="video-container"
-      id="videoContainer"
-    >
+<div class="video-zoom-layer" id="videoZoomLayer">
 
-      <div
-        class="video-pan-layer"
-        id="videoPanLayer"
-      >
-
-        <div
-          class="video-zoom-layer"
-          id="videoZoomLayer"
-        >
-
+<!-- CURRENT YOUTUBE LIVE STREAM -->
 <iframe
-  src="https://www.youtube.com/embed/eXNg9NiOP0E?autoplay=1&mute=1&playsinline=1&controls=0&rel=0&disablekb=1&origin=https%3A%2F%2Fyeger.ca"
-  title="YEGer Edmonton Live"
-  referrerpolicy="strict-origin-when-cross-origin"
-  allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-  allowfullscreen>
+src="https://www.youtube.com/embed/eXNg9NiOP0E?autoplay=1&mute=1&playsinline=1&controls=0&rel=0&modestbranding=1"
+title="YEGer Edmonton Live"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen>
 </iframe>
 
-        </div>
+</div>
+</div>
 
-      </div>
+<div
+id="dragSurface"
+class="drag-surface">
+</div>
 
-      <div
-        id="dragSurface"
-        class="drag-surface"
-        title="Drag to move around the zoomed view"
-      ></div>
+</div>
+</section>
 
-    </div>
 
-  </section>
+<section class="info-bar">
 
-  <!-- =====================================================
-       INFO BAR
-       ===================================================== -->
+<div class="info-box">
+<div class="info-label">Location</div>
+<div class="info-value">Edmonton</div>
+</div>
 
-  <section class="info-bar">
+<div class="info-box">
+<div class="info-label">View</div>
+<div class="info-value">High-rise</div>
+</div>
 
-    <div class="info-box">
-      <div class="info-label">Location</div>
-      <div class="info-value">Edmonton</div>
-    </div>
+<div class="info-box">
+<div class="info-label">Direction</div>
+<div class="info-value">West</div>
+</div>
 
-    <div class="info-box">
-      <div class="info-label">View</div>
-      <div class="info-value">High-rise</div>
-    </div>
+<div class="info-box">
+<div class="info-label">Stream</div>
+<div class="info-value">Live</div>
+</div>
 
-    <div class="info-box">
-      <div class="info-label">Direction</div>
-      <div class="info-value">West</div>
-    </div>
+</section>
 
-    <div class="info-box">
-      <div class="info-label">Stream</div>
-      <div class="info-value">Live</div>
-    </div>
 
-  </section>
+<section class="content-grid">
 
-  <!-- =====================================================
-       CONTENT
-       ===================================================== -->
+<article class="card" id="about">
 
-  <section class="content-grid">
+<h2>Edmonton Live</h2>
 
-    <article
-      class="card"
-      id="about"
-    >
+<p>
+YEGer provides a live view across Edmonton —
+from changing weather and dramatic prairie skies
+to sunsets, storms, construction and the everyday
+movement of the city.
+</p>
 
-      <h2>
-        Edmonton Live
-      </h2>
+<div class="location">
+Edmonton, Alberta, Canada
+</div>
 
-      <p>
-        YEGer provides a live view across Edmonton —
-        from changing weather and dramatic prairie skies
-        to sunsets, storms, construction and the everyday
-        movement of the city.
-      </p>
+</article>
 
-      <div class="location">
-        Edmonton, Alberta, Canada
-      </div>
 
-    </article>
+<aside class="card" id="sunsets">
 
-    <aside
-      class="card"
-      id="sunsets"
-    >
+<h2>Sunsets</h2>
 
-      <h2>
-        Sunsets
-      </h2>
+<p>
+Facing west gives YEGer a front-row view of Edmonton's
+evening skies. Sunset highlights and timelapses will
+appear here.
+</p>
 
-      <p>
-        Facing west gives YEGer a front-row view of Edmonton's
-        evening skies. Sunset highlights and timelapses will
-        appear here.
-      </p>
+</aside>
 
-    </aside>
-
-  </section>
+</section>
 
 </main>
 
+
 <footer>
-  © 2026 YEGer.ca
-  &nbsp; • &nbsp;
-  Edmonton, Alberta
+© 2026 YEGer.ca • Edmonton, Alberta
 </footer>
 
-<!-- =====================================================
-     WEATHER
-     ===================================================== -->
 
 <script>
 
+/* WEATHER */
+
 const weatherURL =
-  "https://api.open-meteo.com/v1/forecast" +
-  "?latitude=53.5461" +
-  "&longitude=-113.4938" +
-  "&current=temperature_2m,weather_code" +
-  "&daily=sunrise,sunset" +
-  "&temperature_unit=celsius" +
-  "&timezone=America%2FEdmonton" +
-  "&forecast_days=1";
+"https://api.open-meteo.com/v1/forecast" +
+"?latitude=53.5461" +
+"&longitude=-113.4938" +
+"&current=temperature_2m,weather_code" +
+"&daily=sunrise,sunset" +
+"&temperature_unit=celsius" +
+"&timezone=America%2FEdmonton" +
+"&forecast_days=1";
 
 
-function formatTime(dateString) {
+function formatTime(dateString){
 
-  if (!dateString) {
-    return "--:--";
-  }
+    if(!dateString) return "--:--";
 
-  const date =
-    new Date(dateString);
+    const date =
+        new Date(dateString);
 
-  return date.toLocaleTimeString(
-
-    "en-CA",
-
-    {
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-      timeZone: "America/Edmonton"
-    }
-
-  );
-
-}
-
-
-function weatherDescription(code) {
-
-  const descriptions = {
-
-    0: "Clear sky",
-    1: "Mainly clear",
-    2: "Partly cloudy",
-    3: "Overcast",
-
-    45: "Fog",
-    48: "Freezing fog",
-
-    51: "Light drizzle",
-    53: "Drizzle",
-    55: "Heavy drizzle",
-
-    56: "Light freezing drizzle",
-    57: "Freezing drizzle",
-
-    61: "Light rain",
-    63: "Rain",
-    65: "Heavy rain",
-
-    66: "Light freezing rain",
-    67: "Freezing rain",
-
-    71: "Light snow",
-    73: "Snow",
-    75: "Heavy snow",
-
-    77: "Snow grains",
-
-    80: "Light rain showers",
-    81: "Rain showers",
-    82: "Heavy rain showers",
-
-    85: "Light snow showers",
-    86: "Heavy snow showers",
-
-    95: "Thunderstorm",
-    96: "Thunderstorm with hail",
-    99: "Severe thunderstorm with hail"
-
-  };
-
-  return descriptions[code] ||
-    "Current conditions";
-
-}
-
-
-async function updateWeather() {
-
-  try {
-
-    const response =
-      await fetch(
-        weatherURL,
+    return date.toLocaleTimeString(
+        "en-CA",
         {
-          cache: "no-store"
+            hour:"numeric",
+            minute:"2-digit",
+            hour12:true,
+            timeZone:"America/Edmonton"
         }
-      );
-
-    if (!response.ok) {
-      throw new Error(
-        "Weather request failed"
-      );
-    }
-
-    const data =
-      await response.json();
-
-    const temperature =
-      data.current?.temperature_2m;
-
-    const weatherCode =
-      data.current?.weather_code;
-
-    const sunrise =
-      data.daily?.sunrise?.[0];
-
-    const sunset =
-      data.daily?.sunset?.[0];
-
-
-    document.getElementById(
-      "temperature"
-    ).textContent =
-
-      Number.isFinite(
-        temperature
-      )
-
-      ? `${Math.round(
-          temperature
-        )}°C`
-
-      : "--°C";
-
-
-    document.getElementById(
-      "weather-condition"
-    ).textContent =
-      weatherDescription(
-        weatherCode
-      );
-
-
-    document.getElementById(
-      "sunrise"
-    ).textContent =
-      formatTime(
-        sunrise
-      );
-
-
-    document.getElementById(
-      "sunset"
-    ).textContent =
-      formatTime(
-        sunset
-      );
-
-  }
-
-  catch (error) {
-
-    console.error(
-      error
     );
+}
 
-    document.getElementById(
-      "weather-condition"
-    ).textContent =
-      "Weather unavailable";
 
-  }
+function weatherDescription(code){
+
+const descriptions={
+
+0:"Clear sky",
+1:"Mainly clear",
+2:"Partly cloudy",
+3:"Overcast",
+
+45:"Fog",
+48:"Freezing fog",
+
+51:"Light drizzle",
+53:"Drizzle",
+55:"Heavy drizzle",
+
+61:"Light rain",
+63:"Rain",
+65:"Heavy rain",
+
+71:"Light snow",
+73:"Snow",
+75:"Heavy snow",
+
+80:"Light rain showers",
+81:"Rain showers",
+82:"Heavy rain showers",
+
+85:"Light snow showers",
+86:"Heavy snow showers",
+
+95:"Thunderstorm",
+96:"Thunderstorm with hail",
+99:"Severe thunderstorm with hail"
+
+};
+
+return descriptions[code] ||
+"Current conditions";
+
+}
+
+
+async function updateWeather(){
+
+try{
+
+const response =
+await fetch(
+    weatherURL,
+    {cache:"no-store"}
+);
+
+if(!response.ok)
+    throw new Error("Weather failed");
+
+const data =
+await response.json();
+
+
+const temperature =
+data.current?.temperature_2m;
+
+const weatherCode =
+data.current?.weather_code;
+
+
+document.getElementById(
+"temperature"
+).textContent =
+
+Number.isFinite(temperature)
+? `${Math.round(temperature)}°C`
+: "--°C";
+
+
+document.getElementById(
+"weather-condition"
+).textContent =
+weatherDescription(weatherCode);
+
+
+document.getElementById(
+"sunrise"
+).textContent =
+formatTime(
+data.daily?.sunrise?.[0]
+);
+
+
+document.getElementById(
+"sunset"
+).textContent =
+formatTime(
+data.daily?.sunset?.[0]
+);
+
+}
+
+catch(error){
+
+console.error(error);
+
+document.getElementById(
+"weather-condition"
+).textContent =
+"Weather unavailable";
+
+}
 
 }
 
@@ -923,596 +735,318 @@ async function updateWeather() {
 updateWeather();
 
 setInterval(
-  updateWeather,
-  600000
+updateWeather,
+600000
 );
 
-</script>
 
-
-<!-- =====================================================
-     YEGer ZOOM + PAN
-     ===================================================== -->
-
-<script>
+/* =====================================================
+   ZOOM
+   ===================================================== */
 
 const videoContainer =
-  document.getElementById(
-    "videoContainer"
-  );
+document.getElementById("videoContainer");
 
 const panLayer =
-  document.getElementById(
-    "videoPanLayer"
-  );
+document.getElementById("videoPanLayer");
 
 const zoomLayer =
-  document.getElementById(
-    "videoZoomLayer"
-  );
+document.getElementById("videoZoomLayer");
 
 const dragSurface =
-  document.getElementById(
-    "dragSurface"
-  );
+document.getElementById("dragSurface");
 
 const zoomText =
-  document.getElementById(
-    "zoomLevel"
-  );
+document.getElementById("zoomLevel");
 
 
-const minZoom = 1;
+const minZoom=1;
+const maxZoom=6;
+const zoomStep=.25;
 
-const maxZoom = 6;
+let zoom=1;
+let panX=0;
+let panY=0;
 
-const zoomStep = 0.25;
+let dragging=false;
 
+let dragStartX=0;
+let dragStartY=0;
 
-let zoom = 1;
-
-let panX = 0;
-
-let panY = 0;
-
-let dragging = false;
-
-let dragStartX = 0;
-
-let dragStartY = 0;
-
-let panStartX = 0;
-
-let panStartY = 0;
+let panStartX=0;
+let panStartY=0;
 
 
-/* =====================================================
-   PAN LIMITS
-   ===================================================== */
+function getPanLimits(){
 
-function getPanLimits() {
+const width =
+videoContainer.clientWidth;
 
-  const width =
-    videoContainer.clientWidth;
+const height =
+videoContainer.clientHeight;
 
-  const height =
-    videoContainer.clientHeight;
+return{
 
-  return {
+x:(width*(zoom-1))/2,
+y:(height*(zoom-1))/2
 
-    x:
-      (width *
-      (zoom - 1)) /
-      2,
-
-    y:
-      (height *
-      (zoom - 1)) /
-      2
-
-  };
+};
 
 }
 
 
-/* =====================================================
-   CLAMP PAN
-   ===================================================== */
+function clampPan(){
 
-function clampPan() {
+if(zoom<=1){
 
-  if (zoom <= 1) {
+panX=0;
+panY=0;
 
-    panX = 0;
+return;
 
-    panY = 0;
+}
 
-    return;
+const limits =
+getPanLimits();
 
-  }
+panX =
+Math.max(
+-limits.x,
+Math.min(limits.x,panX)
+);
 
-  const limits =
-    getPanLimits();
-
-  panX =
-    Math.max(
-      -limits.x,
-      Math.min(
-        limits.x,
-        panX
-      )
-    );
-
-  panY =
-    Math.max(
-      -limits.y,
-      Math.min(
-        limits.y,
-        panY
-      )
-    );
+panY =
+Math.max(
+-limits.y,
+Math.min(limits.y,panY)
+);
 
 }
 
 
-/* =====================================================
-   UPDATE VIEW
-   ===================================================== */
+function updateVideoTransform(){
 
-function updateVideoTransform() {
+clampPan();
 
-  clampPan();
+zoomLayer.style.transform =
+`scale(${zoom})`;
 
-  zoomLayer.style.transform =
-    `scale(${zoom})`;
+panLayer.style.transform =
+`translate3d(${panX}px,${panY}px,0)`;
 
-  panLayer.style.transform =
-    `translate3d(${panX}px, ${panY}px, 0)`;
+zoomText.textContent =
+Math.round(zoom*100)+"%";
 
-  zoomText.textContent =
-    Math.round(
-      zoom * 100
-    ) + "%";
 
-  if (zoom > 1) {
+if(zoom>1)
+dragSurface.classList.add("active");
 
-    dragSurface.classList.add(
-      "active"
-    );
-
-  }
-
-  else {
-
-    dragSurface.classList.remove(
-      "active"
-    );
-
-  }
+else
+dragSurface.classList.remove("active");
 
 }
 
 
-/* =====================================================
-   ZOOM IN
-   ===================================================== */
+document.getElementById("zoomIn")
+.addEventListener("click",()=>{
 
-document
-.getElementById(
-  "zoomIn"
-)
-.addEventListener(
-
-  "click",
-
-  function() {
-
-    zoom =
-      Math.min(
-        maxZoom,
-        zoom + zoomStep
-      );
-
-    updateVideoTransform();
-
-  }
-
+zoom =
+Math.min(
+maxZoom,
+zoom+zoomStep
 );
 
+updateVideoTransform();
 
-/* =====================================================
-   ZOOM OUT
-   ===================================================== */
+});
 
-document
-.getElementById(
-  "zoomOut"
-)
-.addEventListener(
 
-  "click",
+document.getElementById("zoomOut")
+.addEventListener("click",()=>{
 
-  function() {
-
-    zoom =
-      Math.max(
-        minZoom,
-        zoom - zoomStep
-      );
-
-    updateVideoTransform();
-
-  }
-
+zoom =
+Math.max(
+minZoom,
+zoom-zoomStep
 );
 
+updateVideoTransform();
 
-/* =====================================================
-   RESET
-   ===================================================== */
+});
 
-document
-.getElementById(
-  "zoomReset"
-)
-.addEventListener(
 
-  "click",
+document.getElementById("zoomReset")
+.addEventListener("click",()=>{
 
-  function() {
+zoom=1;
+panX=0;
+panY=0;
 
-    zoom = 1;
+updateVideoTransform();
 
-    panX = 0;
+});
 
-    panY = 0;
 
-    updateVideoTransform();
+function panBy(dx,dy){
 
-  }
+if(zoom<=1)
+return;
 
+const step =
+Math.max(
+40,
+videoContainer.clientWidth*.05
 );
 
+panX += dx*step;
+panY += dy*step;
 
-/* =====================================================
-   PAN BUTTONS
-   ===================================================== */
-
-function panBy(
-  dx,
-  dy
-) {
-
-  if (zoom <= 1) {
-    return;
-  }
-
-  const step =
-    Math.max(
-      40,
-      videoContainer.clientWidth *
-      0.05
-    );
-
-  panX +=
-    dx * step;
-
-  panY +=
-    dy * step;
-
-  updateVideoTransform();
+updateVideoTransform();
 
 }
 
 
-document
-.getElementById(
-  "panLeft"
-)
-.addEventListener(
+document.getElementById("panLeft")
+.onclick=()=>panBy(1,0);
 
-  "click",
+document.getElementById("panRight")
+.onclick=()=>panBy(-1,0);
 
-  function() {
+document.getElementById("panUp")
+.onclick=()=>panBy(0,1);
 
-    panBy(
-      1,
-      0
-    );
+document.getElementById("panDown")
+.onclick=()=>panBy(0,-1);
 
-  }
 
+/* PRESETS */
+
+document.getElementById("presetDowntown")
+.onclick=()=>{
+
+zoom=Math.max(zoom,2);
+
+const limits=getPanLimits();
+
+panX=limits.x*.62;
+panY=0;
+
+updateVideoTransform();
+
+};
+
+
+document.getElementById("presetCentre")
+.onclick=()=>{
+
+if(zoom<1.5)
+zoom=1.5;
+
+panX=0;
+panY=0;
+
+updateVideoTransform();
+
+};
+
+
+document.getElementById("presetWest")
+.onclick=()=>{
+
+zoom=Math.max(zoom,2);
+
+const limits=getPanLimits();
+
+panX=-limits.x*.62;
+panY=0;
+
+updateVideoTransform();
+
+};
+
+
+/* DRAG */
+
+dragSurface.addEventListener(
+"pointerdown",
+event=>{
+
+if(zoom<=1)
+return;
+
+dragging=true;
+
+dragStartX=event.clientX;
+dragStartY=event.clientY;
+
+panStartX=panX;
+panStartY=panY;
+
+dragSurface.classList.add("dragging");
+
+dragSurface.setPointerCapture(
+event.pointerId
 );
 
+});
 
-document
-.getElementById(
-  "panRight"
-)
-.addEventListener(
 
-  "click",
+dragSurface.addEventListener(
+"pointermove",
+event=>{
 
-  function() {
+if(!dragging)
+return;
 
-    panBy(
-      -1,
-      0
-    );
+panX =
+panStartX +
+(event.clientX-dragStartX);
 
-  }
+panY =
+panStartY +
+(event.clientY-dragStartY);
 
+updateVideoTransform();
+
+});
+
+
+function stopDragging(event){
+
+if(!dragging)
+return;
+
+dragging=false;
+
+dragSurface.classList.remove(
+"dragging"
 );
 
+try{
 
-document
-.getElementById(
-  "panUp"
-)
-.addEventListener(
-
-  "click",
-
-  function() {
-
-    panBy(
-      0,
-      1
-    );
-
-  }
-
+dragSurface.releasePointerCapture(
+event.pointerId
 );
 
-
-document
-.getElementById(
-  "panDown"
-)
-.addEventListener(
-
-  "click",
-
-  function() {
-
-    panBy(
-      0,
-      -1
-    );
-
-  }
-
-);
-
-
-/* =====================================================
-   PRESET — DOWNTOWN
-   ===================================================== */
-
-document
-.getElementById(
-  "presetDowntown"
-)
-.addEventListener(
-
-  "click",
-
-  function() {
-
-    zoom =
-      Math.max(
-        zoom,
-        2
-      );
-
-    const limits =
-      getPanLimits();
-
-    panX =
-      limits.x *
-      0.62;
-
-    panY = 0;
-
-    updateVideoTransform();
-
-  }
-
-);
-
-
-/* =====================================================
-   PRESET — CENTRE
-   ===================================================== */
-
-document
-.getElementById(
-  "presetCentre"
-)
-.addEventListener(
-
-  "click",
-
-  function() {
-
-    if (zoom < 1.5) {
-
-      zoom =
-        1.5;
-
-    }
-
-    panX = 0;
-
-    panY = 0;
-
-    updateVideoTransform();
-
-  }
-
-);
-
-
-/* =====================================================
-   PRESET — WEST
-   ===================================================== */
-
-document
-.getElementById(
-  "presetWest"
-)
-.addEventListener(
-
-  "click",
-
-  function() {
-
-    zoom =
-      Math.max(
-        zoom,
-        2
-      );
-
-    const limits =
-      getPanLimits();
-
-    panX =
-      -limits.x *
-      0.62;
-
-    panY = 0;
-
-    updateVideoTransform();
-
-  }
-
-);
-
-
-/* =====================================================
-   CLICK / TOUCH DRAG
-   ===================================================== */
-
-dragSurface
-.addEventListener(
-
-  "pointerdown",
-
-  function(event) {
-
-    if (zoom <= 1) {
-      return;
-    }
-
-    dragging = true;
-
-    dragStartX =
-      event.clientX;
-
-    dragStartY =
-      event.clientY;
-
-    panStartX =
-      panX;
-
-    panStartY =
-      panY;
-
-    dragSurface.classList.add(
-      "dragging"
-    );
-
-    dragSurface.setPointerCapture(
-      event.pointerId
-    );
-
-  }
-
-);
-
-
-dragSurface
-.addEventListener(
-
-  "pointermove",
-
-  function(event) {
-
-    if (!dragging) {
-      return;
-    }
-
-    const dx =
-      event.clientX -
-      dragStartX;
-
-    const dy =
-      event.clientY -
-      dragStartY;
-
-    panX =
-      panStartX +
-      dx;
-
-    panY =
-      panStartY +
-      dy;
-
-    updateVideoTransform();
-
-  }
-
-);
-
-
-function stopDragging(
-  event
-) {
-
-  if (!dragging) {
-    return;
-  }
-
-  dragging = false;
-
-  dragSurface.classList.remove(
-    "dragging"
-  );
-
-  try {
-
-    dragSurface.releasePointerCapture(
-      event.pointerId
-    );
-
-  }
-
-  catch (error) {
-  }
+}catch(error){}
 
 }
 
 
-dragSurface
-.addEventListener(
-  "pointerup",
-  stopDragging
+dragSurface.addEventListener(
+"pointerup",
+stopDragging
 );
 
-
-dragSurface
-.addEventListener(
-  "pointercancel",
-  stopDragging
+dragSurface.addEventListener(
+"pointercancel",
+stopDragging
 );
 
-
-window
-.addEventListener(
-  "resize",
-  updateVideoTransform
+window.addEventListener(
+"resize",
+updateVideoTransform
 );
-
 
 updateVideoTransform();
 
