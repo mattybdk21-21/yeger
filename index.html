@@ -65,8 +65,8 @@
     }
 
     .header-inner {
-      width: 92%;
-      max-width: 1600px;
+      width: 96%;
+      max-width: 1800px;
       height: 100%;
 
       margin: auto;
@@ -110,8 +110,8 @@
     ====================================================== */
 
     .page {
-      width: 92%;
-      max-width: 1600px;
+      width: 96%;
+      max-width: 1800px;
 
       margin: 18px auto 40px;
     }
@@ -277,6 +277,8 @@
 
       font-size: 12px;
       font-weight: bold;
+
+      flex-shrink: 0;
     }
 
     .video-title {
@@ -296,11 +298,14 @@
     /* =====================================================
        PANORAMIC VIDEO WINDOW
 
-       Reolink source = 7680 x 2160 = 32:9
-       OBS / YouTube = 3840 x 2160 = 16:9
+       Camera source: 7680 x 2160 = 32:9
+       YouTube stream: 3840 x 2160 = 16:9
 
-       We display a 32:9 viewport and crop the black
-       portions of the 16:9 YouTube stream.
+       The YouTube player is made twice as tall as the
+       visible 32:9 window and vertically centered.
+
+       This hides the black area above and below the
+       panoramic camera picture.
     ====================================================== */
 
     .video-viewport {
@@ -351,33 +356,64 @@
     .quality-note {
       width: 100%;
 
-      margin-top: 8px;
+      margin-top: 10px;
 
-      padding: 11px 14px;
+      padding: 14px 18px;
 
-      background: #11161a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      border: 1px solid #30383d;
+      gap: 10px;
+
+      background: #151c21;
+
+      border: 1px solid #46535c;
 
       border-radius: 6px;
 
-      color: #c8d0d5;
+      color: #e6ebee;
 
-      font-size: 11px;
+      font-size: 13px;
+      font-weight: 500;
 
       line-height: 1.5;
 
       text-align: center;
     }
 
-    .quality-note strong {
+    .quality-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 25px;
+      height: 25px;
+
+      min-width: 25px;
+
+      border: 1px solid #697780;
+
+      border-radius: 50%;
+
       color: #ffffff;
+
+      font-size: 16px;
+      font-weight: bold;
     }
 
-    .quality-note .gear {
-      font-size: 14px;
+    .quality-note strong {
+      color: #ffffff;
 
-      margin-right: 3px;
+      font-weight: 800;
+    }
+
+    .quality-4k {
+      white-space: nowrap;
+
+      font-weight: 800;
+
+      color: #ffffff;
     }
 
 
@@ -497,9 +533,20 @@
       }
 
       .quality-note {
-        font-size: 10px;
+        padding: 12px;
 
-        padding: 10px;
+        font-size: 11px;
+
+        align-items: flex-start;
+      }
+
+      .quality-icon {
+        width: 22px;
+        height: 22px;
+
+        min-width: 22px;
+
+        font-size: 13px;
       }
 
       .info-strip {
@@ -517,6 +564,27 @@
 
       .cards {
         grid-template-columns: 1fr;
+      }
+
+    }
+
+
+    @media (max-width: 500px) {
+
+      .status-row {
+        align-items: flex-start;
+      }
+
+      .controls-row {
+        align-items: flex-start;
+      }
+
+      .controls {
+        flex-wrap: wrap;
+      }
+
+      .quality-note {
+        text-align: left;
       }
 
     }
@@ -564,14 +632,14 @@
 
 
   <!-- ===================================================
-       PAGE
+       MAIN PAGE
   ==================================================== -->
 
   <main class="page">
 
 
     <!-- =================================================
-         STATUS
+         LIVE STATUS
     ================================================== -->
 
     <div class="status-row">
@@ -604,7 +672,7 @@
 
 
     <!-- =================================================
-         CONTROLS
+         CAMERA CONTROLS
     ================================================== -->
 
     <div class="controls-row">
@@ -615,6 +683,7 @@
 
         <button
           class="control-button"
+          type="button"
           onclick="zoomOut()">
           −
         </button>
@@ -627,6 +696,7 @@
 
         <button
           class="control-button"
+          type="button"
           onclick="zoomIn()">
           +
         </button>
@@ -634,6 +704,7 @@
 
         <button
           class="control-button"
+          type="button"
           onclick="moveLeft()">
           ←
         </button>
@@ -641,6 +712,7 @@
 
         <button
           class="control-button"
+          type="button"
           onclick="moveUp()">
           ↑
         </button>
@@ -648,6 +720,7 @@
 
         <button
           class="control-button"
+          type="button"
           onclick="moveDown()">
           ↓
         </button>
@@ -655,6 +728,7 @@
 
         <button
           class="control-button"
+          type="button"
           onclick="moveRight()">
           →
         </button>
@@ -662,6 +736,7 @@
 
         <button
           class="control-button"
+          type="button"
           onclick="resetView()">
           Reset
         </button>
@@ -676,11 +751,14 @@
 
 
 
+      <!-- PRESET VIEW BUTTONS -->
+
       <div class="controls">
 
 
         <button
           class="control-button"
+          type="button"
           onclick="setView('downtown')">
           Downtown
         </button>
@@ -688,6 +766,7 @@
 
         <button
           class="control-button"
+          type="button"
           onclick="setView('centre')">
           Centre
         </button>
@@ -695,6 +774,7 @@
 
         <button
           class="control-button"
+          type="button"
           onclick="setView('west')">
           West
         </button>
@@ -713,6 +793,8 @@
 
     <section class="video-card">
 
+
+      <!-- TITLE BAR -->
 
       <div class="video-titlebar">
 
@@ -739,7 +821,9 @@
 
 
 
-      <!-- PANORAMIC PLAYER -->
+      <!-- =================================================
+           PANORAMIC YOUTUBE PLAYER
+      ================================================== -->
 
       <div
         id="videoViewport"
@@ -779,28 +863,55 @@
 
 
     <!-- =================================================
-         4K QUALITY NOTICE
-
-         THIS APPEARS DIRECTLY UNDER THE VIDEO
+         VIDEO QUALITY INSTRUCTION
     ================================================== -->
 
     <div class="quality-note">
 
-      <span class="gear">
-        ⚙️
+
+      <!--
+        Using a CSS/text gear container instead of relying
+        only on an emoji makes this much easier to see.
+      -->
+
+      <span
+        class="quality-icon"
+        aria-hidden="true">
+        ⚙
       </span>
 
-      <strong>Want the clearest picture?</strong>
 
-      YouTube may automatically start this stream at 720p.
+      <div>
 
-      Click
+        <strong>
+          BETTER PICTURE QUALITY:
+        </strong>
 
-      <strong>
-        Settings ⚙️ → Quality → 2160p (4K)
-      </strong>
+        YouTube may automatically start the live camera
+        at 720p.
 
-      for the best available picture.
+        On the video player click
+
+        <strong>
+          Settings ⚙
+        </strong>
+
+        →
+
+        <strong>
+          Quality
+        </strong>
+
+        →
+
+        <span class="quality-4k">
+          2160p (4K)
+        </span>
+
+        for the clearest picture.
+
+      </div>
+
 
     </div>
 
@@ -875,7 +986,7 @@
 
 
     <!-- =================================================
-         INFORMATION CARDS
+         DESCRIPTION CARDS
     ================================================== -->
 
     <section class="cards">
@@ -938,9 +1049,8 @@
 
 
     /* ===================================================
-       PANORAMA CONTROLS
+       CAMERA VIEW VARIABLES
     ==================================================== */
-
 
     let zoom = 1;
 
@@ -959,6 +1069,10 @@
 
 
 
+    /* ===================================================
+       PAGE ELEMENTS
+    ==================================================== */
+
     const videoTransform =
       document.getElementById("videoTransform");
 
@@ -973,7 +1087,7 @@
 
 
     /* ===================================================
-       UPDATE VIEW
+       UPDATE CAMERA VIEW
     ==================================================== */
 
     function updateView() {
@@ -1159,14 +1273,13 @@
 
 
     /* ===================================================
-       RESET
+       RESET VIEW
     ==================================================== */
 
     function resetView() {
 
 
       zoom = 1;
-
 
       positionX = 0;
 
@@ -1185,14 +1298,13 @@
 
 
     /* ===================================================
-       PRESET VIEWS
+       PRESET CAMERA VIEWS
     ==================================================== */
 
     function setView(view) {
 
 
       zoom = 1.5;
-
 
       positionY = 0;
 
@@ -1211,7 +1323,6 @@
       }
 
 
-
       else if (view === "centre") {
 
 
@@ -1223,7 +1334,6 @@
 
 
       }
-
 
 
       else if (view === "west") {
