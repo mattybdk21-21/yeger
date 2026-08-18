@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>YEGer | Edmonton Live Camera</title>
 
-  <meta name="description"
-        content="Live panoramic view of Edmonton, Alberta, Canada. Watch Edmonton's skyline, weather, clouds, sunsets and changing seasons live from downtown.">
+  <meta
+    name="description"
+    content="Live panoramic view of Edmonton, Alberta, Canada. Watch Edmonton's skyline, weather, clouds, sunsets and changing seasons live."
+  >
+
 
   <style>
 
@@ -25,10 +32,13 @@
     body {
       margin: 0;
       padding: 0;
+
       width: 100%;
       min-height: 100%;
+
       background: #080c0f;
       color: #ffffff;
+
       font-family: Arial, Helvetica, sans-serif;
     }
 
@@ -48,7 +58,9 @@
     .site-header {
       width: 100%;
       height: 56px;
+
       background: #080c0f;
+
       border-bottom: 1px solid #252c31;
     }
 
@@ -56,6 +68,7 @@
       width: 92%;
       max-width: 1600px;
       height: 100%;
+
       margin: auto;
 
       display: flex;
@@ -66,23 +79,28 @@
     .brand {
       display: flex;
       align-items: center;
+
       gap: 10px;
     }
 
     .brand-name {
       font-size: 22px;
       font-weight: 800;
+
       letter-spacing: 1px;
     }
 
     .brand-subtitle {
       color: #6f7980;
+
       font-size: 9px;
+
       text-transform: uppercase;
     }
 
     .header-live {
       color: #b5bdc2;
+
       font-size: 10px;
     }
 
@@ -94,6 +112,7 @@
     .page {
       width: 92%;
       max-width: 1600px;
+
       margin: 18px auto 40px;
     }
 
@@ -108,12 +127,14 @@
       align-items: center;
 
       gap: 20px;
+
       margin-bottom: 10px;
     }
 
     .live-status {
       display: flex;
       align-items: center;
+
       gap: 7px;
 
       font-size: 11px;
@@ -123,23 +144,27 @@
     .live-dot {
       width: 7px;
       height: 7px;
+
       border-radius: 50%;
+
       background: #ff2448;
     }
 
     .weather {
       color: #9aa3a9;
+
       font-size: 10px;
     }
 
     .weather strong {
       color: #ffffff;
+
       font-size: 13px;
     }
 
 
     /* =====================================================
-       CONTROL BAR
+       CONTROLS
     ====================================================== */
 
     .controls-row {
@@ -148,6 +173,7 @@
       align-items: center;
 
       gap: 12px;
+
       flex-wrap: wrap;
 
       margin-bottom: 10px;
@@ -156,6 +182,7 @@
     .controls {
       display: flex;
       align-items: center;
+
       gap: 6px;
     }
 
@@ -166,9 +193,11 @@
       padding: 0 9px;
 
       color: #ffffff;
+
       background: #11171b;
 
       border: 1px solid #394249;
+
       border-radius: 5px;
 
       font-size: 10px;
@@ -183,9 +212,11 @@
 
     #zoomValue {
       min-width: 42px;
+
       text-align: center;
 
       color: #b9c1c6;
+
       font-size: 10px;
     }
 
@@ -193,6 +224,7 @@
       margin-left: 6px;
 
       color: #626d74;
+
       font-size: 9px;
     }
 
@@ -207,6 +239,7 @@
       background: #000000;
 
       border: 1px solid #30383d;
+
       border-radius: 6px;
 
       overflow: hidden;
@@ -224,6 +257,7 @@
 
       display: flex;
       align-items: center;
+
       gap: 10px;
 
       background: #050708;
@@ -254,6 +288,7 @@
       margin-top: 2px;
 
       color: #9da6ab;
+
       font-size: 8px;
     }
 
@@ -261,35 +296,24 @@
     /* =====================================================
        PANORAMIC VIDEO WINDOW
 
-       Website display = 32:9
+       Reolink source = 7680 x 2160 = 32:9
+       OBS / YouTube = 3840 x 2160 = 16:9
 
-       YouTube video itself = 16:9.
-
-       The YouTube player is made twice as tall and moved
-       upward by 50%. This crops the black areas that OBS
-       added above and below the camera panorama.
+       We display a 32:9 viewport and crop the black
+       portions of the 16:9 YouTube stream.
     ====================================================== */
 
     .video-viewport {
       position: relative;
 
       width: 100%;
+
       aspect-ratio: 32 / 9;
 
       background: #000000;
 
       overflow: hidden;
     }
-
-
-    /*
-       IMPORTANT:
-
-       32:9 is exactly half the height of 16:9.
-
-       Therefore the YouTube iframe must occupy twice
-       the viewport height.
-    */
 
     .video-transform {
       position: absolute;
@@ -302,7 +326,6 @@
 
       transform-origin: center center;
     }
-
 
     #youtubePlayer {
       position: absolute;
@@ -322,11 +345,49 @@
 
 
     /* =====================================================
+       QUALITY NOTICE
+    ====================================================== */
+
+    .quality-note {
+      width: 100%;
+
+      margin-top: 8px;
+
+      padding: 11px 14px;
+
+      background: #11161a;
+
+      border: 1px solid #30383d;
+
+      border-radius: 6px;
+
+      color: #c8d0d5;
+
+      font-size: 11px;
+
+      line-height: 1.5;
+
+      text-align: center;
+    }
+
+    .quality-note strong {
+      color: #ffffff;
+    }
+
+    .quality-note .gear {
+      font-size: 14px;
+
+      margin-right: 3px;
+    }
+
+
+    /* =====================================================
        INFORMATION STRIP
     ====================================================== */
 
     .info-strip {
       display: grid;
+
       grid-template-columns: repeat(4, 1fr);
 
       margin-top: 10px;
@@ -334,6 +395,7 @@
       background: #11161a;
 
       border: 1px solid #30383d;
+
       border-radius: 6px;
 
       overflow: hidden;
@@ -357,6 +419,7 @@
       color: #69747b;
 
       font-size: 8px;
+
       text-transform: uppercase;
     }
 
@@ -364,6 +427,7 @@
       color: #ffffff;
 
       font-size: 11px;
+
       font-weight: 700;
     }
 
@@ -374,6 +438,7 @@
 
     .cards {
       display: grid;
+
       grid-template-columns: 2fr 1fr;
 
       gap: 12px;
@@ -387,6 +452,7 @@
       background: #11161a;
 
       border: 1px solid #30383d;
+
       border-radius: 6px;
     }
 
@@ -402,6 +468,7 @@
       color: #a9b1b6;
 
       font-size: 11px;
+
       line-height: 1.6;
     }
 
@@ -429,6 +496,12 @@
         display: none;
       }
 
+      .quality-note {
+        font-size: 10px;
+
+        padding: 10px;
+      }
+
       .info-strip {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -449,7 +522,9 @@
     }
 
   </style>
+
 </head>
+
 
 
 <body>
@@ -462,6 +537,7 @@
   <header class="site-header">
 
     <div class="header-inner">
+
 
       <div class="brand">
 
@@ -480,6 +556,7 @@
         Live
       </div>
 
+
     </div>
 
   </header>
@@ -493,9 +570,12 @@
   <main class="page">
 
 
-    <!-- STATUS -->
+    <!-- =================================================
+         STATUS
+    ================================================== -->
 
     <div class="status-row">
+
 
       <div class="live-status">
 
@@ -517,6 +597,7 @@
         &nbsp; Clear
 
       </div>
+
 
     </div>
 
@@ -658,9 +739,7 @@
 
 
 
-      <!-- ===============================================
-           PANORAMIC VIEWPORT
-      ================================================ -->
+      <!-- PANORAMIC PLAYER -->
 
       <div
         id="videoViewport"
@@ -673,6 +752,7 @@
 
 
           <iframe
+
             id="youtubePlayer"
 
             src="https://www.youtube.com/embed/-8jcjjrf-mg?autoplay=1&mute=1&playsinline=1&controls=1&rel=0"
@@ -684,6 +764,7 @@
             referrerpolicy="strict-origin-when-cross-origin"
 
             allowfullscreen>
+
           </iframe>
 
 
@@ -694,6 +775,34 @@
 
 
     </section>
+
+
+
+    <!-- =================================================
+         4K QUALITY NOTICE
+
+         THIS APPEARS DIRECTLY UNDER THE VIDEO
+    ================================================== -->
+
+    <div class="quality-note">
+
+      <span class="gear">
+        ⚙️
+      </span>
+
+      <strong>Want the clearest picture?</strong>
+
+      YouTube may automatically start this stream at 720p.
+
+      Click
+
+      <strong>
+        Settings ⚙️ → Quality → 2160p (4K)
+      </strong>
+
+      for the best available picture.
+
+    </div>
 
 
 
@@ -766,7 +875,7 @@
 
 
     <!-- =================================================
-         CARDS
+         INFORMATION CARDS
     ================================================== -->
 
     <section class="cards">
@@ -774,16 +883,21 @@
 
       <article class="card">
 
+
         <h2>
           Edmonton Live
         </h2>
 
+
         <p>
+
           YEGer provides a live view across Edmonton —
           from changing weather and dramatic prairie skies
           to sunsets, storms, construction and the everyday
           movement of the city.
+
         </p>
+
 
       </article>
 
@@ -791,15 +905,20 @@
 
       <article class="card">
 
+
         <h2>
           Sunsets
         </h2>
 
+
         <p>
+
           Facing west gives YEGer a front-row view of
           Edmonton's evening skies. Sunset highlights
           and timelapses will appear here.
+
         </p>
+
 
       </article>
 
@@ -817,23 +936,27 @@
 
   <script>
 
-    /*
-     * ---------------------------------------------------
-     * PANORAMA CONTROLS
-     * ---------------------------------------------------
-     */
+
+    /* ===================================================
+       PANORAMA CONTROLS
+    ==================================================== */
+
 
     let zoom = 1;
 
     let positionX = 0;
+
     let positionY = 0;
 
 
     const minZoom = 1;
+
     const maxZoom = 3;
 
     const zoomStep = 0.25;
+
     const moveStep = 50;
+
 
 
     const videoTransform =
@@ -849,155 +972,204 @@
 
 
 
-    /*
-     * ---------------------------------------------------
-     * UPDATE VIEW
-     * ---------------------------------------------------
-     */
+    /* ===================================================
+       UPDATE VIEW
+    ==================================================== */
 
     function updateView() {
 
-      /*
-       * The DIV is already positioned at:
-       *
-       * top: -50%
-       * height: 200%
-       *
-       * The transform below handles only user zoom
-       * and movement.
-       */
 
       videoTransform.style.transform =
+
         "translate(" +
+
         positionX +
+
         "px, " +
+
         positionY +
+
         "px) scale(" +
+
         zoom +
+
         ")";
 
 
       zoomValue.textContent =
+
         Math.round(zoom * 100) + "%";
+
 
     }
 
 
 
-    /*
-     * ---------------------------------------------------
-     * ZOOM
-     * ---------------------------------------------------
-     */
+    /* ===================================================
+       ZOOM IN
+    ==================================================== */
 
     function zoomIn() {
 
+
       zoom = Math.min(
+
         maxZoom,
+
         zoom + zoomStep
+
       );
 
+
       updateView();
+
 
     }
 
 
 
+    /* ===================================================
+       ZOOM OUT
+    ==================================================== */
+
     function zoomOut() {
 
+
       zoom = Math.max(
+
         minZoom,
+
         zoom - zoomStep
+
       );
 
 
       if (zoom === 1) {
 
+
         positionX = 0;
+
         positionY = 0;
+
 
       }
 
 
       updateView();
 
+
     }
 
 
 
-    /*
-     * ---------------------------------------------------
-     * MOVEMENT
-     * ---------------------------------------------------
-     */
+    /* ===================================================
+       MOVE LEFT
+    ==================================================== */
 
     function moveLeft() {
 
+
       if (zoom <= 1) {
+
         return;
+
       }
+
 
       positionX -= moveStep;
 
+
       updateView();
+
 
     }
 
 
+
+    /* ===================================================
+       MOVE RIGHT
+    ==================================================== */
 
     function moveRight() {
 
+
       if (zoom <= 1) {
+
         return;
+
       }
+
 
       positionX += moveStep;
 
+
       updateView();
+
 
     }
 
 
+
+    /* ===================================================
+       MOVE UP
+    ==================================================== */
 
     function moveUp() {
 
+
       if (zoom <= 1) {
+
         return;
+
       }
+
 
       positionY -= moveStep;
 
+
       updateView();
+
 
     }
 
 
+
+    /* ===================================================
+       MOVE DOWN
+    ==================================================== */
 
     function moveDown() {
 
+
       if (zoom <= 1) {
+
         return;
+
       }
+
 
       positionY += moveStep;
 
+
       updateView();
+
 
     }
 
 
 
-    /*
-     * ---------------------------------------------------
-     * RESET
-     * ---------------------------------------------------
-     */
+    /* ===================================================
+       RESET
+    ==================================================== */
 
     function resetView() {
 
+
       zoom = 1;
 
+
       positionX = 0;
+
       positionY = 0;
 
 
@@ -1007,65 +1179,76 @@
 
       updateView();
 
+
     }
 
 
 
-    /*
-     * ---------------------------------------------------
-     * PRESET VIEWS
-     * ---------------------------------------------------
-     */
+    /* ===================================================
+       PRESET VIEWS
+    ==================================================== */
 
     function setView(view) {
 
 
       zoom = 1.5;
 
+
       positionY = 0;
+
 
 
       if (view === "downtown") {
 
+
         positionX = 300;
+
 
         directionValue.textContent =
           "Downtown";
 
+
       }
+
 
 
       else if (view === "centre") {
 
+
         positionX = 0;
+
 
         directionValue.textContent =
           "Centre";
 
+
       }
+
 
 
       else if (view === "west") {
 
+
         positionX = -300;
+
 
         directionValue.textContent =
           "West";
+
 
       }
 
 
       updateView();
 
+
     }
 
 
 
-    /*
-     * ---------------------------------------------------
-     * INITIALIZE
-     * ---------------------------------------------------
-     */
+    /* ===================================================
+       INITIALIZE
+    ==================================================== */
 
     updateView();
 
@@ -1074,4 +1257,5 @@
 
 
 </body>
+
 </html>
