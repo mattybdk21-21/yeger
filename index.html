@@ -1,1055 +1,868 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
 
-<title>YEGer — Edmonton Live</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<meta name="description"
-content="Watch Edmonton live with skyline views, current weather and sunset information from YEGer.">
+  <title>YEGer | Edmonton Live Camera</title>
 
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+  <meta
+    name="description"
+    content="Live panoramic view of Edmonton, Alberta, Canada. Watch Edmonton's skyline, weather, clouds, sunsets and changing seasons live from downtown."
+  >
 
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#0b0d10;
-    color:#fff;
-    line-height:1.5;
-}
-
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-/* HEADER */
-
-header{
-    height:58px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 2.2%;
-    background:rgba(11,13,16,.97);
-    border-bottom:1px solid #222;
-    position:sticky;
-    top:0;
-    z-index:100;
-}
-
-.logo{
-    font-size:28px;
-    font-weight:800;
-    letter-spacing:3px;
-}
-
-.logo span{
-    font-size:11px;
-    font-weight:300;
-    letter-spacing:1px;
-    color:#999;
-    margin-left:8px;
-}
-
-nav{
-    display:flex;
-    gap:24px;
-    color:#bbb;
-    font-size:13px;
-}
-
-nav a:hover{
-    color:#fff;
-}
-
-/* MAIN */
-
-main{
-    width:96%;
-    max-width:1900px;
-    margin:auto;
-}
-
-/* LIVE HEADER */
-
-.hero{
-    padding:8px 0;
-}
-
-.hero-line{
-    min-height:42px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-}
-
-.live-title{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    font-size:13px;
-    font-weight:700;
-}
-
-.live-dot{
-    width:8px;
-    height:8px;
-    background:#ff2b2b;
-    border-radius:50%;
-    animation:pulse 1.8s infinite;
-}
-
-@keyframes pulse{
-    0%,100%{opacity:1;}
-    50%{opacity:.3;}
-}
-
-/* WEATHER */
-
-.weather-inline{
-    display:flex;
-    align-items:center;
-    justify-content:flex-end;
-    flex-wrap:wrap;
-    gap:18px;
-    color:#999;
-    font-size:12px;
-}
-
-.weather-group{
-    display:flex;
-    align-items:baseline;
-    gap:5px;
-}
-
-.weather-label{
-    color:#777;
-    font-size:9px;
-    letter-spacing:.8px;
-    text-transform:uppercase;
-}
-
-#temperature{
-    color:#fff;
-    font-size:18px;
-    font-weight:700;
-}
-
-#weather-condition{
-    color:#aaa;
-}
-
-.weather-inline strong{
-    color:#fff;
-}
-
-/* VIDEO CONTROLS */
-
-.video-toolbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin-bottom:8px;
-    flex-wrap:wrap;
-}
-
-.toolbar-left,
-.toolbar-right{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    flex-wrap:wrap;
-}
-
-.zoom-btn,
-.preset-btn{
-    height:34px;
-    border:1px solid #353a40;
-    border-radius:8px;
-    background:#171a1f;
-    color:#fff;
-    cursor:pointer;
-    padding:0 12px;
-    font-size:13px;
-}
-
-.zoom-btn:hover,
-.preset-btn:hover{
-    background:#252a30;
-}
-
-.zoom-btn.icon{
-    min-width:38px;
-    font-size:18px;
-}
-
-.zoom-level{
-    min-width:55px;
-    text-align:center;
-    color:#aaa;
-    font-size:12px;
-}
-
-.drag-hint{
-    color:#666;
-    font-size:11px;
-    margin-left:5px;
-}
-
-/* VIDEO */
-
-.video-container{
-    position:relative;
-    width:100%;
-    aspect-ratio:16/9;
-    background:#000;
-    overflow:hidden;
-    border:1px solid #292d32;
-    border-radius:12px;
-    user-select:none;
-}
-
-.video-pan-layer{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    transform:translate3d(0,0,0);
-    will-change:transform;
-}
-
-.video-zoom-layer{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    transform:scale(1);
-    transform-origin:center center;
-    will-change:transform;
-}
-
-.video-zoom-layer iframe{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    border:0;
-    display:block;
-}
-
-.drag-surface{
-    position:absolute;
-    inset:0;
-    z-index:10;
-    pointer-events:none;
-    cursor:grab;
-    touch-action:none;
-}
-
-.drag-surface.active{
-    pointer-events:auto;
-}
-
-.drag-surface.dragging{
-    cursor:grabbing;
-}
-
-/* INFO */
-
-.info-bar{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:1px;
-    margin-top:12px;
-    background:#25282d;
-    border:1px solid #25282d;
-    border-radius:10px;
-    overflow:hidden;
-}
-
-.info-box{
-    background:#121519;
-    padding:14px 18px;
-}
-
-.info-label{
-    color:#777;
-    font-size:9px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    margin-bottom:3px;
-}
-
-.info-value{
-    font-size:17px;
-    font-weight:600;
-}
-
-/* CONTENT */
-
-.content-grid{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:20px;
-    margin:25px 0 40px;
-}
-
-.card{
-    background:#121519;
-    border:1px solid #25282d;
-    border-radius:12px;
-    padding:24px;
-}
-
-.card h2{
-    font-size:22px;
-    margin-bottom:10px;
-}
-
-.card p{
-    color:#aaa;
-}
-
-.location{
-    margin-top:18px;
-    padding-top:18px;
-    border-top:1px solid #26292e;
-    color:#777;
-    font-size:13px;
-}
-
-footer{
-    border-top:1px solid #222;
-    text-align:center;
-    color:#666;
-    font-size:12px;
-    padding:28px 20px;
-}
-
-@media(max-width:950px){
-    .hero-line{
-        flex-direction:column;
-        align-items:flex-start;
+  <style>
+    * {
+      box-sizing: border-box;
     }
 
-    .weather-inline{
-        justify-content:flex-start;
-    }
-}
-
-@media(max-width:700px){
-
-    header{
-        padding:0 4%;
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0b0f12;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-    .logo{
-        font-size:22px;
+    body {
+      min-height: 100vh;
     }
 
-    .logo span{
-        display:none;
+    /* =========================================
+       HEADER
+    ========================================= */
+
+    header {
+      width: 100%;
+      border-bottom: 1px solid #252b30;
+      background: #0b0f12;
     }
 
-    nav{
-        gap:11px;
-        font-size:10px;
+    .header-inner {
+      width: min(1400px, calc(100% - 32px));
+      margin: 0 auto;
+      height: 54px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .toolbar-left,
-    .toolbar-right{
-        width:100%;
-        justify-content:center;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .drag-hint{
-        display:none;
+    .brand-name {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
     }
 
-    .info-bar{
-        grid-template-columns:repeat(2,1fr);
+    .brand-subtitle {
+      color: #78828a;
+      font-size: 10px;
+      text-transform: uppercase;
     }
 
-    .content-grid{
-        grid-template-columns:1fr;
+    .header-right {
+      font-size: 11px;
+      color: #aab2b8;
     }
-}
-</style>
+
+    /* =========================================
+       PAGE
+    ========================================= */
+
+    main {
+      width: min(1400px, calc(100% - 32px));
+      margin: 18px auto 40px;
+    }
+
+    /* =========================================
+       TOP STATUS
+    ========================================= */
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 12px;
+    }
+
+    .live-status {
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff2448;
+      display: inline-block;
+    }
+
+    .weather {
+      font-size: 11px;
+      color: #aab2b8;
+      text-align: right;
+    }
+
+    .weather strong {
+      color: #ffffff;
+      font-size: 14px;
+    }
+
+    /* =========================================
+       CONTROLS
+    ========================================= */
+
+    .controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .zoom-controls,
+    .view-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .control-button {
+      appearance: none;
+      border: 1px solid #3b444b;
+      background: #11171b;
+      color: #ffffff;
+      border-radius: 5px;
+      min-width: 34px;
+      height: 30px;
+      padding: 0 9px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .control-button:hover {
+      background: #1b242a;
+    }
+
+    .zoom-label {
+      color: #b2bbc1;
+      font-size: 11px;
+      padding: 0 4px;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .hint {
+      color: #626c73;
+      font-size: 10px;
+      margin-left: 6px;
+    }
+
+    /* =========================================
+       VIDEO CARD
+    ========================================= */
+
+    .video-card {
+      border: 1px solid #30383e;
+      border-radius: 7px;
+      overflow: hidden;
+      background: #000000;
+    }
+
+    .video-titlebar {
+      height: 55px;
+      padding: 11px 14px;
+      background: #050708;
+
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #a936d1;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    .video-title {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .video-owner {
+      margin-top: 3px;
+      color: #9ca5ab;
+      font-size: 9px;
+    }
+
+    /* =========================================
+       YOUTUBE PLAYER
+    ========================================= */
+
+    .player-window {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000000;
+      overflow: hidden;
+    }
+
+    .player-transform {
+      position: absolute;
+      inset: 0;
+
+      transform-origin: center center;
+
+      transition:
+        transform 0.15s ease,
+        translate 0.15s ease;
+    }
+
+    #yeger-live-player {
+      position: absolute;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      border: 0;
+      display: block;
+
+      background: #000000;
+    }
+
+    /* =========================================
+       INFORMATION STRIP
+    ========================================= */
+
+    .info-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+
+      border: 1px solid #30383e;
+      border-radius: 7px;
+
+      margin-top: 12px;
+
+      overflow: hidden;
+      background: #11161a;
+    }
+
+    .info-item {
+      padding: 12px 14px;
+      min-height: 57px;
+      border-right: 1px solid #30383e;
+    }
+
+    .info-item:last-child {
+      border-right: 0;
+    }
+
+    .info-label {
+      color: #66727a;
+      font-size: 8px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .info-value {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* =========================================
+       CARDS
+    ========================================= */
+
+    .cards {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .card {
+      border: 1px solid #30383e;
+      background: #11161a;
+      border-radius: 7px;
+      padding: 18px;
+    }
+
+    .card h2 {
+      margin: 0 0 9px;
+      font-size: 16px;
+    }
+
+    .card p {
+      margin: 0;
+      color: #aab2b8;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width: 800px) {
+
+      .header-inner,
+      main {
+        width: calc(100% - 20px);
+      }
+
+      .brand-subtitle {
+        display: none;
+      }
+
+      .status-row {
+        align-items: flex-start;
+      }
+
+      .weather {
+        font-size: 9px;
+      }
+
+      .controls-row {
+        align-items: flex-start;
+      }
+
+      .hint {
+        display: none;
+      }
+
+      .info-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .info-item:nth-child(2) {
+        border-right: 0;
+      }
+
+      .info-item:nth-child(-n+2) {
+        border-bottom: 1px solid #30383e;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
+  <div class="header-inner">
 
-<div class="logo">
-YEGer
-<span>EDMONTON LIVE</span>
-</div>
+    <div class="brand">
+      <div class="brand-name">YEGer</div>
+      <div class="brand-subtitle">Edmonton Live</div>
+    </div>
 
-<nav>
-<a href="#live">Live</a>
-<a href="#about">About</a>
-<a href="#sunsets">Sunsets</a>
-</nav>
+    <div class="header-right">
+      Live
+    </div>
 
+  </div>
 </header>
+
 
 <main>
 
-<section class="hero" id="live">
+  <!-- STATUS -->
 
-<div class="hero-line">
+  <div class="status-row">
 
-<div class="live-title">
-<span class="live-dot"></span>
-LIVE FROM EDMONTON — YEGer
-</div>
+    <div class="live-status">
+      <span class="live-dot"></span>
+      LIVE FROM EDMONTON — YEGer
+    </div>
 
-<div class="weather-inline">
+    <div class="weather">
+      EDMONTON
+      <strong>21°C</strong>
+      &nbsp; Clear
+    </div>
 
-<div class="weather-group">
-<span class="weather-label">Edmonton</span>
-<span id="temperature">--°C</span>
-<span id="weather-condition">Loading...</span>
-</div>
-
-<div class="weather-group">
-<span class="weather-label">Sunrise</span>
-<strong id="sunrise">--:--</strong>
-</div>
-
-<div class="weather-group">
-<span class="weather-label">Sunset</span>
-<strong id="sunset">--:--</strong>
-</div>
-
-</div>
-</div>
-</section>
+  </div>
 
 
-<section class="video-section">
+  <!-- CONTROLS -->
 
-<div class="video-toolbar">
+  <div class="controls-row">
 
-<div class="toolbar-left">
+    <div class="zoom-controls">
 
-<button id="zoomOut" class="zoom-btn icon">−</button>
+      <button
+        class="control-button"
+        onclick="zoomOut()"
+        title="Zoom out"
+      >
+        −
+      </button>
 
-<span id="zoomLevel" class="zoom-level">
-100%
-</span>
+      <span
+        id="zoomValue"
+        class="zoom-label"
+      >
+        100%
+      </span>
 
-<button id="zoomIn" class="zoom-btn icon">+</button>
+      <button
+        class="control-button"
+        onclick="zoomIn()"
+        title="Zoom in"
+      >
+        +
+      </button>
 
-<button id="panLeft" class="zoom-btn icon">←</button>
+      <button
+        class="control-button"
+        onclick="moveLeft()"
+        title="Move left"
+      >
+        ←
+      </button>
 
-<button id="panUp" class="zoom-btn icon">↑</button>
+      <button
+        class="control-button"
+        onclick="moveUp()"
+        title="Move up"
+      >
+        ↑
+      </button>
 
-<button id="panDown" class="zoom-btn icon">↓</button>
+      <button
+        class="control-button"
+        onclick="moveDown()"
+        title="Move down"
+      >
+        ↓
+      </button>
 
-<button id="panRight" class="zoom-btn icon">→</button>
+      <button
+        class="control-button"
+        onclick="moveRight()"
+        title="Move right"
+      >
+        →
+      </button>
 
-<button id="zoomReset" class="zoom-btn">
-Reset
-</button>
+      <button
+        class="control-button"
+        onclick="resetView()"
+      >
+        Reset
+      </button>
 
-<span class="drag-hint">
-Zoom in, then drag the image
-</span>
+      <span class="hint">
+        Zoom in, then drag the image
+      </span>
 
-</div>
-
-
-<div class="toolbar-right">
-
-<button id="presetDowntown" class="preset-btn">
-Downtown
-</button>
-
-<button id="presetCentre" class="preset-btn">
-Centre
-</button>
-
-<button id="presetWest" class="preset-btn">
-West
-</button>
-
-</div>
-</div>
-
-
-<div class="video-container" id="videoContainer">
-
-<div class="video-pan-layer" id="videoPanLayer">
-
-<div class="video-zoom-layer" id="videoZoomLayer">
-
-<!-- CURRENT YOUTUBE LIVE STREAM -->
-<iframe
-  src="https://www.youtube.com/embed/8jcjjrf-mg?autoplay=1&mute=1&playsinline=1&controls=1&rel=0&origin=https%3A%2F%2Fyeger.ca"
-  title="YEGer Edmonton Live"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  referrerpolicy="strict-origin-when-cross-origin"
-  allowfullscreen>
-</iframe>
-
-</div>
-</div>
-
-<div
-id="dragSurface"
-class="drag-surface">
-</div>
-
-</div>
-</section>
+    </div>
 
 
-<section class="info-bar">
+    <div class="view-controls">
 
-<div class="info-box">
-<div class="info-label">Location</div>
-<div class="info-value">Edmonton</div>
-</div>
+      <button
+        class="control-button"
+        onclick="setView('downtown')"
+      >
+        Downtown
+      </button>
 
-<div class="info-box">
-<div class="info-label">View</div>
-<div class="info-value">High-rise</div>
-</div>
+      <button
+        class="control-button"
+        onclick="setView('centre')"
+      >
+        Centre
+      </button>
 
-<div class="info-box">
-<div class="info-label">Direction</div>
-<div class="info-value">West</div>
-</div>
+      <button
+        class="control-button"
+        onclick="setView('west')"
+      >
+        West
+      </button>
 
-<div class="info-box">
-<div class="info-label">Stream</div>
-<div class="info-value">Live</div>
-</div>
+    </div>
 
-</section>
-
-
-<section class="content-grid">
-
-<article class="card" id="about">
-
-<h2>Edmonton Live</h2>
-
-<p>
-YEGer provides a live view across Edmonton —
-from changing weather and dramatic prairie skies
-to sunsets, storms, construction and the everyday
-movement of the city.
-</p>
-
-<div class="location">
-Edmonton, Alberta, Canada
-</div>
-
-</article>
+  </div>
 
 
-<aside class="card" id="sunsets">
+  <!-- VIDEO -->
 
-<h2>Sunsets</h2>
+  <section class="video-card">
 
-<p>
-Facing west gives YEGer a front-row view of Edmonton's
-evening skies. Sunset highlights and timelapses will
-appear here.
-</p>
+    <div class="video-titlebar">
 
-</aside>
+      <div class="avatar">
+        E
+      </div>
 
-</section>
+      <div>
+        <div class="video-title">
+          Live Edmonton
+        </div>
+
+        <div class="video-owner">
+          Em Mat
+        </div>
+      </div>
+
+    </div>
+
+
+    <div
+      id="playerWindow"
+      class="player-window"
+    >
+
+      <div
+        id="playerTransform"
+        class="player-transform"
+      >
+
+        <iframe
+          id="yeger-live-player"
+
+          src="https://www.youtube.com/embed/8jcjjrf-mg?autoplay=1&mute=1&playsinline=1&controls=1&rel=0&origin=https%3A%2F%2Fyeger.ca"
+
+          title="YEGer Edmonton Live Camera"
+
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+
+          referrerpolicy="strict-origin-when-cross-origin"
+
+          allowfullscreen>
+        </iframe>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- INFORMATION -->
+
+  <section class="info-strip">
+
+    <div class="info-item">
+      <div class="info-label">
+        Location
+      </div>
+
+      <div class="info-value">
+        Edmonton
+      </div>
+    </div>
+
+
+    <div class="info-item">
+      <div class="info-label">
+        View
+      </div>
+
+      <div class="info-value">
+        High-rise
+      </div>
+    </div>
+
+
+    <div class="info-item">
+      <div class="info-label">
+        Direction
+      </div>
+
+      <div
+        id="directionValue"
+        class="info-value"
+      >
+        West
+      </div>
+    </div>
+
+
+    <div class="info-item">
+      <div class="info-label">
+        Stream
+      </div>
+
+      <div class="info-value">
+        Live
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- DESCRIPTION -->
+
+  <section class="cards">
+
+    <article class="card">
+
+      <h2>
+        Edmonton Live
+      </h2>
+
+      <p>
+        YEGer provides a live view across Edmonton — from
+        changing weather and dramatic prairie skies to
+        sunsets, storms, construction and the everyday
+        movement of the city.
+      </p>
+
+    </article>
+
+
+    <article class="card">
+
+      <h2>
+        Sunsets
+      </h2>
+
+      <p>
+        Facing west gives YEGer a front-row view of
+        Edmonton's evening skies. Sunset highlights
+        and timelapses will appear here.
+      </p>
+
+    </article>
+
+  </section>
 
 </main>
 
 
-<footer>
-© 2026 YEGer.ca • Edmonton, Alberta
-</footer>
-
-
 <script>
 
-/* WEATHER */
+  /*
+   * =====================================================
+   * PLAYER VIEW CONTROLS
+   * =====================================================
+   */
 
-const weatherURL =
-"https://api.open-meteo.com/v1/forecast" +
-"?latitude=53.5461" +
-"&longitude=-113.4938" +
-"&current=temperature_2m,weather_code" +
-"&daily=sunrise,sunset" +
-"&temperature_unit=celsius" +
-"&timezone=America%2FEdmonton" +
-"&forecast_days=1";
+  let zoom = 1;
+  let positionX = 0;
+  let positionY = 0;
+
+  const minimumZoom = 1;
+  const maximumZoom = 3;
+  const zoomStep = 0.25;
+  const moveStep = 50;
+
+  const playerTransform =
+    document.getElementById("playerTransform");
+
+  const zoomValue =
+    document.getElementById("zoomValue");
+
+  const directionValue =
+    document.getElementById("directionValue");
 
 
-function formatTime(dateString){
+  function updateTransform() {
 
-    if(!dateString) return "--:--";
+    playerTransform.style.transform =
+      `translate(${positionX}px, ${positionY}px) scale(${zoom})`;
 
-    const date =
-        new Date(dateString);
+    zoomValue.textContent =
+      Math.round(zoom * 100) + "%";
+  }
 
-    return date.toLocaleTimeString(
-        "en-CA",
-        {
-            hour:"numeric",
-            minute:"2-digit",
-            hour12:true,
-            timeZone:"America/Edmonton"
-        }
+
+  function zoomIn() {
+
+    zoom = Math.min(
+      maximumZoom,
+      zoom + zoomStep
     );
-}
 
+    updateTransform();
+  }
 
-function weatherDescription(code){
 
-const descriptions={
+  function zoomOut() {
 
-0:"Clear sky",
-1:"Mainly clear",
-2:"Partly cloudy",
-3:"Overcast",
+    zoom = Math.max(
+      minimumZoom,
+      zoom - zoomStep
+    );
 
-45:"Fog",
-48:"Freezing fog",
+    if (zoom === 1) {
+      positionX = 0;
+      positionY = 0;
+    }
 
-51:"Light drizzle",
-53:"Drizzle",
-55:"Heavy drizzle",
+    updateTransform();
+  }
 
-61:"Light rain",
-63:"Rain",
-65:"Heavy rain",
 
-71:"Light snow",
-73:"Snow",
-75:"Heavy snow",
+  function moveLeft() {
 
-80:"Light rain showers",
-81:"Rain showers",
-82:"Heavy rain showers",
+    if (zoom > 1) {
+      positionX -= moveStep;
+      updateTransform();
+    }
+  }
 
-85:"Light snow showers",
-86:"Heavy snow showers",
 
-95:"Thunderstorm",
-96:"Thunderstorm with hail",
-99:"Severe thunderstorm with hail"
+  function moveRight() {
 
-};
+    if (zoom > 1) {
+      positionX += moveStep;
+      updateTransform();
+    }
+  }
 
-return descriptions[code] ||
-"Current conditions";
 
-}
+  function moveUp() {
 
+    if (zoom > 1) {
+      positionY -= moveStep;
+      updateTransform();
+    }
+  }
 
-async function updateWeather(){
 
-try{
+  function moveDown() {
 
-const response =
-await fetch(
-    weatherURL,
-    {cache:"no-store"}
-);
+    if (zoom > 1) {
+      positionY += moveStep;
+      updateTransform();
+    }
+  }
 
-if(!response.ok)
-    throw new Error("Weather failed");
 
-const data =
-await response.json();
+  function resetView() {
 
+    zoom = 1;
+    positionX = 0;
+    positionY = 0;
 
-const temperature =
-data.current?.temperature_2m;
+    directionValue.textContent = "West";
 
-const weatherCode =
-data.current?.weather_code;
+    updateTransform();
+  }
 
 
-document.getElementById(
-"temperature"
-).textContent =
+  function setView(view) {
 
-Number.isFinite(temperature)
-? `${Math.round(temperature)}°C`
-: "--°C";
+    /*
+     * These presets move around the same panoramic
+     * YouTube image. Adjust the numbers later if you
+     * want different framing.
+     */
 
+    zoom = 1.5;
+    positionY = 0;
 
-document.getElementById(
-"weather-condition"
-).textContent =
-weatherDescription(weatherCode);
+    if (view === "downtown") {
 
+      positionX = 260;
 
-document.getElementById(
-"sunrise"
-).textContent =
-formatTime(
-data.daily?.sunrise?.[0]
-);
+      directionValue.textContent =
+        "Downtown";
 
+    }
 
-document.getElementById(
-"sunset"
-).textContent =
-formatTime(
-data.daily?.sunset?.[0]
-);
+    else if (view === "centre") {
 
-}
+      positionX = 0;
 
-catch(error){
+      directionValue.textContent =
+        "Centre";
 
-console.error(error);
+    }
 
-document.getElementById(
-"weather-condition"
-).textContent =
-"Weather unavailable";
+    else if (view === "west") {
 
-}
+      positionX = -260;
 
-}
+      directionValue.textContent =
+        "West";
 
+    }
 
-updateWeather();
+    updateTransform();
+  }
 
-setInterval(
-updateWeather,
-600000
-);
 
+  /*
+   * =====================================================
+   * MOUSE WHEEL ZOOM
+   * =====================================================
+   */
 
-/* =====================================================
-   ZOOM
-   ===================================================== */
+  const playerWindow =
+    document.getElementById("playerWindow");
 
-const videoContainer =
-document.getElementById("videoContainer");
 
-const panLayer =
-document.getElementById("videoPanLayer");
+  playerWindow.addEventListener(
+    "wheel",
+    function(event) {
 
-const zoomLayer =
-document.getElementById("videoZoomLayer");
+      /*
+       * Holding CTRL while scrolling controls the
+       * YEGer zoom instead of scrolling the page.
+       */
 
-const dragSurface =
-document.getElementById("dragSurface");
+      if (!event.ctrlKey) {
+        return;
+      }
 
-const zoomText =
-document.getElementById("zoomLevel");
+      event.preventDefault();
 
+      if (event.deltaY < 0) {
+        zoomIn();
+      }
+      else {
+        zoomOut();
+      }
 
-const minZoom=1;
-const maxZoom=6;
-const zoomStep=.25;
+    },
+    {
+      passive: false
+    }
+  );
 
-let zoom=1;
-let panX=0;
-let panY=0;
 
-let dragging=false;
+  /*
+   * =====================================================
+   * INITIAL STATE
+   * =====================================================
+   */
 
-let dragStartX=0;
-let dragStartY=0;
-
-let panStartX=0;
-let panStartY=0;
-
-
-function getPanLimits(){
-
-const width =
-videoContainer.clientWidth;
-
-const height =
-videoContainer.clientHeight;
-
-return{
-
-x:(width*(zoom-1))/2,
-y:(height*(zoom-1))/2
-
-};
-
-}
-
-
-function clampPan(){
-
-if(zoom<=1){
-
-panX=0;
-panY=0;
-
-return;
-
-}
-
-const limits =
-getPanLimits();
-
-panX =
-Math.max(
--limits.x,
-Math.min(limits.x,panX)
-);
-
-panY =
-Math.max(
--limits.y,
-Math.min(limits.y,panY)
-);
-
-}
-
-
-function updateVideoTransform(){
-
-clampPan();
-
-zoomLayer.style.transform =
-`scale(${zoom})`;
-
-panLayer.style.transform =
-`translate3d(${panX}px,${panY}px,0)`;
-
-zoomText.textContent =
-Math.round(zoom*100)+"%";
-
-
-if(zoom>1)
-dragSurface.classList.add("active");
-
-else
-dragSurface.classList.remove("active");
-
-}
-
-
-document.getElementById("zoomIn")
-.addEventListener("click",()=>{
-
-zoom =
-Math.min(
-maxZoom,
-zoom+zoomStep
-);
-
-updateVideoTransform();
-
-});
-
-
-document.getElementById("zoomOut")
-.addEventListener("click",()=>{
-
-zoom =
-Math.max(
-minZoom,
-zoom-zoomStep
-);
-
-updateVideoTransform();
-
-});
-
-
-document.getElementById("zoomReset")
-.addEventListener("click",()=>{
-
-zoom=1;
-panX=0;
-panY=0;
-
-updateVideoTransform();
-
-});
-
-
-function panBy(dx,dy){
-
-if(zoom<=1)
-return;
-
-const step =
-Math.max(
-40,
-videoContainer.clientWidth*.05
-);
-
-panX += dx*step;
-panY += dy*step;
-
-updateVideoTransform();
-
-}
-
-
-document.getElementById("panLeft")
-.onclick=()=>panBy(1,0);
-
-document.getElementById("panRight")
-.onclick=()=>panBy(-1,0);
-
-document.getElementById("panUp")
-.onclick=()=>panBy(0,1);
-
-document.getElementById("panDown")
-.onclick=()=>panBy(0,-1);
-
-
-/* PRESETS */
-
-document.getElementById("presetDowntown")
-.onclick=()=>{
-
-zoom=Math.max(zoom,2);
-
-const limits=getPanLimits();
-
-panX=limits.x*.62;
-panY=0;
-
-updateVideoTransform();
-
-};
-
-
-document.getElementById("presetCentre")
-.onclick=()=>{
-
-if(zoom<1.5)
-zoom=1.5;
-
-panX=0;
-panY=0;
-
-updateVideoTransform();
-
-};
-
-
-document.getElementById("presetWest")
-.onclick=()=>{
-
-zoom=Math.max(zoom,2);
-
-const limits=getPanLimits();
-
-panX=-limits.x*.62;
-panY=0;
-
-updateVideoTransform();
-
-};
-
-
-/* DRAG */
-
-dragSurface.addEventListener(
-"pointerdown",
-event=>{
-
-if(zoom<=1)
-return;
-
-dragging=true;
-
-dragStartX=event.clientX;
-dragStartY=event.clientY;
-
-panStartX=panX;
-panStartY=panY;
-
-dragSurface.classList.add("dragging");
-
-dragSurface.setPointerCapture(
-event.pointerId
-);
-
-});
-
-
-dragSurface.addEventListener(
-"pointermove",
-event=>{
-
-if(!dragging)
-return;
-
-panX =
-panStartX +
-(event.clientX-dragStartX);
-
-panY =
-panStartY +
-(event.clientY-dragStartY);
-
-updateVideoTransform();
-
-});
-
-
-function stopDragging(event){
-
-if(!dragging)
-return;
-
-dragging=false;
-
-dragSurface.classList.remove(
-"dragging"
-);
-
-try{
-
-dragSurface.releasePointerCapture(
-event.pointerId
-);
-
-}catch(error){}
-
-}
-
-
-dragSurface.addEventListener(
-"pointerup",
-stopDragging
-);
-
-dragSurface.addEventListener(
-"pointercancel",
-stopDragging
-);
-
-window.addEventListener(
-"resize",
-updateVideoTransform
-);
-
-updateVideoTransform();
+  updateTransform();
 
 </script>
 
