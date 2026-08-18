@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
   <title>YEGer | Edmonton Live Camera</title>
 
-  <meta
-    name="description"
-    content="Live panoramic view of Edmonton, Alberta, Canada. Watch Edmonton's skyline, weather, clouds, sunsets and changing seasons live from downtown."
-  >
+  <meta name="description"
+        content="Live panoramic view of Edmonton, Alberta, Canada. Watch Edmonton's skyline, weather, clouds, sunsets and changing seasons live from downtown.">
 
   <style>
+
+    /* =====================================================
+       RESET
+    ====================================================== */
+
     * {
       box-sizing: border-box;
     }
@@ -24,29 +25,38 @@
     body {
       margin: 0;
       padding: 0;
-      background: #0b0f12;
+      width: 100%;
+      min-height: 100%;
+      background: #080c0f;
       color: #ffffff;
       font-family: Arial, Helvetica, sans-serif;
     }
 
     body {
-      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* =========================================
-       HEADER
-    ========================================= */
+    button {
+      font-family: inherit;
+    }
 
-    header {
+
+    /* =====================================================
+       HEADER
+    ====================================================== */
+
+    .site-header {
       width: 100%;
-      border-bottom: 1px solid #252b30;
-      background: #0b0f12;
+      height: 56px;
+      background: #080c0f;
+      border-bottom: 1px solid #252c31;
     }
 
     .header-inner {
-      width: min(1400px, calc(100% - 32px));
-      margin: 0 auto;
-      height: 54px;
+      width: 92%;
+      max-width: 1600px;
+      height: 100%;
+      margin: auto;
 
       display: flex;
       align-items: center;
@@ -66,274 +76,344 @@
     }
 
     .brand-subtitle {
-      color: #78828a;
-      font-size: 10px;
+      color: #6f7980;
+      font-size: 9px;
       text-transform: uppercase;
     }
 
-    .header-right {
-      font-size: 11px;
-      color: #aab2b8;
+    .header-live {
+      color: #b5bdc2;
+      font-size: 10px;
     }
 
-    /* =========================================
-       PAGE
-    ========================================= */
 
-    main {
-      width: min(1400px, calc(100% - 32px));
+    /* =====================================================
+       MAIN PAGE
+    ====================================================== */
+
+    .page {
+      width: 92%;
+      max-width: 1600px;
       margin: 18px auto 40px;
     }
 
-    /* =========================================
-       TOP STATUS
-    ========================================= */
+
+    /* =====================================================
+       STATUS
+    ====================================================== */
 
     .status-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
       gap: 20px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .live-status {
-      font-size: 12px;
-      font-weight: 700;
       display: flex;
       align-items: center;
       gap: 7px;
+
+      font-size: 11px;
+      font-weight: 700;
     }
 
     .live-dot {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: #ff2448;
-      display: inline-block;
     }
 
     .weather {
-      font-size: 11px;
-      color: #aab2b8;
-      text-align: right;
+      color: #9aa3a9;
+      font-size: 10px;
     }
 
     .weather strong {
       color: #ffffff;
-      font-size: 14px;
+      font-size: 13px;
     }
 
-    /* =========================================
-       CONTROLS
-    ========================================= */
+
+    /* =====================================================
+       CONTROL BAR
+    ====================================================== */
 
     .controls-row {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+
       gap: 12px;
-      margin-bottom: 10px;
       flex-wrap: wrap;
+
+      margin-bottom: 10px;
     }
 
-    .zoom-controls,
-    .view-controls {
+    .controls {
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
     .control-button {
-      appearance: none;
-      border: 1px solid #3b444b;
-      background: #11171b;
-      color: #ffffff;
-      border-radius: 5px;
-      min-width: 34px;
-      height: 30px;
+      height: 29px;
+      min-width: 32px;
+
       padding: 0 9px;
+
+      color: #ffffff;
+      background: #11171b;
+
+      border: 1px solid #394249;
+      border-radius: 5px;
+
+      font-size: 10px;
+      font-weight: 600;
+
       cursor: pointer;
-      font-size: 11px;
     }
 
     .control-button:hover {
-      background: #1b242a;
+      background: #20292e;
     }
 
-    .zoom-label {
-      color: #b2bbc1;
-      font-size: 11px;
-      padding: 0 4px;
-      min-width: 40px;
+    #zoomValue {
+      min-width: 42px;
       text-align: center;
-    }
 
-    .hint {
-      color: #626c73;
+      color: #b9c1c6;
       font-size: 10px;
-      margin-left: 6px;
     }
 
-    /* =========================================
+    .zoom-hint {
+      margin-left: 6px;
+
+      color: #626d74;
+      font-size: 9px;
+    }
+
+
+    /* =====================================================
        VIDEO CARD
-    ========================================= */
+    ====================================================== */
 
     .video-card {
-      border: 1px solid #30383e;
-      border-radius: 7px;
-      overflow: hidden;
+      width: 100%;
+
       background: #000000;
+
+      border: 1px solid #30383d;
+      border-radius: 6px;
+
+      overflow: hidden;
     }
 
+
+    /* =====================================================
+       VIDEO TITLE
+    ====================================================== */
+
     .video-titlebar {
-      height: 55px;
-      padding: 11px 14px;
-      background: #050708;
+      height: 52px;
+
+      padding: 10px 14px;
 
       display: flex;
       align-items: center;
-      gap: 11px;
+      gap: 10px;
+
+      background: #050708;
     }
 
     .avatar {
-      width: 30px;
-      height: 30px;
+      width: 29px;
+      height: 29px;
+
       border-radius: 50%;
-      background: #a936d1;
 
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
 
+      background: #ac38d5;
+
+      font-size: 12px;
       font-weight: bold;
-      font-size: 13px;
     }
 
     .video-title {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
     }
 
     .video-owner {
-      margin-top: 3px;
-      color: #9ca5ab;
-      font-size: 9px;
+      margin-top: 2px;
+
+      color: #9da6ab;
+      font-size: 8px;
     }
 
-    /* =========================================
-       YOUTUBE PLAYER
-    ========================================= */
 
-    .player-window {
+    /* =====================================================
+       PANORAMIC VIDEO WINDOW
+
+       Website display = 32:9
+
+       YouTube video itself = 16:9.
+
+       The YouTube player is made twice as tall and moved
+       upward by 50%. This crops the black areas that OBS
+       added above and below the camera panorama.
+    ====================================================== */
+
+    .video-viewport {
       position: relative;
+
       width: 100%;
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 32 / 9;
+
       background: #000000;
+
       overflow: hidden;
     }
 
-    .player-transform {
+
+    /*
+       IMPORTANT:
+
+       32:9 is exactly half the height of 16:9.
+
+       Therefore the YouTube iframe must occupy twice
+       the viewport height.
+    */
+
+    .video-transform {
       position: absolute;
-      inset: 0;
+
+      width: 100%;
+      height: 200%;
+
+      left: 0;
+      top: -50%;
 
       transform-origin: center center;
-
-      transition:
-        transform 0.15s ease,
-        translate 0.15s ease;
     }
 
-    #yeger-live-player {
+
+    #youtubePlayer {
       position: absolute;
-      inset: 0;
+
+      top: 0;
+      left: 0;
 
       width: 100%;
       height: 100%;
 
       border: 0;
+
       display: block;
 
       background: #000000;
     }
 
-    /* =========================================
+
+    /* =====================================================
        INFORMATION STRIP
-    ========================================= */
+    ====================================================== */
 
     .info-strip {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
 
-      border: 1px solid #30383e;
-      border-radius: 7px;
+      margin-top: 10px;
 
-      margin-top: 12px;
+      background: #11161a;
+
+      border: 1px solid #30383d;
+      border-radius: 6px;
 
       overflow: hidden;
-      background: #11161a;
     }
 
     .info-item {
-      padding: 12px 14px;
       min-height: 57px;
-      border-right: 1px solid #30383e;
+
+      padding: 11px 14px;
+
+      border-right: 1px solid #30383d;
     }
 
     .info-item:last-child {
-      border-right: 0;
+      border-right: none;
     }
 
     .info-label {
-      color: #66727a;
+      margin-bottom: 6px;
+
+      color: #69747b;
+
       font-size: 8px;
       text-transform: uppercase;
-      margin-bottom: 6px;
     }
 
     .info-value {
-      font-size: 12px;
+      color: #ffffff;
+
+      font-size: 11px;
       font-weight: 700;
     }
 
-    /* =========================================
-       CARDS
-    ========================================= */
+
+    /* =====================================================
+       INFORMATION CARDS
+    ====================================================== */
 
     .cards {
       display: grid;
       grid-template-columns: 2fr 1fr;
-      gap: 14px;
-      margin-top: 14px;
+
+      gap: 12px;
+
+      margin-top: 12px;
     }
 
     .card {
-      border: 1px solid #30383e;
+      padding: 16px;
+
       background: #11161a;
-      border-radius: 7px;
-      padding: 18px;
+
+      border: 1px solid #30383d;
+      border-radius: 6px;
     }
 
     .card h2 {
-      margin: 0 0 9px;
-      font-size: 16px;
+      margin: 0 0 8px;
+
+      font-size: 15px;
     }
 
     .card p {
       margin: 0;
-      color: #aab2b8;
-      font-size: 12px;
+
+      color: #a9b1b6;
+
+      font-size: 11px;
       line-height: 1.6;
     }
 
-    /* =========================================
+
+    /* =====================================================
        MOBILE
-    ========================================= */
+    ====================================================== */
 
     @media (max-width: 800px) {
 
       .header-inner,
-      main {
+      .page {
         width: calc(100% - 20px);
       }
 
@@ -341,19 +421,11 @@
         display: none;
       }
 
-      .status-row {
-        align-items: flex-start;
-      }
-
       .weather {
         font-size: 9px;
       }
 
-      .controls-row {
-        align-items: flex-start;
-      }
-
-      .hint {
+      .zoom-hint {
         display: none;
       }
 
@@ -362,509 +434,644 @@
       }
 
       .info-item:nth-child(2) {
-        border-right: 0;
+        border-right: none;
       }
 
-      .info-item:nth-child(-n+2) {
-        border-bottom: 1px solid #30383e;
+      .info-item:nth-child(1),
+      .info-item:nth-child(2) {
+        border-bottom: 1px solid #30383d;
       }
 
       .cards {
         grid-template-columns: 1fr;
       }
+
     }
+
   </style>
 </head>
 
+
 <body>
 
-<header>
-  <div class="header-inner">
 
-    <div class="brand">
-      <div class="brand-name">YEGer</div>
-      <div class="brand-subtitle">Edmonton Live</div>
-    </div>
+  <!-- ===================================================
+       HEADER
+  ==================================================== -->
 
-    <div class="header-right">
-      Live
-    </div>
+  <header class="site-header">
 
-  </div>
-</header>
+    <div class="header-inner">
 
+      <div class="brand">
 
-<main>
-
-  <!-- STATUS -->
-
-  <div class="status-row">
-
-    <div class="live-status">
-      <span class="live-dot"></span>
-      LIVE FROM EDMONTON — YEGer
-    </div>
-
-    <div class="weather">
-      EDMONTON
-      <strong>21°C</strong>
-      &nbsp; Clear
-    </div>
-
-  </div>
-
-
-  <!-- CONTROLS -->
-
-  <div class="controls-row">
-
-    <div class="zoom-controls">
-
-      <button
-        class="control-button"
-        onclick="zoomOut()"
-        title="Zoom out"
-      >
-        −
-      </button>
-
-      <span
-        id="zoomValue"
-        class="zoom-label"
-      >
-        100%
-      </span>
-
-      <button
-        class="control-button"
-        onclick="zoomIn()"
-        title="Zoom in"
-      >
-        +
-      </button>
-
-      <button
-        class="control-button"
-        onclick="moveLeft()"
-        title="Move left"
-      >
-        ←
-      </button>
-
-      <button
-        class="control-button"
-        onclick="moveUp()"
-        title="Move up"
-      >
-        ↑
-      </button>
-
-      <button
-        class="control-button"
-        onclick="moveDown()"
-        title="Move down"
-      >
-        ↓
-      </button>
-
-      <button
-        class="control-button"
-        onclick="moveRight()"
-        title="Move right"
-      >
-        →
-      </button>
-
-      <button
-        class="control-button"
-        onclick="resetView()"
-      >
-        Reset
-      </button>
-
-      <span class="hint">
-        Zoom in, then drag the image
-      </span>
-
-    </div>
-
-
-    <div class="view-controls">
-
-      <button
-        class="control-button"
-        onclick="setView('downtown')"
-      >
-        Downtown
-      </button>
-
-      <button
-        class="control-button"
-        onclick="setView('centre')"
-      >
-        Centre
-      </button>
-
-      <button
-        class="control-button"
-        onclick="setView('west')"
-      >
-        West
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- VIDEO -->
-
-  <section class="video-card">
-
-    <div class="video-titlebar">
-
-      <div class="avatar">
-        E
-      </div>
-
-      <div>
-        <div class="video-title">
-          Live Edmonton
+        <div class="brand-name">
+          YEGer
         </div>
 
-        <div class="video-owner">
-          Em Mat
+        <div class="brand-subtitle">
+          Edmonton Live
         </div>
-      </div>
-
-    </div>
-
-
-    <div
-      id="playerWindow"
-      class="player-window"
-    >
-
-      <div
-        id="playerTransform"
-        class="player-transform"
-      >
-
-        <iframe
-          id="yeger-live-player"
-
-          src="https://www.youtube.com/embed/-8jcjjrf-mg?autoplay=1&mute=1&playsinline=1&controls=1&rel=0&origin=https%3A%2F%2Fyeger.ca"
-
-          title="YEGer Edmonton Live Camera"
-
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-
-          referrerpolicy="strict-origin-when-cross-origin"
-
-          allowfullscreen>
-        </iframe>
 
       </div>
 
-    </div>
 
-  </section>
-
-
-  <!-- INFORMATION -->
-
-  <section class="info-strip">
-
-    <div class="info-item">
-      <div class="info-label">
-        Location
-      </div>
-
-      <div class="info-value">
-        Edmonton
-      </div>
-    </div>
-
-
-    <div class="info-item">
-      <div class="info-label">
-        View
-      </div>
-
-      <div class="info-value">
-        High-rise
-      </div>
-    </div>
-
-
-    <div class="info-item">
-      <div class="info-label">
-        Direction
-      </div>
-
-      <div
-        id="directionValue"
-        class="info-value"
-      >
-        West
-      </div>
-    </div>
-
-
-    <div class="info-item">
-      <div class="info-label">
-        Stream
-      </div>
-
-      <div class="info-value">
+      <div class="header-live">
         Live
       </div>
+
     </div>
 
-  </section>
+  </header>
 
 
-  <!-- DESCRIPTION -->
 
-  <section class="cards">
+  <!-- ===================================================
+       PAGE
+  ==================================================== -->
 
-    <article class="card">
-
-      <h2>
-        Edmonton Live
-      </h2>
-
-      <p>
-        YEGer provides a live view across Edmonton — from
-        changing weather and dramatic prairie skies to
-        sunsets, storms, construction and the everyday
-        movement of the city.
-      </p>
-
-    </article>
+  <main class="page">
 
 
-    <article class="card">
+    <!-- STATUS -->
 
-      <h2>
-        Sunsets
-      </h2>
+    <div class="status-row">
 
-      <p>
-        Facing west gives YEGer a front-row view of
-        Edmonton's evening skies. Sunset highlights
-        and timelapses will appear here.
-      </p>
+      <div class="live-status">
 
-    </article>
+        <span class="live-dot"></span>
 
-  </section>
+        LIVE FROM EDMONTON — YEGer
 
-</main>
+      </div>
 
 
-<script>
+      <div class="weather">
 
-  /*
-   * =====================================================
-   * PLAYER VIEW CONTROLS
-   * =====================================================
-   */
+        EDMONTON
 
-  let zoom = 1;
-  let positionX = 0;
-  let positionY = 0;
+        <strong>
+          21°C
+        </strong>
 
-  const minimumZoom = 1;
-  const maximumZoom = 3;
-  const zoomStep = 0.25;
-  const moveStep = 50;
+        &nbsp; Clear
 
-  const playerTransform =
-    document.getElementById("playerTransform");
+      </div>
 
-  const zoomValue =
-    document.getElementById("zoomValue");
-
-  const directionValue =
-    document.getElementById("directionValue");
+    </div>
 
 
-  function updateTransform() {
 
-    playerTransform.style.transform =
-      `translate(${positionX}px, ${positionY}px) scale(${zoom})`;
+    <!-- =================================================
+         CONTROLS
+    ================================================== -->
 
-    zoomValue.textContent =
-      Math.round(zoom * 100) + "%";
-  }
+    <div class="controls-row">
 
 
-  function zoomIn() {
-
-    zoom = Math.min(
-      maximumZoom,
-      zoom + zoomStep
-    );
-
-    updateTransform();
-  }
+      <div class="controls">
 
 
-  function zoomOut() {
-
-    zoom = Math.max(
-      minimumZoom,
-      zoom - zoomStep
-    );
-
-    if (zoom === 1) {
-      positionX = 0;
-      positionY = 0;
-    }
-
-    updateTransform();
-  }
+        <button
+          class="control-button"
+          onclick="zoomOut()">
+          −
+        </button>
 
 
-  function moveLeft() {
-
-    if (zoom > 1) {
-      positionX -= moveStep;
-      updateTransform();
-    }
-  }
+        <span id="zoomValue">
+          100%
+        </span>
 
 
-  function moveRight() {
-
-    if (zoom > 1) {
-      positionX += moveStep;
-      updateTransform();
-    }
-  }
+        <button
+          class="control-button"
+          onclick="zoomIn()">
+          +
+        </button>
 
 
-  function moveUp() {
-
-    if (zoom > 1) {
-      positionY -= moveStep;
-      updateTransform();
-    }
-  }
+        <button
+          class="control-button"
+          onclick="moveLeft()">
+          ←
+        </button>
 
 
-  function moveDown() {
-
-    if (zoom > 1) {
-      positionY += moveStep;
-      updateTransform();
-    }
-  }
+        <button
+          class="control-button"
+          onclick="moveUp()">
+          ↑
+        </button>
 
 
-  function resetView() {
-
-    zoom = 1;
-    positionX = 0;
-    positionY = 0;
-
-    directionValue.textContent = "West";
-
-    updateTransform();
-  }
+        <button
+          class="control-button"
+          onclick="moveDown()">
+          ↓
+        </button>
 
 
-  function setView(view) {
+        <button
+          class="control-button"
+          onclick="moveRight()">
+          →
+        </button>
+
+
+        <button
+          class="control-button"
+          onclick="resetView()">
+          Reset
+        </button>
+
+
+        <span class="zoom-hint">
+          Zoom in, then move the image
+        </span>
+
+
+      </div>
+
+
+
+      <div class="controls">
+
+
+        <button
+          class="control-button"
+          onclick="setView('downtown')">
+          Downtown
+        </button>
+
+
+        <button
+          class="control-button"
+          onclick="setView('centre')">
+          Centre
+        </button>
+
+
+        <button
+          class="control-button"
+          onclick="setView('west')">
+          West
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         LIVE VIDEO
+    ================================================== -->
+
+    <section class="video-card">
+
+
+      <div class="video-titlebar">
+
+
+        <div class="avatar">
+          E
+        </div>
+
+
+        <div>
+
+          <div class="video-title">
+            Live Edmonton
+          </div>
+
+          <div class="video-owner">
+            Em Mat
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- ===============================================
+           PANORAMIC VIEWPORT
+      ================================================ -->
+
+      <div
+        id="videoViewport"
+        class="video-viewport">
+
+
+        <div
+          id="videoTransform"
+          class="video-transform">
+
+
+          <iframe
+            id="youtubePlayer"
+
+            src="https://www.youtube.com/embed/-8jcjjrf-mg?autoplay=1&mute=1&playsinline=1&controls=1&rel=0"
+
+            title="YEGer Edmonton Live Camera"
+
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+
+            referrerpolicy="strict-origin-when-cross-origin"
+
+            allowfullscreen>
+          </iframe>
+
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         STREAM INFORMATION
+    ================================================== -->
+
+    <section class="info-strip">
+
+
+      <div class="info-item">
+
+        <div class="info-label">
+          Location
+        </div>
+
+        <div class="info-value">
+          Edmonton
+        </div>
+
+      </div>
+
+
+
+      <div class="info-item">
+
+        <div class="info-label">
+          View
+        </div>
+
+        <div class="info-value">
+          High-rise
+        </div>
+
+      </div>
+
+
+
+      <div class="info-item">
+
+        <div class="info-label">
+          Direction
+        </div>
+
+        <div
+          id="directionValue"
+          class="info-value">
+          West
+        </div>
+
+      </div>
+
+
+
+      <div class="info-item">
+
+        <div class="info-label">
+          Stream
+        </div>
+
+        <div class="info-value">
+          Live
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         CARDS
+    ================================================== -->
+
+    <section class="cards">
+
+
+      <article class="card">
+
+        <h2>
+          Edmonton Live
+        </h2>
+
+        <p>
+          YEGer provides a live view across Edmonton —
+          from changing weather and dramatic prairie skies
+          to sunsets, storms, construction and the everyday
+          movement of the city.
+        </p>
+
+      </article>
+
+
+
+      <article class="card">
+
+        <h2>
+          Sunsets
+        </h2>
+
+        <p>
+          Facing west gives YEGer a front-row view of
+          Edmonton's evening skies. Sunset highlights
+          and timelapses will appear here.
+        </p>
+
+      </article>
+
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- ===================================================
+       JAVASCRIPT
+  ==================================================== -->
+
+  <script>
 
     /*
-     * These presets move around the same panoramic
-     * YouTube image. Adjust the numbers later if you
-     * want different framing.
+     * ---------------------------------------------------
+     * PANORAMA CONTROLS
+     * ---------------------------------------------------
      */
 
-    zoom = 1.5;
-    positionY = 0;
+    let zoom = 1;
 
-    if (view === "downtown") {
+    let positionX = 0;
+    let positionY = 0;
 
-      positionX = 260;
 
-      directionValue.textContent =
-        "Downtown";
+    const minZoom = 1;
+    const maxZoom = 3;
+
+    const zoomStep = 0.25;
+    const moveStep = 50;
+
+
+    const videoTransform =
+      document.getElementById("videoTransform");
+
+
+    const zoomValue =
+      document.getElementById("zoomValue");
+
+
+    const directionValue =
+      document.getElementById("directionValue");
+
+
+
+    /*
+     * ---------------------------------------------------
+     * UPDATE VIEW
+     * ---------------------------------------------------
+     */
+
+    function updateView() {
+
+      /*
+       * The DIV is already positioned at:
+       *
+       * top: -50%
+       * height: 200%
+       *
+       * The transform below handles only user zoom
+       * and movement.
+       */
+
+      videoTransform.style.transform =
+        "translate(" +
+        positionX +
+        "px, " +
+        positionY +
+        "px) scale(" +
+        zoom +
+        ")";
+
+
+      zoomValue.textContent =
+        Math.round(zoom * 100) + "%";
 
     }
 
-    else if (view === "centre") {
+
+
+    /*
+     * ---------------------------------------------------
+     * ZOOM
+     * ---------------------------------------------------
+     */
+
+    function zoomIn() {
+
+      zoom = Math.min(
+        maxZoom,
+        zoom + zoomStep
+      );
+
+      updateView();
+
+    }
+
+
+
+    function zoomOut() {
+
+      zoom = Math.max(
+        minZoom,
+        zoom - zoomStep
+      );
+
+
+      if (zoom === 1) {
+
+        positionX = 0;
+        positionY = 0;
+
+      }
+
+
+      updateView();
+
+    }
+
+
+
+    /*
+     * ---------------------------------------------------
+     * MOVEMENT
+     * ---------------------------------------------------
+     */
+
+    function moveLeft() {
+
+      if (zoom <= 1) {
+        return;
+      }
+
+      positionX -= moveStep;
+
+      updateView();
+
+    }
+
+
+
+    function moveRight() {
+
+      if (zoom <= 1) {
+        return;
+      }
+
+      positionX += moveStep;
+
+      updateView();
+
+    }
+
+
+
+    function moveUp() {
+
+      if (zoom <= 1) {
+        return;
+      }
+
+      positionY -= moveStep;
+
+      updateView();
+
+    }
+
+
+
+    function moveDown() {
+
+      if (zoom <= 1) {
+        return;
+      }
+
+      positionY += moveStep;
+
+      updateView();
+
+    }
+
+
+
+    /*
+     * ---------------------------------------------------
+     * RESET
+     * ---------------------------------------------------
+     */
+
+    function resetView() {
+
+      zoom = 1;
 
       positionX = 0;
+      positionY = 0;
 
-      directionValue.textContent =
-        "Centre";
-
-    }
-
-    else if (view === "west") {
-
-      positionX = -260;
 
       directionValue.textContent =
         "West";
 
+
+      updateView();
+
     }
 
-    updateTransform();
-  }
 
 
-  /*
-   * =====================================================
-   * MOUSE WHEEL ZOOM
-   * =====================================================
-   */
+    /*
+     * ---------------------------------------------------
+     * PRESET VIEWS
+     * ---------------------------------------------------
+     */
 
-  const playerWindow =
-    document.getElementById("playerWindow");
+    function setView(view) {
 
 
-  playerWindow.addEventListener(
-    "wheel",
-    function(event) {
+      zoom = 1.5;
 
-      /*
-       * Holding CTRL while scrolling controls the
-       * YEGer zoom instead of scrolling the page.
-       */
+      positionY = 0;
 
-      if (!event.ctrlKey) {
-        return;
+
+      if (view === "downtown") {
+
+        positionX = 300;
+
+        directionValue.textContent =
+          "Downtown";
+
       }
 
-      event.preventDefault();
 
-      if (event.deltaY < 0) {
-        zoomIn();
-      }
-      else {
-        zoomOut();
+      else if (view === "centre") {
+
+        positionX = 0;
+
+        directionValue.textContent =
+          "Centre";
+
       }
 
-    },
-    {
-      passive: false
+
+      else if (view === "west") {
+
+        positionX = -300;
+
+        directionValue.textContent =
+          "West";
+
+      }
+
+
+      updateView();
+
     }
-  );
 
 
-  /*
-   * =====================================================
-   * INITIAL STATE
-   * =====================================================
-   */
 
-  updateTransform();
+    /*
+     * ---------------------------------------------------
+     * INITIALIZE
+     * ---------------------------------------------------
+     */
 
-</script>
+    updateView();
+
+
+  </script>
+
 
 </body>
 </html>
