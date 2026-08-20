@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -147,12 +146,34 @@
       color: #9aa3a9;
 
       font-size: 10px;
+
+      text-align: right;
     }
 
     .weather strong {
       color: #ffffff;
 
       font-size: 13px;
+    }
+
+    .sun-times {
+      margin-top: 4px;
+
+      color: #7f8a91;
+
+      font-size: 9px;
+
+      text-align: right;
+
+      white-space: nowrap;
+    }
+
+    .sun-times strong {
+      color: #d7dde1;
+
+      font-size: 9px;
+
+      font-weight: 700;
     }
 
 
@@ -205,6 +226,7 @@
 
     .control-button.active {
       background: #26323a;
+
       border-color: #71808a;
     }
 
@@ -281,6 +303,7 @@
 
     .video-title {
       font-size: 12px;
+
       font-weight: 700;
     }
 
@@ -295,12 +318,6 @@
 
     /* =====================================================
        VIDEO VIEWPORT
-
-       Full 16:9 YouTube player.
-
-       At 100%, all native YouTube controls are visible.
-
-       Zoom/pan transforms the player itself.
     ====================================================== */
 
     .video-viewport {
@@ -341,6 +358,30 @@
       display: block;
 
       background: #000000;
+    }
+
+
+    /* =====================================================
+       PLAYER FILL MODE
+
+       The Duo panorama is wider than a normal 16:9 video.
+
+       Fill enlarges the YouTube player vertically and clips
+       some of the unused area at the top and bottom.
+    ====================================================== */
+
+    .video-viewport.fill-mode #youtubePlayer {
+      width: 100%;
+
+      height: 134%;
+
+      top: -17%;
+
+      left: 0;
+    }
+
+    .fit-toggle {
+      margin-left: 6px;
     }
 
 
@@ -528,6 +569,10 @@
         align-items: flex-start;
       }
 
+      .sun-times {
+        white-space: normal;
+      }
+
     }
 
   </style>
@@ -591,13 +636,34 @@
 
       <div class="weather">
 
-        EDMONTON
+        <div>
 
-        <strong>
-          21°C
-        </strong>
+          EDMONTON
 
-        &nbsp; Clear
+          <strong>
+            21°C
+          </strong>
+
+          &nbsp; Clear
+
+        </div>
+
+
+        <div class="sun-times">
+
+          🌅 Sunrise
+          <strong id="sunriseTime">
+            --:--
+          </strong>
+
+          &nbsp; • &nbsp;
+
+          🌇 Sunset
+          <strong id="sunsetTime">
+            --:--
+          </strong>
+
+        </div>
 
       </div>
 
@@ -680,6 +746,16 @@
         </button>
 
 
+        <button
+          id="fitButton"
+          class="control-button fit-toggle active"
+          type="button"
+          onclick="togglePlayerFit()"
+          title="Switch between full player and cropped fill view">
+          Fit
+        </button>
+
+
         <span class="zoom-hint">
           Zoom in, then move the image
         </span>
@@ -717,7 +793,6 @@
 
       </div>
 
-
     </div>
 
 
@@ -751,7 +826,7 @@
 
       <div
         id="videoViewport"
-        class="video-viewport">
+        class="video-viewport fill-mode">
 
 
         <div
@@ -775,7 +850,6 @@
 
 
         </div>
-
 
       </div>
 
@@ -930,6 +1004,7 @@
 
   <script>
 
+
     /* ===================================================
        VIEW STATE
     ==================================================== */
@@ -972,6 +1047,17 @@
 
     const westButton =
       document.getElementById("westButton");
+
+
+    const videoViewport =
+      document.getElementById("videoViewport");
+
+
+    const fitButton =
+      document.getElementById("fitButton");
+
+
+    let playerFillMode = true;
 
 
     /* ===================================================
@@ -1064,7 +1150,6 @@
 
       positionX -= moveStep;
 
-
       updateView();
 
     }
@@ -1083,7 +1168,6 @@
 
 
       positionX += moveStep;
-
 
       updateView();
 
@@ -1104,7 +1188,6 @@
 
       positionY -= moveStep;
 
-
       updateView();
 
     }
@@ -1124,17 +1207,54 @@
 
       positionY += moveStep;
 
-
       updateView();
 
     }
 
 
     /* ===================================================
-       RESET
+       PLAYER FIT / FILL
+    ==================================================== */
 
-       This restores the complete YouTube iframe so the
-       native Settings gear and other controls are visible.
+    function applyPlayerFitMode() {
+
+      if (playerFillMode) {
+
+        videoViewport.classList.add("fill-mode");
+
+        fitButton.textContent =
+          "Fit";
+
+        fitButton.classList.add("active");
+
+      }
+
+      else {
+
+        videoViewport.classList.remove("fill-mode");
+
+        fitButton.textContent =
+          "Fill";
+
+        fitButton.classList.remove("active");
+
+      }
+
+    }
+
+
+    function togglePlayerFit() {
+
+      playerFillMode =
+        !playerFillMode;
+
+      applyPlayerFitMode();
+
+    }
+
+
+    /* ===================================================
+       RESET
     ==================================================== */
 
     function resetView() {
@@ -1162,8 +1282,6 @@
 
     /* ===================================================
        PRESET VIEWS
-
-       These are CSS views into the same YouTube panorama.
     ==================================================== */
 
     function setView(view) {
@@ -1171,24 +1289,12 @@
       clearPresetButtons();
 
 
-      /*
-       * Keep preset zoom moderate.
-       *
-       * This gives the viewer a closer city view without
-       * making the image excessively pixelated.
-       */
-
       zoom = 1.35;
 
       positionY = 0;
 
 
       if (view === "downtown") {
-
-        /*
-         * Shift right to show more of the left side
-         * of the underlying panorama.
-         */
 
         positionX = 260;
 
@@ -1214,11 +1320,6 @@
 
       else if (view === "west") {
 
-        /*
-         * Shift left to show more of the right/west side
-         * of the panorama.
-         */
-
         positionX = -260;
 
         directionValue.textContent =
@@ -1235,10 +1336,109 @@
 
 
     /* ===================================================
+       EDMONTON SUNRISE / SUNSET
+    ==================================================== */
+
+    async function updateSunTimes() {
+
+      const sunriseElement =
+        document.getElementById("sunriseTime");
+
+      const sunsetElement =
+        document.getElementById("sunsetTime");
+
+
+      try {
+
+        const response = await fetch(
+          "https://api.sunrise-sunset.org/json?lat=53.5461&lng=-113.4938&formatted=0"
+        );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Sunrise/sunset request failed"
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        if (data.status !== "OK") {
+
+          throw new Error(
+            "Sunrise/sunset data unavailable"
+          );
+
+        }
+
+
+        const timeFormatter =
+          new Intl.DateTimeFormat(
+            "en-CA",
+            {
+              timeZone: "America/Edmonton",
+
+              hour: "numeric",
+
+              minute: "2-digit",
+
+              hour12: true
+            }
+          );
+
+
+        sunriseElement.textContent =
+          timeFormatter.format(
+            new Date(
+              data.results.sunrise
+            )
+          );
+
+
+        sunsetElement.textContent =
+          timeFormatter.format(
+            new Date(
+              data.results.sunset
+            )
+          );
+
+      }
+
+
+      catch (error) {
+
+        sunriseElement.textContent =
+          "Unavailable";
+
+        sunsetElement.textContent =
+          "Unavailable";
+
+
+        console.error(
+          "Could not load sunrise/sunset times:",
+          error
+        );
+
+      }
+
+    }
+
+
+    /* ===================================================
        INITIALIZE
     ==================================================== */
 
     updateView();
+
+    applyPlayerFitMode();
+
+    updateSunTimes();
+
 
   </script>
 
@@ -1246,4 +1446,3 @@
 </body>
 
 </html>
-```
