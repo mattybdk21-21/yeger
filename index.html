@@ -348,7 +348,7 @@
       transition: transform 0.18s ease;
     }
 
-    #youtubePlayer {
+    #earthcamPlayer {
       position: absolute;
 
       inset: 0;
@@ -368,28 +368,25 @@
        PANORAMA MODE
 
        The Reolink Duo stream contains an ultra-wide image
-       inside YouTube's standard 16:9 video frame.
+       inside the standard 16:9 video frame.
 
        This creates a much wider visible viewport and crops
        away most of the black space above and below.
 
        IMPORTANT:
-       The full YouTube player can still be restored with
+       The full EarthCam player can still be restored with
        the Quality button so the native Settings gear
        remains accessible.
     ====================================================== */
 
     .video-viewport.panorama-mode {
-      aspect-ratio: 32 / 9;
+      aspect-ratio: 16 / 9;
     }
 
-    .video-viewport.panorama-mode #youtubePlayer {
+    .video-viewport.panorama-mode #earthcamPlayer {
       width: 100%;
-
-      height: 200%;
-
-      top: -50%;
-
+      height: 100%;
+      top: 0;
       left: 0;
     }
 
@@ -766,7 +763,7 @@
           class="control-button fit-toggle active"
           type="button"
           onclick="togglePlayerFit()"
-          title="Show full YouTube player to change quality">
+          title="Toggle EarthCam player view">
           ⚙ Quality
         </button>
 
@@ -852,11 +849,11 @@
 
 
           <iframe
-            id="youtubePlayer"
+            id="earthcamPlayer"
 
             src="https://myearthcam.com/yeger"
 
-            title="YEGer Edmonton Live Camera"
+            title="YEGer Edmonton Live Camera - My EarthCam"
 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 
@@ -880,47 +877,10 @@
     ================================================== -->
 
     <div class="quality-note">
-
-      <strong>
-        BEST PICTURE:
-      </strong>
-
-      YouTube may automatically start at 720p.
-
-      Click
-
-      <strong>
-        ⚙ Quality
-      </strong>
-
-      above the video to show the complete YouTube player.
-
-      Then click the native YouTube
-
-      <strong>
-        ⚙ Settings
-      </strong>
-
-      →
-
-      <strong>
-        Quality
-      </strong>
-
-      →
-
-      <strong>
-        2160p (4K)
-      </strong>.
-
-      After changing quality, click
-
-      <strong>
-        Panorama
-      </strong>
-
-      to return to the clean wide view.
-
+      <strong>EARTHCAM LIVE:</strong>
+      The YEGer live camera is now hosted by My EarthCam.
+      Use the controls inside the EarthCam player for fullscreen and
+      any available player settings.
     </div>
 
 
@@ -1247,12 +1207,11 @@
 
 
     /* ===================================================
-       PANORAMA / QUALITY MODE
+       EARTHCAM PLAYER MODE
 
-       Normal mode = panorama with black bars cropped.
-
-       Quality mode = full YouTube player so the native
-       Settings gear and resolution controls are visible.
+       The EarthCam page is displayed at its native responsive
+       16:9 viewport. The external transform controls remain
+       available for page positioning/zoom.
     ==================================================== */
 
     function applyPlayerFitMode() {
